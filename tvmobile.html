@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RTCS Live Mobile View</title>
+  <style>
+body {
+display: flex;
+flex-direction: column;
+justify-content: center;
+background:#446eac;
+align-items: center;
+height: 100vh;
+}
+.miniiframe
+{
+width: 1280px;
+height: 720px;
+   -moz-transform-origin: top left;
+   -webkit-transform-origin: top left;
+   -o-transform-origin: top left;
+   -ms-transform-origin: top left;
+   transform-origin: top left;
+   -moz-transform: scale( 0.34, 0.34); 
+   -webkit-transform: scale( 0.34, 0.34); 
+   -o-transform: scale( 0.34, 0.34);
+   -ms-transform: scale( 0.34, 0.34);
+   transform: scale( 0.34, 0.34); 
+   border: 0;
+}
+
+div {
+  width: 450px;
+  height: 270px;
+  padding: 10px;
+}
+</style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<center>
+  <div>
+   <iframe class="miniiframe" src="https://demo.rtcs.live/tvplus"></iframe>
+  </div>
+  <span></span>
+</center>
+<!-- partial -->
+  
+</body>
+</html>

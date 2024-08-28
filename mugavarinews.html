@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RTCS News TV Display</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./images/mugavarinews-style.css">
+</head>
+<body>
+<div class='stream'>
+<iframe class="stream" width="100vh" height="100vh" src="https://demo.rtcs.live/stream" allow="autoplay" frameborder="0" autoplay; encrypted-media;></iframe>
+<iframe class="stream" width="100vh" height="100vh" src="https://lt.rtcs.live/" allow="autoplay" frameborder="0" autoplay; encrypted-media;></iframe>
+</div>
+<!-- partial:index.partial.html -->
+
+  <div class='logo'>
+    <img src="images/mugavari-logo.gif" alt="Logo" width="150" height="80" style="z-index: 99;vertical-align:middle;margin:50px 1090px">
+    </div>
+
+<!-- partial -->
+<div class="breaking_news">
+  <div class="label ripple">Breaking News</div>
+</div>
+
+<div class='ticker'>
+  <nav class="topnews" id="topnews" role="topnews">
+<style>
+.topnews,.topnews a:link {text-decoration: none; color:#FFF !important ;font-family:serif;font-size:20px; margin-top: 8px; }
+</style>
+<script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+var nMaxPosts =50;
+        var nWidth = 100;
+        var nScrollDelay = 0;
+        var sDirection = "left";
+        var sOpenLinkLocation = "N";
+        var sBulletChar = "&#128313;"
+</script>
+<script type="text/javascript">
+function RecentPostsScrollerv2(json) {
+var sHeadLines;
+var sPostURL;
+var objPost;
+var sMoqueeHTMLStart;
+var sMoqueeHTMLEnd;
+var sPoweredBy;
+var sHeadlineTerminator;
+var sPostLinkLocation;
+  try {
+   sMoqueeHTMLStart = "\<MARQUEE behavior=\"scroll\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\" ";
+   if (nWidth) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"" + nWidth + "%\"";
+  } else {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"100%\"";
+  }
+  if (nScrollDelay) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " scrolldelay = \"" + nScrollDelay + "\"";
+  }
+  if (sDirection) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " direction = \"" + sDirection + "\"\>";
+    if (sDirection == "left" || sDirection == "right") {
+    sHeadlineTerminator = "&nbsp;&nbsp;";
+   } else {
+    sHeadlineTerminator = "\<br/\>";
+   }
+  }
+  if (sOpenLinkLocation == "N") {
+   sPostLinkLocation = " target= \"_blank\" ";
+  } else {
+   sPostLinkLocation = " ";
+  }
+  sMoqueeHTMLEnd = "\</MARQUEE\>"
+   sHeadLines = "";
+   for (var nFeedCounter = 0; nFeedCounter < nMaxPosts; nFeedCounter++) {
+   var objPost = json.feed.entry[nFeedCounter];
+    if (nFeedCounter == json.feed.entry.length) break;
+    for (var nCounter = 0; nCounter < objPost.link.length; nCounter++) {
+    if (objPost.link[nCounter].rel == 'alternate') {
+     sPostURL = objPost.link[nCounter].href;
+     break;
+    }
+   }
+   sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
+sHeadlineTerminator;
+  }
+   if (sDirection == "left") {
+   sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
+  } else if (sDirection == "right") {
+   sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
+  } else if (sDirection == "up") {
+   sHeadLines = sHeadLines + "\<br/\>" + sHeadLines;
+  }
+  document.write(sMoqueeHTMLStart + sHeadLines + sMoqueeHTMLEnd)
+} catch (exception) {
+  alert(exception);
+}
+}</script>
+<script src="https://debatedais.blogspot.com/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
+type="text/javascript"></script>
+      
+    <script src="https://hosting.rtcs.live/rtcs/horizontal-panel-marquee.js"></script>
+     <script type="text/javascript">
+    $(window).load( function() {
+      $('#panel').hpanel({
+        duration: 80000
+      });
+    });
+    </script>
+  <div class='stock-info'>
+    <div class='stock-symbol'>
+      <!-- A fictitious stock symbol for CodePen since I’m not aware of a real one -->
+      <p>www.</p>
+    </div>
+    <span>rtcs.live</span>
+  </div>
+</div>
+  
+
+</body>
+</html>
