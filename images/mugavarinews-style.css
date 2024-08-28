@@ -1,0 +1,89 @@
+html { max-width: 1300px; margin: 0 auto;}
+body {
+  background: #19f radial-gradient(transparent, #02c);
+  
+}
+
+.ticker {
+  background: #1a6700;
+  font-size: 12pt;
+  font-weight: bold;
+  width: 1280px;
+  height: 48px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+.breaking_news {
+  float:left;
+  width:100%;
+  font-family: arial;
+  font-size: 26px;
+  margin-top: 625px;
+}
+.label {
+  float:left;
+  padding:8px 8px;
+  background:#870804;
+  color:#FFF;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Ripple magic */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 5px;
+  background: rgba(255, 255, 255, .5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+.ripple::after {
+  animation: ripple 1.5s ease-out  infinite;
+}
+
+.stream
+{
+    width:1280px;
+    height: 720px;    
+    margin-bottom: 0px;
+    position: absolute;    
+}
+
+.logo
+{
+   z-index: 99;
+   position: absolute;
+}
+   
+   
+
+

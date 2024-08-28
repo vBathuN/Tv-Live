@@ -1,0 +1,30 @@
+html { max-width: 1280px; margin: 0 auto;}
+body {
+  background: #19f radial-gradient(transparent, #02c);
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  align-items: flex-end;
+  -webkit-align-items: flex-end;
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  height: 100vh;
+  overflow:hidden;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.stream
+{
+    width:1280px;
+    height: 720px;    
+    margin-top: 0px;
+    position: absolute;    
+}
+
+.logo-area
+{
+   z-index: 99;
+   
+   
+
+
