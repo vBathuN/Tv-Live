@@ -48,3 +48,12 @@ p {
     margin-bottom: 0px;
     position: absolute;
 }
+
+.nt {
+    display: inline-block;
+    z-index: 5;
+    vertical-align: top;
+    width: 1280px;
+    height: 720px;
+    margin-left: -400px;
+    position: absolute;
