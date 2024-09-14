@@ -1,0 +1,50 @@
+/* Depends on length of ticker text */
+html { max-width: 1280px; margin: 0 auto;}
+body {
+  background: transparent;
+  font-family: Arial;
+  color: #ffffff;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-justify-content: flex-end;
+  height: 100vh;
+  overflow:hidden;
+  margin: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+  justify-content:center;
+}
+
+p {
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  width: 100%;
+}
+
+.rtcs {
+    display: inline-block;
+    vertical-align: top;
+    width: 1280px;
+    height: 720px;
+    margin-top: 0px;
+    position: relative;
+}
+
+.stream {
+    display: inline-block;
+    vertical-align: top;
+    width: 400px;
+    height: 720px;
+    padding-right: 880px;
+    margin-bottom: 0px;
+    position: absolute;
+}
