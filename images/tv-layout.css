@@ -211,7 +211,19 @@ animation-name: blinker;
     border-top: 5px solid #2a366a;  
 }
 
-.rtcs-report {
+.rtcs-studio {
+    display: inline-block;
+    vertical-align: top;
+    width: 940px;
+    height: 496px;
+    margin-bottom: 44px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: -1;
+    border-right: 5px solid #c9a050;
+}
+
+.rtcs-screen {
     display: inline-block;
     vertical-align: top;
     width: 940px;
