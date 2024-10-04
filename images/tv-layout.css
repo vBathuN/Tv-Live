@@ -171,7 +171,7 @@ animation-name: blinker;
 
 .textrss {
     position: absolute;
-    z-index: 100;
+    z-index: 1;
     line-height: 1.6;
     margin: -58px -45px;
 }
@@ -213,7 +213,6 @@ animation-name: blinker;
 
 .rtcs-studio {
     display: inline-block;
-    vertical-align: top;
     width: 940px;
     height: 586px;
     margin-bottom: 0px;
@@ -225,12 +224,21 @@ animation-name: blinker;
 
 .rtcs-screen {
     display: inline-block;
-    vertical-align: top;
     width: 940px;
     height: 607px;
     margin-top: 8px;
     position: absolute;
     vertical-align: middle;
-    z-index: 1;
+    z-index: 2;
     border-right: 5px solid #c9a050;
+}
+
+.rtcs-lt {
+    display: inline-block;
+    vertical-align: top;
+    width: 1280px;
+    height: 720px;
+    margin-top: 0px;
+    position: absolute;
+    z-index: 2;
 }
