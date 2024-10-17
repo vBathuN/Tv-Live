@@ -182,8 +182,8 @@ animation-name: blinker;
 .textrss {
     position: absolute;
     z-index: 1;
-    line-height: 1.6;
-    margin: -58px -45px;
+    line-height: 1.8;
+    margin: -54px -47px;
 }
 
 .ticker-top {
