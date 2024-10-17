@@ -1,5 +1,15 @@
 /* Depends on length of ticker text */
 html { max-width: 1280px; margin: 0 auto;}
+
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtcs.live/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtcs.live/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
   font-family: Arial;
   color: #ffffff;
@@ -173,7 +183,7 @@ animation-name: blinker;
     position: absolute;
     z-index: 1;
     line-height: 1.6;
-    margin: -58px -45px;
+    margin: -101px -45px;
 }
 
 .ticker-top {
