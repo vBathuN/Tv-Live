@@ -183,7 +183,7 @@ animation-name: blinker;
     position: absolute;
     z-index: 1;
     line-height: 1.8;
-    margin: -54px -47px;
+    margin: -64px -45px;
 }
 
 .ticker-top {
