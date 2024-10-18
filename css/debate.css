@@ -38,8 +38,8 @@ body {
   overflow: hidden;
   position: relative;
   text-align: center;
-  width: 73.8%;
-  height: 120px;
+  width: 74.7%;
+  height: 110px;
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
@@ -183,20 +183,21 @@ animation-name: blinker;
     position: absolute;
     z-index: 1;
     line-height: 1.8;
-    margin: -64px -45px;
+    margin: -68px -39px;
 }
 
 .ticker-top {
   background: linear-gradient(87deg, rgba(42,54,106,1) 50%, rgba(201,160,80,1) 65%);
   font-weight: 600;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   text-align: center;
-  width: 100%;
-  height: 70px;
+  width: 101%;
+  height: 60px;
 }
 
 .rtcs {
+    
     display: inline-block;
     vertical-align: top;
     width:947px;
@@ -209,9 +210,9 @@ animation-name: blinker;
 .rtcs-ad {
     display: inline-block;
     vertical-align: top;
-    width: 395px;
+    width: 320px;
     height: 673px;
-    padding-right: 880px;
+    padding-right: 955px;
     margin-top: 0px;
     position: absolute;
     border-left: 5px solid #2a366a;
@@ -220,12 +221,12 @@ animation-name: blinker;
 
 .rtcs-stream {
     display: inline-block;
-    width: 940px;
-    height: 586px;
-    margin-bottom: 0px;
+    width: 950px;
+    height: 535px;
+    margin-bottom: 110px;
     position: absolute;
     vertical-align: middle;
-    z-index: -1;
+    z-index: -3;
     border-right: 5px solid #c9a050;
 }
 
