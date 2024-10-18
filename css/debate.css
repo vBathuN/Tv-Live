@@ -11,7 +11,7 @@ html { max-width: 1280px; margin: 0 auto;}
 }
 
 body {
-  font-family: Arial;
+  important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;;
   color: #ffffff;
   display: -webkit-flex;
   -webkit-flex-direction: column;
@@ -72,7 +72,7 @@ background:
   box-shadow: 0 0 2px #800 inset;
   bottom: 0;
   height: 3px;
-  width: 244px;
+  width: 241px;
 animation-name: blinker;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -123,8 +123,9 @@ animation-name: blinker;
 .breaking_news {
   float:right;
   width:100%;
-  font-family: arial;
-  font-size: 26px;
+  font-family: "Agdasima", sans-serif;
+  font-size: 40px;
+  margin-top:-10px;
 }
 
 .label {
