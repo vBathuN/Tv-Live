@@ -184,7 +184,7 @@ animation-name: blinker;
     position: absolute;
     z-index: 1;
     line-height: 2;
-    word-spacing: -2px;
+    word-spacing: -5px;
     margin: -68px -39px;
 }
 
