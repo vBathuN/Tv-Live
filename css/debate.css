@@ -208,6 +208,7 @@ animation-name: blinker;
 }
 
 .rtcs-ad {
+    background: #2a366a;
     display: inline-block;
     vertical-align: top;
     width: 395px;
