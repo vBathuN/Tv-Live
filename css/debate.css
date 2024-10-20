@@ -72,7 +72,7 @@ background:
   box-shadow: 0 0 2px #800 inset;
   bottom: 0;
   height: 3px;
-  width: 240px;
+  width: 236px;
 animation-name: blinker;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -185,7 +185,7 @@ animation-name: blinker;
     z-index: 1;
     line-height: 2;
     word-spacing: -5px;
-    margin: -68px -39px;
+    margin: -69px -39px;
 }
 
 .ticker-top {
