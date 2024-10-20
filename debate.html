@@ -99,6 +99,61 @@ anime.timeline({loop: true})
 <div class="rtcs-lt">
 <iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtcs.live/" frameborder="0" encrypted-media;></iframe>
 </div>
+
+ <div class="pulse-logo">
+<style>
+
+.round-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  z-index: 1;
+  position: relative;
+}
+
+.pulse-container {
+  position: relative;
+}
+
+.pulse1,
+.pulse2,
+.pulse3 {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  z-index: 0;
+  background: red;
+  animation: pulse 3s infinite;
+}
+
+.pulse2 {
+  animation-delay: 1s;
+}
+
+.pulse3 {
+  animation-delay: 2s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+   <div class="pulse-container">
+      <div class="pulse1"></div>
+      <div class="pulse2"></div>
+      <div class="pulse3"></div>
+
+      <img class="round-image" src="https://www.rtcs.live/animated-logo/bathu/images/hero.jpg" alt="" />
+    </div></div>
   
   <div class='cur-event'>
     <div class='top'></div>
