@@ -274,18 +274,14 @@ animation-name: blinker;
 .overlay {
   opacity: .2;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
+  width: 1280px;
+  height: 720px;
   box-sizing: border-box;
-  padding: 15% 32px;
+  padding: 0px 0px ;
   line-height: 1.5;
-  text-align: center;
+  text-align: right;
   text-transform:lowercase;
   letter-spacing: 2px;
   font-family: 'Oxygen', sans-serif;
-  h1 {font-size: 22px; text-shadow: 0 0 .3em #000; padding-left:800px; margin: 8em 0 0em;}
+  h1 {font-size: 22px; text-shadow: 0 0 .3em #000; margin-right: 130px; margin-top: 350px;}
 }
