@@ -286,5 +286,5 @@ animation-name: blinker;
   text-transform:lowercase;
   letter-spacing: 2px;
   font-family: 'Oxygen', sans-serif;
-  h1 {font-size: 22px; text-shadow: 0 0 .3em #000; padding-left:800px; margin: 8em 0 0em;}
+  h1 {font-size: 22px; text-shadow: 0 0 .3em #fff; padding-left:800px; margin: 8em 0 0em;}
 }
