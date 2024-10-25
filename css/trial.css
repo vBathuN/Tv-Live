@@ -251,3 +251,20 @@ animation-name: blinker;
     margin-top: 160px;
     position: absolute;  
 }
+
+.button {
+  margin-left: -167px;
+  margin-top: 105px;  
+  position: absolute;
+  font-family: Helvetica, Sans-serif;
+  font-size: 32px;
+  text-transform:lowercase;
+  background-color:transparent;
+  border-radius:0px;
+  background-color:rgba(27, 24, 27, .30);
+  padding:5px 10px;
+  border-radius:0px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
