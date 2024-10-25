@@ -270,7 +270,7 @@ animation-name: blinker;
   letter-spacing: 2px;
 }
 
-.overlay {
+.watermark {
   opacity: .2;
   position: absolute;
   bottom: 0;
