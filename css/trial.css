@@ -203,7 +203,7 @@ animation-name: blinker;
     display: inline-block;
     vertical-align: top;
     width:947px;
-    height: 556px;
+    height: 565px;
     margin-top: 0px;
     position: relative;
     z-index: -2;
@@ -225,7 +225,7 @@ animation-name: blinker;
 .rtcs-stream {
     display: inline-block;
     width: 950px;
-    height: 535px;
+    height: 550px;
     margin-bottom: 60px;
     position: absolute;
     vertical-align: middle;
@@ -271,7 +271,7 @@ animation-name: blinker;
   letter-spacing: 2px;
 }
 
-.overlay {
+.watermark {
   opacity: .2;
   position: absolute;
   width: 1280px;
