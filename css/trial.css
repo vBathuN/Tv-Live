@@ -253,7 +253,7 @@ animation-name: blinker;
 }
 
 .button {
-  margin-left: -167px;
+  margin-left: -180px;
   margin-top: 105px;  
   position: absolute;
   font-family: Helvetica, Sans-serif;
@@ -267,4 +267,5 @@ animation-name: blinker;
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  letter-spacing: 2px;
 }
