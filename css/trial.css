@@ -269,14 +269,14 @@ animation-name: blinker;
 }
 
 .watermark {
-  opacity: .3;
+  opacity: .2;
   position: absolute;
   width: 100px;
   height: 50px;
   box-sizing: border-box;
   padding: 0px 0px ;
-  margin-right: 180px;
-  margin-top: 0px;
+  margin-right: 150px;
+  margin-top: 180px;
   line-height: 1.5;
   text-align: right;
   text-transform:none;
