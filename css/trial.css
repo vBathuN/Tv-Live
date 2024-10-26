@@ -195,7 +195,7 @@ animation-name: blinker;
   position: absolute;
   text-align: center;
   width: 100.8%;
-  height: 60px;
+  height: 65px;
 }
 
 .rtcs {
@@ -225,7 +225,7 @@ animation-name: blinker;
 .rtcs-stream {
     display: inline-block;
     width: 950px;
-    height: 550px;
+    height: 545px;
     margin-bottom: 60px;
     position: absolute;
     vertical-align: middle;
