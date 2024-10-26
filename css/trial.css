@@ -278,10 +278,13 @@ animation-name: blinker;
   height: 720px;
   box-sizing: border-box;
   padding: 0px 0px ;
+  margin-right: 130px;
+  margin-top: 660px;
   line-height: 1.5;
   text-align: right;
-  text-transform:lowercase;
+  text-transform:none;
   letter-spacing: 2px;
   font-family: 'Oxygen', sans-serif;
-  h1 {font-size: 22px; text-shadow: 0 0 .3em #000; margin-right: 130px; margin-top: 350px;}
+  font-size: 10px;
+  h1 {text-shadow: 0 0 .3em #000;}
 }
