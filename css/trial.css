@@ -39,7 +39,7 @@ body {
   position: relative;
   text-align: center;
   width: 74.6%;
-  height: 110px;
+  height: 120px;
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
@@ -183,7 +183,7 @@ animation-name: blinker;
     z-index: 1;
     line-height: 1.8;
     word-spacing: -5px;
-    margin: -68px -39px;
+    margin: -64px -39px;
 }
 
 .ticker-top {
@@ -200,7 +200,7 @@ animation-name: blinker;
     display: inline-block;
     vertical-align: top;
     width:955px;
-    height: 565px;
+    height: 555px;
     margin-top: 0px;
     position: relative;
     z-index: -2;
