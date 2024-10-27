@@ -237,7 +237,7 @@ animation-name: blinker;
     height: 720px;
     margin-top: 0px;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
 }
 
 .pulse-logo {
@@ -289,7 +289,7 @@ animation-name: blinker;
 .location {
   opacity: .8;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin: 0px 730px;
   margin-top: -470px;
 }
