@@ -285,3 +285,11 @@ animation-name: blinker;
   font-size: 10px;
   h1 {text-shadow: 0 0 .3em #000;}
 }
+
+.location {
+  opacity: .8;
+  position: absolute;
+  z-index: 5;
+  margin: 0px 730px;
+  margin-top: -470px;
+}
