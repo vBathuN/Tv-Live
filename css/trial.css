@@ -179,6 +179,7 @@ animation-name: blinker;
 }
 
 .textrss {
+    opacity: .9;
     position: absolute;
     z-index: 1;
     line-height: 1.8;
@@ -207,6 +208,7 @@ animation-name: blinker;
 }
 
 .rtcs-ad {
+    opacity: .9;
     display: inline-block;
     vertical-align: top;
     z-index: -4;
@@ -251,6 +253,7 @@ animation-name: blinker;
 }
 
 .button {
+  opacity: .9;
   margin-left: -180px;
   margin-top: 107px;  
   position: absolute;
@@ -269,7 +272,7 @@ animation-name: blinker;
 }
 
 .watermark {
-  opacity: .2;
+  opacity: .3;
   position: absolute;
   width: 100px;
   height: 50px;
