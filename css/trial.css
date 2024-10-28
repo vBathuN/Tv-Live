@@ -223,7 +223,7 @@ animation-name: blinker;
 
 .rtcs-stream {
     display: inline-block;
-    width: 950px;
+    width: 950.1px;
     height: 545px;
     margin-bottom: 60px;
     position: absolute;
