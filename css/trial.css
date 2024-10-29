@@ -290,6 +290,13 @@ animation-name: blinker;
   opacity: .8;
   position: absolute;
   z-index: 1;
-  margin: 0px 730px;
   margin-top: -470px;
+  
+}
+
+.custom-logo {
+  position: absolute;
+  z-index: 1;
+  margin-left: 460px;
+  margin-top: -19.6px;
 }
