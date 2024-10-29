@@ -1,50 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-<script language=JavaScript>
-//Disable right mouse click Script
-
-var message="Function Disabled!";
-
-function clickIE4(){
-if (event.button==2){
-alert(message);
-return false;
- }
-}
-
-function clickNS4(e){
-if (document.layers||document.getElementById&&!document.all){
-if (e.which==2||e.which==3){
-alert(message);
-return false;
-}
-}
-}
-
-if (document.layers){
-document.captureEvents(Event.MOUSEDOWN);
-document.onmousedown=clickNS4;
-}
-else if (document.all&&!document.getElementById){
-document.onmousedown=clickIE4;
-}
-
-document.oncontextmenu=new Function("alert(message);return false")
-</script>
   <meta charset="UTF-8">
   <title>RTCS Live TV</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/trial.css">
- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="./style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
 </head>
 <body>
 <div class='rtcs'>
 <!-- partial:index.partial.html -->
 <div class='main'>
 <div class='ticker-top'>
-<div class='logo'><img src="images/logo.gif" alt="Logo" width="300" height="45" style="vertical-align: middle;margin-left:620px;padding-top:7px;">
+<div class='logo'><img src="images/logo.gif" alt="Logo" width="300" height="45" style="vertical-align: middle;margin-left:590px;padding-top:7px;">
 
-  <div class='logo-text'>
+<div class='logo-text'>
   <style type="text/css">
     .ml15 {
   important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
@@ -240,8 +209,9 @@ anime.timeline({loop: true})
  
  <div class="watermark"><h1>www.rtcs.live</h1></div>
 
- <div class="location">
+<div class="location">
 <!--[ Location Ticker Code ]-->
+
 <div id="content">
 <div class='ticker-wrap'>
 <div id='ticker'>
@@ -597,7 +567,7 @@ jQuery(function(){jQuery("ul.spy").simpleSpy(limitspy,intervalspy).bind("mouseen
 <div class='ticker'>
   <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
 <style>
-.breaking-scroll,.breaking-scroll a:link {text-decoration: none; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 0px; }
+.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 0px; }
 </style>
 <script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
 var nMaxPosts =50;
