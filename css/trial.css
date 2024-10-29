@@ -295,8 +295,9 @@ animation-name: blinker;
 }
 
 .custom-logo {
+  display: inline-block;
+  opacity: .8;
   position: absolute;
-  z-index: 1;
-  margin-left: 460px;
+  margin-left: -190px;
   margin-top: -19.6px;
 }
