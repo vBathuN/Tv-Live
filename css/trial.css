@@ -290,7 +290,7 @@ animation-name: blinker;
 }
 
 .location {
-  opacity: .8;
+  opacity: .9;
   position: absolute;
   z-index: 1;
   margin-top: -530px;
