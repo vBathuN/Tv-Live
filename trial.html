@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>RTCS Live TV</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/trial.css">
+  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="./style.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
 </head>
 <body>
@@ -248,14 +248,15 @@ anime.timeline({loop: true})
 #ticker ul li img {
   background: transparent;
   float: left;
-  width: 45px;
-  height: 45px;
+  width: 25px;
+  height: 25px;
   margin: 3px 3px -15px 0px
 }
 
 #ticker ul li h3 {
   margin: 0;
   font: 700 16px 'roboto', sans-serif
+  margin: 3px 3px -15px 0px
 }
 
 #ticker ul li h3 a {
@@ -267,7 +268,8 @@ anime.timeline({loop: true})
 #ticker ul li .tickermeta {
   font: 700 18px 'roboto', sans-serif;
   line-height: 25px!important;
-  color: #fff
+  color: #fff;
+  display: none;
 }
   </style>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
@@ -307,7 +309,7 @@ function RTCSliveTicker(t) {
       var u = r.title.$t,
         c = getauthor(r.author),
         d = getmeta(r.published.$t);
-      a += "<li>" + o + '<h3><a href="' + l + '">' + d + '</a></h3><div class="tickermeta"><span>' + u + "</span></div></li>"
+      a += "<li>" + o + '<h3><a href="' + l + '">' + u + '</a></h3><div class="tickermeta"><span>' + d + "</span></div></li>"
     }
     a += "</ul>", e.innerHTML = a
   }
