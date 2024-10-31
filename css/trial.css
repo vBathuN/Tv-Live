@@ -293,8 +293,8 @@ animation-name: blinker;
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -530px;
-  margin-right: -40px;
+  margin-top: -515px;
+  margin-right: 735px;
   text-shadow: 0 0 .3em #000;
   
 }
@@ -303,6 +303,6 @@ animation-name: blinker;
   display: inline-block;
   opacity: .8;
   position: absolute;
-  margin-left: -190px;
+  margin-left: -180px;
   margin-top: -19.6px;
 }
