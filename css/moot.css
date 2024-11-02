@@ -236,9 +236,9 @@ animation-name: blinker;
     display: inline-block;
     position: absolute;
     width: 236px;
-    height: 419px;
-    padding-right: 705px;
-    margin-bottom: -35px;
+    height: 369px;
+    padding-right: 732px;
+    margin-bottom: -115px;
 }
 
 .rtcs-lt {
