@@ -232,6 +232,15 @@ animation-name: blinker;
     border-right: 5px solid #c9a050;
 }
 
+.rtcs-anchor {
+    display: inline-block;
+    position: absolute;
+    width: 236px;
+    height: 419px;
+    padding-right: 705px;
+    margin-bottom: 22px;
+}
+
 .rtcs-lt {
     display: inline-block;
     vertical-align: top;
