@@ -374,6 +374,7 @@ animation-name: blinker;
 .flip-text {
   display: inline-block;
   position: absolute;
+  z-index: 2;
   letter-spacing: 1px;
   font-family: 'Oxygen', sans-serif;
   text-transform: none;
