@@ -371,6 +371,39 @@ animation-name: blinker;
   100% { opacity: .3; }
 }
 
+
+@keyframes vertical {
+  0% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 0;
+    -webkit-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  38% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  45% {
+    opacity: 0;
+    -webkit-transform: translateY(-90px);
+    transform: translateY(-90px);
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .flip-text {
   display: inline-block;
   position: absolute;
