@@ -370,3 +370,14 @@ animation-name: blinker;
   75%  { opacity: 1; }
   100% { opacity: .3; }
 }
+
+.flip-text {
+  display: inline-block;
+  position: absolute;
+  letter-spacing: 1px;
+  font-family: 'Oxygen', sans-serif;
+  text-transform: none;
+  opacity: .9;
+  padding-right: 638px;
+  margin-top: -724px;
+}
