@@ -44,7 +44,7 @@ body {
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-    #2a366a;
+    #c9a050;
   background-size:300% 50%;
   animation: shine 3s infinite;
 }
@@ -103,7 +103,7 @@ animation-name: blinker;
 }
 
 .ticker {
-  background: #000;
+  background: #2a366a;
   width: 100%;
   height: 47px;
   overflow: hidden;
