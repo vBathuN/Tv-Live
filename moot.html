@@ -11,7 +11,7 @@
 <!-- partial:index.partial.html -->
 <div class='main'>
 <div class='ticker-top'>
-<div class='logo'><img src="images/logo.gif" alt="Logo" width="300" height="45" style="vertical-align: middle;margin-left:635px;padding-top:9px;">
+<div class='logo'><img src="images/logo.gif" alt="Logo" width="300" height="45" style="vertical-align: middle;margin-left:637px;padding-top:2px;">
 
 <div class="custom-logo">
 <div class="custom-animated">
@@ -91,7 +91,7 @@
 </div></div></div></div>
 
 <div class='rtcs-ad'>
-<iframe name="rtcs-ad" width="320px" height="670px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+<iframe name="rtcs-ad" width="320px" height="673px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
 </div></div></div>
 
 <div class="rtcs-stream">
@@ -99,7 +99,7 @@
 </div>
 
 <div class='rtcs-anchor'>
-<iframe name="anchor" width="206px" height="366px" src="https://com.rtcs.live/?view=Anchor&scene=1&room=RTCSliveDemo&916&controls=0&transparent&rounded=50&border=3&bordercolor=c9a050&sl&css=https://hosting.rtcs.live/rtcs/labelanchor.css" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+<iframe name="anchor" width="206px" height="366px" src="https://com.rtcs.live/?view=Anchor&scene=1&room=RTCSliveDemo&916&cover&controls=0&transparent&rounded=50&border=4&bordercolor=c9a050" allow="autoplay" frameborder="0" encrypted-media;></iframe>
 </div>
 
 <div class="rtcs-lt">
@@ -197,7 +197,7 @@
 }
 
 #ticker ul li {
-  height: 50px;
+  height: 32px;
   white-space: nowrap
 }
 
@@ -206,7 +206,7 @@
   float: left;
   width: 25px;
   height: 25px;
-  margin: 3px 3px -15px 0px
+  margin: 5px 3px 0px 0px
 }
 
 #ticker ul li h3 {
@@ -216,9 +216,11 @@
 }
 
 #ticker ul li h3 a {
+  background: rgb(0 0 0 / 20%);
+  border-radius: 10px;
   color: #fff;
   text-decoration: none;
-  line-height: 25px!important
+  padding: 0px 5px 0px 5px;
 }
 
 #ticker ul li .tickermeta {
@@ -581,7 +583,7 @@ var nMaxPosts =50;
         var nScrollDelay = 0;
         var sDirection = "left";
         var sOpenLinkLocation = "N";
-        var sBulletChar = "&#128313;"
+        var sBulletChar = "&#x2727;"
 </script>
 <script type="text/javascript">
 function RecentPostsScrollerv2(json) {
