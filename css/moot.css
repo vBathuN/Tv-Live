@@ -40,10 +40,11 @@ body {
   text-align: center;
   width: 74.6%;
   height: 120px;
+  margin-top: 558px;
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-    #2a366a;
+    #c9a050;
   background-size:300% 50%;
   animation: shine 3s infinite;
 }
@@ -72,7 +73,7 @@ background:
   box-shadow: 0 0 2px #800 inset;
   bottom: 0;
   height: 3px;
-  width: 236px;
+  width: 235.5px;
 animation-name: blinker;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -102,7 +103,7 @@ animation-name: blinker;
 }
 
 .ticker {
-  background: #000;
+  background: #2a366a;
   width: 100%;
   height: 47px;
   overflow: hidden;
@@ -188,48 +189,51 @@ animation-name: blinker;
 }
 
 .ticker-top {
-  background: linear-gradient(90deg, rgba(42,54,106,1) 84.4%, rgba(201,160,80,1) 35%);
+  background: linear-gradient(90deg, rgba(42,54,106,1) 84.7%, rgba(201,160,80,1) 35%);
   font-weight: 600;
   overflow: hidden;
   position: absolute;
   text-align: center;
-  width: 100%;
-  height: 60px;
+  width: 74.8%;
+  height: 50px;
+  z-index: -4;
 }
 
 .rtcs {
     display: inline-block;
     vertical-align: top;
-    width:955px;
-    height: 555px;
-    margin-top: 0px;
-    position: relative;
-    z-index: -2;
+    width: 1270px;
+    height: 720px;
+    margin-right: 0px;
+    position: absolute;
+    border-right: 5px solid #c9a050;
+    border-left: 5px solid #2a366a;
+    border-top: 5px solid #2a366a;
 }
 
 .rtcs-ad {
     opacity: .9;
     display: inline-block;
     vertical-align: top;
-    z-index: -4;
-    width: 325px;
+    z-index: 1;
+    width: 320px;
     height: 672px;
     padding-right: 950px;
     margin-top: 0px;
-    position: absolute;
-    border-left: 5px solid #2a366a;
-    border-top: 5px solid #2a366a;  
+    position: absolute;  
 }
 
 .rtcs-stream {
     display: inline-block;
-    width: 950.1px;
+    width: 946px;
     height: 535px;
-    margin-bottom: 67px;
+    margin-bottom: 77px;
+    margin-right: 7px;
     position: absolute;
     vertical-align: middle;
     z-index: -2;
-    border-right: 5px solid #c9a050;
+    border-left: 2.8px solid #c9a050;
+    border-top: 2.8px solid #c9a050;
 }
 
 .rtcs-anchor {
@@ -238,7 +242,7 @@ animation-name: blinker;
     width: 206px;
     height: 366px;
     padding-right: 749px;
-    margin-bottom: -180px;
+    margin-bottom: -110px;
 }
 
 .rtcs-lt {
@@ -313,14 +317,14 @@ animation-name: blinker;
   opacity: .9;
   position: absolute;
   margin-left: -870px;
-  margin-top: 31px;
+  margin-top: 24px;
 }
 
 .onair {
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -645px;
+  margin-top: -652px;
   margin-right: 880px;
 }
 
@@ -412,5 +416,5 @@ animation-name: blinker;
   text-transform: none;
   opacity: .9;
   padding-right: 638px;
-  margin-top: -724px;
+  margin-top: -735px;
 }
