@@ -1,5 +1,5 @@
 /* Depends on length of ticker text */
-html { max-width: 720px; max-height: 1280px; margin: 0 auto;}
+html { max-width: 720px; max-height: 100vh; margin: 0 auto;}
 
 @font-face {
     font-family: 'Tamil039';
@@ -160,7 +160,7 @@ background:
     vertical-align: top;
     width: 720px;
     height: 1280px;
-    margin-right: -5.9px;
+    margin-right: -5px;
     position: absolute;
     border-right: 5px solid #c9a050;
     border-left: 5px solid #2a366a;
