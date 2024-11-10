@@ -35,17 +35,16 @@ body {
 .cur-event {
   background: #2a366a;
   font-weight: 600;
-  overflow: hidden;
   position: relative;
   text-align: center;
   width: 100%;
-  height: 220px;
+  height: 300px;
   margin-top: 0px;
   z-index:-1;
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-    #2a366a;
+    #c60203;
   background-size:300% 50%;
   animation: shine 3s infinite;
 }
@@ -69,43 +68,30 @@ background:
   width: 95%;
 }
 
-.ticker {
-  background: #2a366a;
-  width: 100%;
-  height: 47px;
-  overflow: hidden;
-  position: relative;
-  white-space: nowrap;
-  margin-top: 393px;
-}
-
-.ticker .stock-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 190px;
-  height: 48px;
-}
-
 .breaking_news {
   float:right;
   width:100%;
   font-family: "Agdasima", sans-serif;
-  font-size: 40px;
+  font-size: 50px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 .3em #000;
   margin-top:-3.5px;
+  padding-top: 60px;
 }
 
 .label {
   float:right;
   padding:0px 8px;
-  background:#c60203;
+  background:#19f radial-gradient(transparent, #02c);
+  border-radius: 10px;
   color:#FFF;
-  font-weight: bold;
+  margin-right: 225px;
+  font-weight: 900;
   text-transform: uppercase;
-  border-top: 2px solid #c9a050;
-  border-left: 2px solid #c9a050;
-  border-right: 2px solid #c9a050;
-  border-bottom: 2px solid #c9a050;
+  border-top: 3px solid #fff000;
+  border-left: 3px solid #fff000;
+  border-right: 3px solid #fff000;
+  border-bottom: 3px solid #fff000;
 }
 
 /* Ripple magic */
@@ -153,17 +139,7 @@ background:
     z-index: 1;
     line-height: 1.8;
     word-spacing: -5px;
-    margin: -49px -34px;
-}
-
-.ticker-top {
-  background: linear-gradient(90deg, rgba(42,54,106,1) 79.3%, rgba(201,160,80,1) 35%);
-  font-weight: 600;
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  height: 60px;
+    margin: 35px -38px;
 }
 
 .rtcs {
@@ -173,17 +149,18 @@ background:
     height: 1280px;
     margin-right: -5px;
     position: absolute;
-    border-right: 5px solid #c9a050;
-    border-left: 5px solid #2a366a;
-    border-top: 5px solid #2a366a;
+    border-right: 5px solid #fff000;
+    border-left: 5px solid #fff000;
+    border-top: 5px solid #fff000;
+    border-bottom: 5px solid #fff000;
 }
 
 .rtcs-stream {
     display: inline-block;
-    position: relative;
+    position: absolute;
     width: 720px;
     height: 600px;
-    margin-top: 25px;
+    margin-bottom: 680px;
     z-index: -1;
 }
 
@@ -202,34 +179,16 @@ background:
     width: 75px;
     height: 75px;
     padding-right: 45px;
-    margin-top: 720px;
+    margin-top: 780px;
     position: absolute;  
-}
-
-.location {
-  opacity: .9;
-  position: absolute;
-  z-index: 1;
-  margin-top: -1100px;
-  margin-right: 510px;
-  text-shadow: 0 0 .3em #000;
-  
-}
-
-.custom-logo {
-  display: inline-block;
-  opacity: .9;
-  position: absolute;
-  margin-left: -870px;
-  margin-top: 31px;
 }
 
 .onair {
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -1205px;
-  margin-right: 650px;
+  margin-top: -225px;
+  margin-right: 460px;
 }
 
 #box > svg {
@@ -319,9 +278,9 @@ background:
   font-family: 'Oxygen', sans-serif;
   text-transform: none;
   text-shadow: 0 0 .3em #000;
-  opacity: .8;
-  padding-right: 650px;
-  margin-top: -1275px;
+  opacity: .3;
+  padding-right: 450px;
+  margin-top: -460px;
 }
 
 .topad { 
@@ -329,6 +288,6 @@ background:
     position: absolute;  
     width:720px;
     height: 500px;    
-    margin-top: 248px;
+    margin-top: 262px;
     z-index:-1;    
 }
