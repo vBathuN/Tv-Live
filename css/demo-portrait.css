@@ -45,7 +45,7 @@ body {
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-    #c9a050;
+    #2a366a;
   background-size:300% 50%;
   animation: shine 3s infinite;
 }
