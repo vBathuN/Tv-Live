@@ -228,7 +228,7 @@ background:
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -1200px;
+  margin-top: -1205px;
   margin-right: 650px;
 }
 
@@ -319,9 +319,9 @@ background:
   font-family: 'Oxygen', sans-serif;
   text-transform: none;
   text-shadow: 0 0 .3em #000;
-  opacity: .3;
+  opacity: .8;
   padding-right: 650px;
-  margin-top: -1270px;
+  margin-top: -1275px;
 }
 
 .topad { 
