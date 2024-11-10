@@ -153,7 +153,7 @@ background:
     z-index: 1;
     line-height: 1.8;
     word-spacing: -5px;
-    margin: -49px -35px;
+    margin: -49px -34px;
 }
 
 .ticker-top {
@@ -210,8 +210,8 @@ background:
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -50px;
-  margin-right: 500px;
+  margin-top: -1100px;
+  margin-right: 510px;
   text-shadow: 0 0 .3em #000;
   
 }
