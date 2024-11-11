@@ -41,6 +41,7 @@ body {
   height: 220px;
   margin-top: 0px;
   z-index:-1;
+  border-radius: 20px;
   border-top: 10px solid #fff000;
   border-bottom: 10px solid #fff000;
 
