@@ -33,7 +33,7 @@ body {
 }
 
 .cur-event {
-  background: #2a366a;
+  background: #c60203;
   font-weight: 600;
   position: relative;
   text-align: center;
@@ -75,7 +75,7 @@ background:
   float:right;
   width:100%;
   font-family: "Agdasima", sans-serif;
-  font-size: 50px;
+  font-size: 55px;
   letter-spacing: 3px;
   text-shadow: 0 0 .3em #000;
   margin-top:-3.5px;
@@ -88,7 +88,7 @@ background:
   background:#19f radial-gradient(transparent, #02c);
   border-radius: 10px;
   color:#FFF;
-  margin-right: 240px;
+  margin-right: 245px;
   font-weight: 900;
   text-transform: uppercase;
   border-top: 5px solid #fff000;
