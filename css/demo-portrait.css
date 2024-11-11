@@ -188,7 +188,7 @@ background:
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -1200px;
+  margin-top: -120px;
   margin-right: 650px;
 }
 
@@ -280,8 +280,8 @@ background:
   text-transform: none;
   text-shadow: 0 0 .3em #000;
   opacity: .9;
-  padding-right: 645px;
-  margin-top: -1270px;
+  padding-right: 215px;
+  margin-top: -190px;
 }
 
 .topad { 
