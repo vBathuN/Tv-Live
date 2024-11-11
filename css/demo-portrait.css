@@ -41,8 +41,8 @@ body {
   height: 220px;
   margin-top: 0px;
   z-index:-1;
-  border-top: 3px solid #fff000;
-  border-bottom: 3px solid #fff000;
+  border-top: 10px solid #fff000;
+  border-bottom: 10px solid #fff000;
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
@@ -87,13 +87,12 @@ background:
   background:#19f radial-gradient(transparent, #02c);
   border-radius: 10px;
   color:#FFF;
-  margin-right: 225px;
+  margin-right: 240px;
   font-weight: 900;
   text-transform: uppercase;
-  border-top: 3px solid #fff000;
-  border-left: 3px solid #fff000;
-  border-right: 3px solid #fff000;
-  border-bottom: 3px solid #fff000;
+  border-top: 5px solid #fff000;
+  border-left: 5px solid #fff000;
+  border-right: 5px solid #fff000;
 }
 
 /* Ripple magic */
@@ -149,12 +148,12 @@ background:
     vertical-align: top;
     width: 720px;
     height: 1280px;
-    margin-right: -5px;
+    margin-right: -10px;
     position: absolute;
-    border-right: 5px solid #fff000;
-    border-left: 5px solid #fff000;
-    border-top: 5px solid #fff000;
-    border-bottom: 5px solid #fff000;
+    border-right: 10px solid #fff000;
+    border-left: 10px solid #fff000;
+    border-top: 10px solid #fff000;
+    border-bottom: 10px solid #fff000;
 }
 
 .rtcs-stream {
@@ -189,8 +188,8 @@ background:
   opacity: .9;
   position: absolute;
   z-index: 1;
-  margin-top: -98px;
-  margin-right: 460px;
+  margin-top: -1200px;
+  margin-right: 650px;
 }
 
 #box > svg {
@@ -280,9 +279,9 @@ background:
   font-family: 'Oxygen', sans-serif;
   text-transform: none;
   text-shadow: 0 0 .3em #000;
-  opacity: .3;
-  padding-right: 435px;
-  margin-top: -310px;
+  opacity: .9;
+  padding-right: 645px;
+  margin-top: -1270px;
 }
 
 .topad { 
