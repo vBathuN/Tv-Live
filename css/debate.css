@@ -411,8 +411,8 @@ animation-name: blinker;
 .flip-text {
   display: inline-block;
   position: absolute;
-  letter-spacing: 1px;
-  font-family: 'Oxygen', sans-serif;
+  letter-spacing: 1.5px;
+  font-family: "Agdasima", sans-serif;
   text-transform: none;
   opacity: .9;
   padding-right: 772px;
