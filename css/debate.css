@@ -233,7 +233,7 @@ animation-name: blinker;
     vertical-align: middle;
     z-index: -2;
     border-left: 2.8px solid #c9a050;
-    border-top: 2.8px solid #c9a050;
+    border-top: 2px solid #c9a050;
 }
 
 .rtcs-anchor {
