@@ -44,7 +44,7 @@ body {
 
 background: 
     linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-    #c9a050;
+    #c60203;
   background-size:300% 50%;
   animation: shine 3s infinite;
 }
@@ -90,9 +90,9 @@ animation-name: blinker;
     100% { background: red; }
 }
 @keyframes blinker {  
-    0% { background: red; }
-    50% { background: #660303; }
-    100% { background: red; }
+    0% { background: #fff000; }
+    50% { background: blue; }
+    100% { background: #fff000; }
 }
 .cur-event p {
   line-height: 1em;
@@ -124,7 +124,7 @@ animation-name: blinker;
   width:100%;
   font-family: "Agdasima", sans-serif;
   font-size: 40px;
-  margin-top:-4.5px;
+  margin-top:-4px;
 }
 
 .label {
@@ -189,7 +189,7 @@ animation-name: blinker;
 }
 
 .ticker-top {
-  background: #2a366a;
+  background: #c60203;
   font-weight: 600;
   overflow: hidden;
   position: absolute;
@@ -207,8 +207,8 @@ animation-name: blinker;
     margin-right: 0px;
     position: absolute;
     border-right: 5px solid #c9a050;
-    border-left: 5px solid #2a366a;
-    border-top: 5px solid #2a366a;
+    border-left: 5px solid #c9a050;
+    border-top: 5px solid #c9a050;
 }
 
 .rtcs-ad {
@@ -316,7 +316,7 @@ animation-name: blinker;
   display: inline-block;
   opacity: .9;
   position: absolute;
-  margin-left: -1297px;
+  margin-left: -1307px;
   margin-top: -3px;
 }
 
