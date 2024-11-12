@@ -189,7 +189,7 @@ animation-name: blinker;
 }
 
 .ticker-top {
-  background: linear-gradient(90deg, rgba(42,54,106,1) 84.7%, rgba(201,160,80,1) 35%);
+  background: #2a366a;
   font-weight: 600;
   overflow: hidden;
   position: absolute;
@@ -316,16 +316,16 @@ animation-name: blinker;
   display: inline-block;
   opacity: .9;
   position: absolute;
-  margin-left: -870px;
-  margin-top: 31px;
+  margin-left: -1297px;
+  margin-top: -3px;
 }
 
 .onair {
-  opacity: .9;
+  opacity: .5;
   position: absolute;
   z-index: 1;
   margin-top: -645px;
-  margin-right: 880px;
+  margin-right: 890px;
 }
 
 #box > svg {
@@ -415,6 +415,6 @@ animation-name: blinker;
   font-family: 'Oxygen', sans-serif;
   text-transform: none;
   opacity: .9;
-  padding-right: 638px;
+  padding-right: 772px;
   margin-top: -724px;
 }
