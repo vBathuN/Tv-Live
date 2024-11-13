@@ -242,7 +242,7 @@ animation-name: blinker;
     width: 210px;
     height: 515px;
     margin-bottom: 110px;
-    margin-right: 5px;
+    margin-right: 0px;
     position: absolute;
     vertical-align: middle;
     z-index: -5;
