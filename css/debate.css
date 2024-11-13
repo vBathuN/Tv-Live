@@ -245,6 +245,15 @@ animation-name: blinker;
     margin-bottom: -110px;
 }
 
+.rtcs-slider {
+    display: inline-block;
+    position: absolute;
+    width: 205px;
+    height: 505px;
+    padding-right: 5px;
+    margin-bottom: 99px;
+}
+
 .rtcs-lt {
     display: inline-block;
     vertical-align: top;
@@ -291,7 +300,7 @@ animation-name: blinker;
   height: 50px;
   box-sizing: border-box;
   padding: 0px 0px ;
-  margin-right: 150px;
+  margin-right: 320px;
   margin-top: 180px;
   line-height: 1.5;
   text-align: right;
