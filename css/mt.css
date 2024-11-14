@@ -141,7 +141,7 @@ body {
 }
 
 .ticker-top {
-  background: #c60203;
+  background: #c9a050;
   font-weight: 600;
   overflow: hidden;
   position: absolute;
@@ -381,5 +381,5 @@ body {
   text-transform: none;
   opacity: .9;
   padding-right: 772px;
-  margin-top: -724px;
+  margin-top: -730px;
 }
