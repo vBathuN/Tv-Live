@@ -33,7 +33,7 @@ body {
 }
 
 .cur-event {
-  background: #2a366a;
+  background: #fff000;
   font-weight: 600;
   overflow: hidden;
   position: relative;
@@ -41,21 +41,6 @@ body {
   width: 74.6%;
   height: 120px;
   margin-top: 558px;
-
-background: 
-    linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-    #c60203;
-  background-size:300% 50%;
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% {
-    background-position: right;    
-  }
-  /*100% {
-    background-position: left; it's the default value, no need to define it
-  }*/
 }
 
 .cur-event .top, .cur-event .glow, .cur-event .bttm {
@@ -67,39 +52,6 @@ background:
   top: 0;
   height: 5px;
   width: 95%;
-}
-.cur-event .bttm {
-  background: linear-gradient(90deg, transparent, #fca);
-  box-shadow: 0 0 2px #800 inset;
-  bottom: 0;
-  height: 3px;
-  width: 235.5px;
-animation-name: blinker;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@-moz-keyframes blinker {  
-    0% { background: red; }
-    50% { background: #660303 ; }
-    100% { background: red; }
-}@-webkit-keyframes blinker {  
-    0% { background: red; }
-    50% { background: #660303 ; }
-    100% { background: red; }
-}
-@keyframes blinker {  
-    0% { background: #fff000; }
-    50% { background: blue; }
-    100% { background: #fff000; }
-}
-.cur-event p {
-  line-height: 1em;
-  margin: 20px;
-  text-shadow: 0 2px 4px #000;
-  vertical-align: center;
-  transform: scale(1, 1.3);
 }
 
 .ticker {
@@ -131,6 +83,7 @@ animation-name: blinker;
   float:right;
   padding:0px 8px;
   background:#c60203;
+  border-radius: 15px 0px 0px 15px;
   color:#FFF;
   font-weight: bold;
   text-transform: uppercase;
@@ -185,7 +138,7 @@ animation-name: blinker;
     z-index: 1;
     line-height: 1.8;
     word-spacing: -5px;
-    margin: -64px -38px;
+    margin: -54px 5px;
 }
 
 .ticker-top {
