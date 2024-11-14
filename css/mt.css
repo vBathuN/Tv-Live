@@ -40,7 +40,7 @@ body {
   text-align: center;
   width: 74.6%;
   height: 120px;
-  margin-top: 558px;
+  margin-top: 550px;
 }
 
 .cur-event .top, .cur-event .glow, .cur-event .bttm {
@@ -57,7 +57,7 @@ body {
 .ticker {
   background: #2a366a;
   width: 100%;
-  height: 47px;
+  height: 50px;
   overflow: hidden;
   position: relative;
   white-space: nowrap;
@@ -169,7 +169,7 @@ body {
     vertical-align: top;
     z-index: 1;
     width: 320px;
-    height: 672px;
+    height: 667px;
     padding-right: 950px;
     margin-top: 0px;
     position: absolute;  
