@@ -33,7 +33,7 @@ body {
 }
 
 .cur-event {
-  background: #fff000;
+  background: #c9a050;
   font-weight: 600;
   overflow: hidden;
   position: relative;
@@ -137,7 +137,7 @@ body {
     z-index: 1;
     line-height: 1.8;
     word-spacing: -5px;
-    margin: -54px 5px;
+    margin: -53.7px 3px;
 }
 
 .ticker-top {
