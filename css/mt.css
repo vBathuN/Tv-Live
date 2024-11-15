@@ -178,11 +178,11 @@ body {
     display: inline-block;
     width: 760px;
     height: 505px;
-    margin-bottom: 105px;
+    margin-bottom: 100px;
     margin-right: 200px;
     position: absolute;
     vertical-align: middle;
-    z-index: -2;
+    z-index: -5;
 }
 
 .rtcs-slider {
