@@ -1,0 +1,294 @@
+/* Depends on length of ticker text */
+html { max-width: 720px; margin: 0 auto;}
+
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtcs.live/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtcs.live/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+  important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+  color: #ffffff;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: flex-end;
+  overflow:hidden;
+  height: 100vh;
+  margin: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+  justify-content:center;
+}
+
+.main {
+  
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  
+}
+
+.cur-event {
+  background: #c60203;
+  font-weight: 600;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 220px;
+  margin-top: 0px;
+  z-index:-1;
+  border-radius: 20px;
+  border-top: 10px solid #fff000;
+  border-bottom: 10px solid #fff000;
+
+background: 
+    linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
+    #c60203;
+  background-size:300% 50%;
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: right;    
+  }
+  /*100% {
+    background-position: left; it's the default value, no need to define it
+  }*/
+}
+
+.cur-event .top, .cur-event .glow, .cur-event .bttm {
+  position: absolute;
+  right: 0;
+}
+.cur-event .top {
+  top: 0;
+  height: 5px;
+  width: 95%;
+}
+
+.breaking_news {
+  float:right;
+  width:100%;
+  font-family: "Agdasima", sans-serif;
+  font-size: 55px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 .3em #000;
+  margin-top:-3.5px;
+  padding-top: 110px;
+}
+
+.label {
+  float:right;
+  padding:0px 8px 0px 11px;
+  background:#19f radial-gradient(transparent, #02c);
+  border-radius: 10px;
+  color:#FFF;
+  margin-right: 200px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-top: 5px solid #fff000;
+  border-left: 5px solid #fff000;
+  border-right: 5px solid #fff000;
+}
+
+/* Ripple magic */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 5px;
+  background: rgba(255, 255, 255, .5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+.ripple::after {
+  animation: ripple 1.5s ease-out  infinite;
+}
+
+.caption {
+    position: absolute;
+    width: 700px;
+    height: 200px;
+    z-index: 1;
+    margin: 7px -170px;
+}
+
+.rtcs {
+    display: inline-block;
+    vertical-align: top;
+    width: 720px;
+    height: 1280px;
+    margin-right: -10px;
+    position: absolute;
+    border-right: 10px solid #fff000;
+    border-left: 10px solid #fff000;
+    border-top: 10px solid #fff000;
+    border-bottom: 10px solid #fff000;
+}
+
+.rtcs-stream {
+    display: inline-block;
+    position: absolute;
+    width: 720px;
+    height: 620px;
+    margin-bottom: 660px;
+    z-index: -1;
+}
+
+.rtcs-lt {
+    display: inline-block;
+    vertical-align: top;
+    width: 720px;
+    height: 1280px;
+    position: absolute;
+    z-index: 2;
+}
+
+.pulse-logo {
+    display: inline-block;
+    z-index: 5;
+    width: 75px;
+    height: 75px;
+    padding-right: 45px;
+    margin-top: 780px;
+    position: absolute;  
+}
+
+.onair {
+  opacity: .9;
+  position: absolute;
+  z-index: 1;
+  margin-top: -120px;
+  margin-right: 650px;
+}
+
+#box > svg {
+  height: 54px;
+  width: 54px;
+/*   transform: scale(2); */
+}
+
+#box > svg path#on-air-out {
+  animation: on-air-out 2s infinite;
+}
+
+#box > svg path#on-air-in {
+  animation: on-air-in 2s infinite;
+}
+
+#box > svg ellipse {
+  transform-origin: 50% 50%;
+  animation: on-air-circle 2s infinite;
+}
+
+@keyframes on-air-circle {
+  0% {
+    opacity: .1;
+    transform: scale(1);
+  }
+  25%  { opacity: 1;
+  transform: scale(2);}
+  50%  { opacity: 1;}
+  75%  { opacity: 1;
+  transform: scale(1)}
+  100% { opacity: .3; }
+}
+
+@keyframes on-air-in {
+  0%   { opacity: .3; }
+  25%  { opacity: .3; }
+  50%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: .3; }
+}
+
+@keyframes on-air-out {
+  0%   { opacity: .3; }
+  50%  { opacity: .3; }
+  75%  { opacity: 1; }
+  100% { opacity: .3; }
+}
+
+
+@keyframes vertical {
+  0% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 0;
+    -webkit-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  38% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  45% {
+    opacity: 0;
+    -webkit-transform: translateY(-90px);
+    transform: translateY(-90px);
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.flip-text {
+  display: inline-block;
+  position: absolute;
+  letter-spacing: 1px;
+  font-family: 'Oxygen', sans-serif;
+  text-transform: none;
+  text-shadow: 0 0 .3em #000;
+  opacity: .9;
+  padding-right: 480px;
+  margin-top: -330px;
+}
+
+.topad { 
+    display: inline-block;
+    position: absolute;  
+    width:720px;
+    height: 500px;    
+    margin-top: 262px;
+    z-index:-1;    
+}
