@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RTCS Live TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/portrait-caption.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+</head>
+<body>
+<div class='rtcs'>
+<!-- partial:index.partial.html -->
+<div class='main'>
+</div></div>
+
+
+<div class='topad'>
+<iframe class="topad" width="100vh" height="100vh" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" autoplay; encrypted-media;></iframe></div>
+
+<div class="rtcs-lt">
+<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtcs.live/" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="pulse-logo">
+<style>
+
+.round-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  z-index: 1;
+  position: relative;
+}
+
+.pulse-container {
+  position: relative;
+}
+
+.pulse1,
+.pulse2,
+.pulse3 {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  z-index: 0;
+  background: red;
+  animation: pulse 3s infinite;
+}
+
+.pulse2 {
+  animation-delay: 1s;
+}
+
+.pulse3 {
+  animation-delay: 2s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+   <div class="pulse-container">
+      <div class="pulse1"></div>
+      <div class="pulse2"></div>
+      <div class="pulse3"></div>
+
+      <img class="round-image" src="https://www.rtcs.live/animated-logo/bathu/images/hero.jpg" alt="" />
+    </div>
+</div>
+
+<div class="flip-text">
+<style>
+.verticalflip {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.verticalflip span {
+  animation: vertical 7.5s linear infinite 0s;
+  -ms-animation: vertical 7.5s linear infinite 0s;
+  -webkit-animation: vertical 7.5s linear infinite 0s;
+  color: #fff;
+  position: absolute;
+  opacity: 0;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+
+.verticalflip span:nth-child(2) {
+  -ms-animation-delay: 2.5s;
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
+.verticalflip span:nth-child(3) {
+  -ms-animation-delay: 5s;
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s;
+}
+</style>
+<div class="verticalflip">
+  <span>Follow Us</span>
+  <span>@themediatrial</span>
+  <span>tv.rtcs.live</span>
+</div></div>
+
+<div class="breaking_news">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+</style>
+  <span class="label ripple">Media <span> Trial</span></span>
+</div>
+  
+  <div class='cur-event'>
+    <div class='top'></div>
+    <div class='glow'></div>
+
+<div class='caption'>
+<iframe class="caption" width="100vh" height="100vh" src="https://caption.rtcs.live/output?room=RTCSliveDemo" scrolling="no" frameborder="0" autoplay; encrypted-media;></iframe>
+</div></div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+
+const title = urlParams.get('title');
+const subTitle = urlParams.get('subTitle');
+const once = urlParams.get('once');
+
+if (title) {
+  document.getElementById('titleText').innerHTML = title; 
+  document.getElementById('titleContainer').style.display = 'block'; 
+}
+
+if (subTitle) {
+  document.getElementById('subTitleText').innerHTML = subTitle;  
+  document.getElementById('subTitleContainer').style.display = 'block'; 
+}
+
+if (!title && !subTitle) {
+  document.getElementById('titleContainer').style.display = 'block';
+  document.getElementById('subTitleContainer').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
