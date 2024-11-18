@@ -173,18 +173,19 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    width: 630px;
+    width: 580px;
     height: 505px;
     margin-bottom: 100px;
-    margin-right: 330px;
+    margin-right: 380px;
     position: absolute;
     vertical-align: middle;
     z-index: -5;
 }
 
 .rtcs-slider {
+    background: #2a366a;
     display: inline-block;
-    width: 340px;
+    width: 380px;
     height: 505px;
     margin-bottom: 115px;
     margin-right: 0px;
@@ -249,7 +250,7 @@ body {
   height: 50px;
   box-sizing: border-box;
   padding: 0px 0px ;
-  margin-right: 320px;
+  margin-right: 630px;
   margin-top: 180px;
   line-height: 1.5;
   text-align: right;
