@@ -185,13 +185,13 @@ body {
 .rtcs-slider {
     background: #2a366a;
     display: inline-block;
-    width: 380px;
+    width: 390px;
     height: 505px;
     margin-bottom: 115px;
     margin-right: 0px;
     position: absolute;
     vertical-align: middle;
-    z-index: -5;
+    z-index: -6;
     
 }
 
