@@ -140,7 +140,7 @@ body {
 }
 
 .ticker-top {
-  background: #c60203;
+  background: #2a366a;
   font-weight: 600;
   overflow: hidden;
   position: absolute;
@@ -173,10 +173,10 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    width: 580px;
+    width: 650px;
     height: 505px;
     margin-bottom: 100px;
-    margin-right: 380px;
+    margin-right: 310px;
     position: absolute;
     vertical-align: middle;
     z-index: -5;
@@ -185,7 +185,7 @@ body {
 .rtcs-slider {
     background: #2a366a;
     display: inline-block;
-    width: 390px;
+    width: 320px;
     height: 505px;
     margin-bottom: 115px;
     margin-right: 0px;
