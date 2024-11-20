@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RTCS Live TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/mt-news.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+</head>
+<body>
+<div class='rtcs'>
+<!-- partial:index.partial.html -->
+<div class='main'>
+<div class='ticker-top'>
+<div class='logo'>
+<style>
+.logo {
+  width: 320px;
+  height: 50px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  margin-right: 0px;
+}
+.waviy {
+  background: #c60203;
+  position: relative;
+  padding: 12px 0px 0px 10px;
+  
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 45px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -5px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  -webkit-text-stroke: 1.5px #c9a050;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+.live {
+  background: #19f radial-gradient(transparent, #02c);
+  position: relative;
+  padding: 0px 10px 5px 12px;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 47px;
+  font-weight: 900;
+  color: #2a366a;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  
+  -webkit-text-stroke: 1px red;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+</style>
+<div class="waviy">
+   <span style="--i:1">M</span>
+   <span style="--i:2">e</span>
+   <span style="--i:3">d</span>
+   <span style="--i:4">i</span>
+   <span style="letter-spacing: 1px;--i:5">a</span>
+
+   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
+</div></div>
+
+<div class="custom-logo">
+<div class="custom-animated">
+
+<style>
+.custom-animated {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 740px) {
+  .custom-animated {
+    flex-direction: row;
+  }
+}
+.custom-animated__angle {
+  color: #c9a050;
+  font-size: 10rem;
+  line-height: 0rem;
+  -webkit-animation: blink 1s infinite;
+          animation: blink 1s infinite;
+}
+@media (min-width: 340px) {
+  .custom-animated__angle {
+    transform: rotate(-0deg);
+    margin-left: 1rem;
+    font-size: 2em;
+  }
+}
+.custom-animated__angle--1 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+.custom-animated__angle--2 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+.custom-animated__angle--3 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+.custom-animated__angle--4 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+.custom-animated__angle--5 {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+.custom-animated__angle--6 {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+</style>
+
+<i class="fa fa-youtube custom-animated__angle custom-animated__angle--1"></i>
+  <i class="fa fa-facebook custom-animated__angle custom-animated__angle--2"></i>
+  <i class="fa fa-twitter custom-animated__angle custom-animated__angle--3"></i>
+  <i class="fa fa-instagram custom-animated__angle custom-animated__angle--4"></i>
+</div></div></div>
+
+<div class='rtcs-ad'>
+<iframe name="rtcs-ad" width="320px" height="670px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+</div></div></div>
+
+<div class="rtcs-stream">
+<iframe class="rtcs-stream" width="100vh" height="720px" src="https://demo.rtcs.live/stream-live-mt" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="rtcs-slider">
+<iframe name="rtcs-ad" width="300px" height="500px" src="https://www.rtcs.live/text-animation/label" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class='rtcs-anchor'>
+<iframe name="anchor" width="206px" height="366px" src="https://com.rtcs.live/?view=Anchor&scene=1&room=RTCSliveDemo&916&cover&controls=0&transparent&rounded=50&border=4&bordercolor=c9a050" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="rtcs-lt">
+<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtcs.live/" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="pulse-logo">
+<style>
+
+.round-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  z-index: 1;
+  position: relative;
+}
+
+.pulse-container {
+  position: relative;
+}
+
+.pulse1,
+.pulse2,
+.pulse3 {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  z-index: 0;
+  background: red;
+  animation: pulse 3s infinite;
+}
+
+.pulse2 {
+  animation-delay: 1s;
+}
+
+.pulse3 {
+  animation-delay: 2s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+   <div class="pulse-container">
+      <div class="pulse1"></div>
+      <div class="pulse2"></div>
+      <div class="pulse3"></div>
+
+      <img class="round-image" src="https://www.rtcs.live/animated-logo/bathu/images/hero.jpg" alt="" />
+    </div>
+<a class="button">www.rtcs.live</a>
+</div>
+ 
+ <div class="watermark"><h1>www.rtcs.live</h1></div>
+
+<div class="location">
+<!--[ Location Ticker Code ]-->
+
+<div id="content">
+<div class='ticker-wrap'>
+<div id='ticker'>
+</div></div></div>
+  <style>
+  /* CSS News Ticker */
+
+.ticker-wrap {
+  width: 200px;
+  display: block;
+  border-radius: 21px;
+  text-align: center;
+  margin: 0 0px 0px 0px;
+  padding: 5px;
+}
+
+#ticker {
+  height: 45px;
+  overflow: hidden;
+  text-align: left
+}
+
+#ticker ul {
+  padding: 0;
+  margin: 0;
+  list-style: none
+}
+
+#ticker ul li {
+  height: 32px;
+  white-space: nowrap
+}
+
+#ticker ul li img {
+  background: transparent;
+  float: left;
+  width: 25px;
+  height: 25px;
+  margin: 5px 3px 0px 0px
+}
+
+#ticker ul li h3 {
+  margin: 0;
+  font: 700 16px 'roboto', sans-serif
+  margin: 3px 3px -15px 0px
+}
+
+#ticker ul li h3 a {
+  background: rgb(0 0 0 / 70%);
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  padding: 0px 5px 0px 5px;
+}
+
+#ticker ul li .tickermeta {
+  font: 700 18px 'roboto', sans-serif;
+  line-height: 25px!important;
+  color: #fff;
+  display: none;
+}
+  </style>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script>
+//<![CDATA[
+function getauthor(t) {
+  for (var e = 0; e < t.length; e++) var i = t[e].name.$t;
+  return i
+}
+
+function getmeta(t) {
+  var e = [];
+  e[1] = "Jan", e[2] = "Feb", e[3] = "Mar", e[4] = "Apr", e[5] = "May", e[6] = "Jun", e[7] = "Jul", e[8] = "Aug", e[9] = "Sep", e[10] = "Oct", e[11] = "Nov", e[12] = "Dec";
+  var i = t.substring(0, 4),
+    a = t.substring(5, 7),
+    n = t.substring(8, 10),
+    r = e[parseInt(a, 10)] + " " + n + " " + i;
+  return r
+}
+
+function RTCSliveTicker(t) {
+  var e = document.querySelector("#ticker"),
+    i = t.feed.entry,
+    a = "<ul id='ticket-wrapper-inner'>";
+  if (i) {
+    for (var n = 0; n < i.length; n++) {
+      for (var r = i[n], s = 0; s < r.link.length; s++)
+        if ("alternate" == r.link[s].rel) {
+          var l = r.link[s].href;
+          break
+        }
+      try {
+        var o = '<img src="' + r.media$thumbnail.url + '"/>'
+      } catch (t) {
+        var o = ""
+      }
+      var u = r.title.$t,
+        c = getauthor(r.author),
+        d = getmeta(r.published.$t);
+      a += "<li>" + o + '<h3><a href="' + l + '">' + u + '</a></h3><div class="tickermeta"><span>' + d + "</span></div></li>"
+    }
+    a += "</ul>", e.innerHTML = a
+  }
+  $("#ticker").vTicker()
+}! function(t) {
+  var e = {
+      speed: 700,
+      pause: 4e3,
+      showItems: 1,
+      mousePause: !0,
+      height: 0,
+      animate: !0,
+      margin: 0,
+      padding: 0,
+      startPaused: !1
+    },
+    i = {
+      moveUp: function(t, e) {
+        i.animate(t, e, "up")
+      },
+      moveDown: function(t, e) {
+        i.animate(t, e, "down")
+      },
+      animate: function(e, i, a) {
+        var n = e.itemHeight,
+          r = e.options,
+          s = e.element,
+          l = s.children("ul"),
+          o = "up" === a ? "li:first" : "li:last";
+        s.trigger("vticker.beforeTick");
+        var u = l.children(o).clone(!0);
+        if (0 < r.height && (n = l.children("li:first").height()), n += r.margin + 2 * r.padding, "down" === a && l.css("top", "-" + n + "px").prepend(u), i && i.animate) {
+          if (e.animating) return;
+          e.animating = !0, l.animate("up" === a ? {
+            top: "-=" + n + "px"
+          } : {
+            top: 0
+          }, r.speed, function() {
+            t(l).children(o).remove(), t(l).css("top", "0px"), e.animating = !1, s.trigger("vticker.afterTick")
+          })
+        } else l.children(o).remove(), l.css("top", "0px"), s.trigger("vticker.afterTick");
+        "up" === a && u.appendTo(l)
+      },
+      nextUsePause: function() {
+        var e = t(this).data("state"),
+          i = e.options;
+        e.isPaused || 2 > e.itemCount || a.next.call(this, {
+          animate: i.animate
+        })
+      },
+      startInterval: function() {
+        var e = t(this).data("state"),
+          a = this;
+        e.intervalId = setInterval(function() {
+          i.nextUsePause.call(a)
+        }, e.options.pause)
+      },
+      stopInterval: function() {
+        var e = t(this).data("state");
+        e && (e.intervalId && clearInterval(e.intervalId), e.intervalId = void 0)
+      },
+      restartInterval: function() {
+        i.stopInterval.call(this), i.startInterval.call(this)
+      }
+    },
+    a = {
+      init: function(n) {
+        a.stop.call(this);
+        var r = jQuery.extend({}, e);
+        n = t.extend(r, n);
+        var r = t(this),
+          s = {
+            itemCount: r.children("ul").children("li").length,
+            itemHeight: 0,
+            itemMargin: 0,
+            element: r,
+            animating: !1,
+            options: n,
+            isPaused: n.startPaused ? !0 : !1,
+            pausedByCode: !1
+          };
+        t(this).data("state", s), r.css({
+          overflow: "hidden",
+          position: "relative"
+        }).children("ul").css({
+          position: "absolute",
+          margin: 0,
+          padding: 0
+        }).children("li").css({
+          margin: n.margin,
+          padding: n.padding
+        }), isNaN(n.height) || 0 === n.height ? (r.children("ul").children("li").each(function() {
+          var e = t(this);
+          e.height() > s.itemHeight && (s.itemHeight = e.height())
+        }), r.children("ul").children("li").each(function() {
+          t(this).height(s.itemHeight)
+        }), r.height((s.itemHeight + (n.margin + 2 * n.padding)) * n.showItems + n.margin)) : r.height(n.height);
+        var l = this;
+        n.startPaused || i.startInterval.call(l), n.mousePause && r.bind("mouseenter", function() {
+          !0 !== s.isPaused && (s.pausedByCode = !0, i.stopInterval.call(l), a.pause.call(l, !0))
+        }).bind("mouseleave", function() {
+          (!0 !== s.isPaused || s.pausedByCode) && (s.pausedByCode = !1, a.pause.call(l, !1), i.startInterval.call(l))
+        })
+      },
+      pause: function(e) {
+        var i = t(this).data("state");
+        if (i) {
+          if (2 > i.itemCount) return !1;
+          i.isPaused = e, i = i.element, e ? (t(this).addClass("paused"), i.trigger("vticker.pause")) : (t(this).removeClass("paused"), i.trigger("vticker.resume"))
+        }
+      },
+      next: function(e) {
+        var a = t(this).data("state");
+        if (a) {
+          if (a.animating || 2 > a.itemCount) return !1;
+          i.restartInterval.call(this), i.moveUp(a, e)
+        }
+      },
+      prev: function(e) {
+        var a = t(this).data("state");
+        if (a) {
+          if (a.animating || 2 > a.itemCount) return !1;
+          i.restartInterval.call(this), i.moveDown(a, e)
+        }
+      },
+      stop: function() {
+        t(this).data("state") && i.stopInterval.call(this)
+      },
+      remove: function() {
+        var e = t(this).data("state");
+        e && (i.stopInterval.call(this), e = e.element, e.unbind(), e.remove())
+      }
+    };
+  t.fn.vTicker = function(e) {
+    return a[e] ? a[e].apply(this, Array.prototype.slice.call(arguments, 1)) : "object" != typeof e && e ? void t.error("Method " + e + " does not exist on jQuery.vTicker") : a.init.apply(this, arguments)
+  }
+}(jQuery);
+//]]>
+  </script><script src='https://feed.rtcs.live/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
+</div>
+
+<div class='onair'>
+<div id="box">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
+  <g fill="#ffffff" fill-rule="evenodd">
+    <ellipse cx="12" cy="8.705" rx="3" ry="3"/>
+    <path id="on-air-out" d="M3.51471863.219669914C-1.17157288 4.90596141-1.17157288 12.5039412 3.51471863 17.1902327 3.80761184 17.4831259 4.28248558 17.4831259 4.5753788 17.1902327 4.86827202 16.8973394 4.86827202 16.4224657 4.5753788 16.1295725.474873734 12.0290674.474873734 5.38083515 4.5753788 1.28033009 4.86827202.987436867 4.86827202.512563133 4.5753788.219669914 4.28248558-.0732233047 3.80761184-.0732233047 3.51471863.219669914zM20.4852814 17.1902327C25.1715729 12.5039412 25.1715729 4.90596141 20.4852814.219669914 20.1923882-.0732233047 19.7175144-.0732233047 19.4246212.219669914 19.131728.512563133 19.131728.987436867 19.4246212 1.28033009 23.5251263 5.38083515 23.5251263 12.0290674 19.4246212 16.1295725 19.131728 16.4224657 19.131728 16.8973394 19.4246212 17.1902327 19.7175144 17.4831259 20.1923882 17.4831259 20.4852814 17.1902327z"/>
+    <path id="on-air-in" d="M17.3033009 14.0082521C18.7217837 12.5897693 19.4928584 10.6983839 19.4999509 8.73215792 19.507111 6.74721082 18.7352286 4.8335782 17.3033009 3.40165043 17.0104076 3.10875721 16.5355339 3.10875721 16.2426407 3.40165043 15.9497475 3.69454365 15.9497475 4.16941738 16.2426407 4.4623106 17.3890249 5.6086948 18.0056933 7.13752465 17.9999607 8.72674718 17.9942823 10.30094 17.3782748 11.8119579 16.2426407 12.947592 15.9497475 13.2404852 15.9497475 13.7153589 16.2426407 14.0082521 16.5355339 14.3011454 17.0104076 14.3011454 17.3033009 14.0082521zM6.69669914 3.40165043C3.76776695 6.33058262 3.76776695 11.07932 6.69669914 14.0082521 6.98959236 14.3011454 7.46446609 14.3011454 7.75735931 14.0082521 8.05025253 13.7153589 8.05025253 13.2404852 7.75735931 12.947592 5.41421356 10.6044462 5.41421356 6.80545635 7.75735931 4.4623106 8.05025253 4.16941738 8.05025253 3.69454365 7.75735931 3.40165043 7.46446609 3.10875721 6.98959236 3.10875721 6.69669914 3.40165043z"/>
+  </g>
+</svg>
+</div></div>
+
+<div class="flip-text">
+<style>
+.verticalflip {
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.verticalflip span {
+  animation: vertical 7.5s linear infinite 0s;
+  -ms-animation: vertical 7.5s linear infinite 0s;
+  -webkit-animation: vertical 7.5s linear infinite 0s;
+  color: #fff;
+  position: absolute;
+  opacity: 0;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+
+.verticalflip span:nth-child(2) {
+  -ms-animation-delay: 2.5s;
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
+.verticalflip span:nth-child(3) {
+  -ms-animation-delay: 5s;
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s;
+}
+</style>
+<div class="verticalflip">
+  <span>Follow Us</span>
+  <span>@themediatrial</span>
+  <span>tv.rtcs.live</span>
+</div></div>
+ 
+  <div class='cur-event'>
+    <div class='top'></div>
+    <div class='glow'></div>
+    <div class='bttm'></div>
+
+<div class='textrss'>
+<style type="text/css">
+#rtcslive-widget {
+important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+overflow: hidden;
+padding: 0px 0px;
+height: 110px;
+text-align: center;
+background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
+background-size:300% 50%;
+animation: shine 3s infinite;
+border-radius: 15px 30px 15px 30px;
+border: 2px solid #fff000;
+}
+
+@keyframes shine {
+  0% {
+    background-position: right;    
+  }
+  /*100% {
+    background-position: left; it's the default value, no need to define it
+  }*/
+}
+
+#rtcslive-widget ul {
+width: 99%;
+overflow: hidden;
+list-style-type: none;
+padding: 0px 0px;
+margin: 0px 0px;
+}
+
+#rtcslive-widget li {
+width: 940px;
+padding: 9px 5px;
+margin: 0px 0px 5px 0px;
+list-style-type: none;
+float: none;
+height: 110px;
+overflow: hidden;
+background: transparent;
+}
+
+#rtcslive-widget li a {
+text-decoration: none;
+color: #ffffff;
+font-size: 28px;
+font-weight: bold;
+height: 24px;
+overflow: hidden;
+margin: 0px 0px;
+padding: 0px 0px 2px 0px;
+text-shadow: 0 0 .3em #000;
+animation:blink 1.5s linear infinite alternate 1.5s;
+
+}
+
+@keyframes blink {
+  80% {
+    color:white;
+  }
+  90% {
+    color:red;
+  }
+  100% {
+    color:white;
+  }
+}
+
+}
+#rtcslive-widget img {
+}
+#rtcslive-widget img {
+}
+#rtcslive-widget img:hover {
+}
+
+.spydate {
+display: none;
+}
+
+.spycomment {
+display: none;
+}
+</style>
+
+<script language='JavaScript'>
+imgr = new Array();
+imgr[0] = "";
+imgr[1] = "";
+imgr[2] = "";
+imgr[3] = "";
+imgr[4] = "";
+showRandomImg = false;
+boxwidth = 880;
+cellspacing = 6;
+borderColor = "#232c35";
+bgTD = "#000000";
+thumbwidth = 0;
+thumbheight = 0;
+fntsize = 20;
+acolor = "#666";
+aBold = false;
+icon = "";
+text = "Comments";
+showPostDate = false;
+summaryPost = 70;
+summaryFontsize = 20;
+summaryColor = "#666";
+icon2 = " ";
+numposts = 10;
+home_page = "https://feed.rtcs.live/";
+limitspy=4;
+intervalspy=8000;
+</script><br />
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script><br />
+<div id="rtcslive-widget">
+<script type='text/javascript'>
+//<![CDATA[
+jQuery(function(){jQuery("ul.spy").simpleSpy(limitspy,intervalspy).bind("mouseenter",function(){jQuery(this).trigger("stop")}).bind("mouseleave",function(){jQuery(this).trigger("start")})});(function(e){e.fn.simpleSpy=function(f,g){f=f||4;g=g||5000;return this.each(function(){var l=e(this),k=true,i=[],m=f,o=0,h=l.find("> li:first").height();l.find("> li").each(function(){i.push("<li>"+e(this).html()+"</li>")});o=i.length;l.wrap('<div class="spyWrapper" />').parent().css({height:h*f});l.find("> li").filter(":gt("+(f-1)+")").remove();l.bind("stop",function(){k=false}).bind("start",function(){k=true});function n(){if(k){var p=e(i[m]).css({height:0,opacity:0,display:"none"}).prependTo(l);l.find("> li:last").animate({opacity:0},1000,function(){p.animate({height:h},1000).animate({opacity:1},1000);e(this).remove()});m++;if(m>=o){m=0}}setTimeout(n,g)}n()})}})(jQuery);function showrecentposts(z){document.write('<ul class="spy">');j=(showRandomImg)?Math.floor((imgr.length+1)*Math.random()):0;img=new Array();for(var o=0;o<numposts;o++){var w=z.feed.entry[o];var g=w.title.$t;var f;var p;if(o==z.feed.entry.length){break}for(var l=0;l<w.link.length;l++){if(w.link[l].rel=="alternate"){p=w.link[l].href;break}}for(var l=0;l<w.link.length;l++){if(w.link[l].rel=="replies"&&w.link[l].type=="text/html"){f=w.link[l].title.split(" ")[0];break}}if("content" in w){var r=w.content.$t}else{if("summary" in w){var r=w.summary.$t}else{var r=""}}postdate=w.published.$t;if(j>imgr.length-1){j=0}img[o]=imgr[j];s=r;a=s.indexOf("<img");b=s.indexOf('src="',a);c=s.indexOf('"',b+5);d=s.substr(b+5,c-b-5);if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")){img[o]=d}cmtext=(text!="no")?'<i><font color="'+acolor+'">('+f+" "+text+")</font></i>":"";var q=[1,2,3,4,5,6,7,8,9,10,11,12];var x=["January","February","March","April","May","June","July","August","September","October","November","December"];var u=postdate.split("-")[2].substring(0,2);var h=postdate.split("-")[1];var t=postdate.split("-")[0];for(var e=0;e<q.length;e++){if(parseInt(h)==q[e]){h=x[e];break}}var n=(showPostDate)?'<i><font color="'+acolor+'"> ('+u+" "+h+" "+t+")</font></i>":"";g=(aBold)?"<b>"+g+"</b>":g;var v='<li><a href="'+p+'"><img src="'+img[o]+'" width="'+thumbwidth+'" height="'+thumbheight+'" class="recent-thumb"/></a><a href="'+p+'" class="recent-link">'+g+'</a><div class="spydate">'+n+'</div><div class="spycomment">'+cmtext+"</div>";document.write(v);j++}document.write("</ul>")}document.write('<script src="'+home_page+"feeds/posts/default/-/sliding?max-results="+numposts+'&orderby=published&alt=json-in-script&callback=showrecentposts"><\/script>');
+//]]>
+</script>
+</div></div></div>
+
+<div class='ticker'>
+  <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
+<style>
+.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 1px; }
+</style>
+<script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+var nMaxPosts =50;
+        var nWidth = 100;
+        var nScrollDelay = 0;
+        var sDirection = "left";
+        var sOpenLinkLocation = "N";
+        var sBulletChar = "&#x2727;"
+</script>
+<script type="text/javascript">
+function RecentPostsScrollerv2(json) {
+var sHeadLines;
+var sPostURL;
+var objPost;
+var sMoqueeHTMLStart;
+var sMoqueeHTMLEnd;
+var sPoweredBy;
+var sHeadlineTerminator;
+var sPostLinkLocation;
+  try {
+   sMoqueeHTMLStart = "\<MARQUEE behavior=\"scroll\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\" ";
+   if (nWidth) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"" + nWidth + "%\"";
+  } else {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"100%\"";
+  }
+  if (nScrollDelay) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " scrolldelay = \"" + nScrollDelay + "\"";
+  }
+  if (sDirection) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " direction = \"" + sDirection + "\"\>";
+    if (sDirection == "left" || sDirection == "right") {
+    sHeadlineTerminator = "&nbsp;&nbsp;";
+   } else {
+    sHeadlineTerminator = "\<br/\>";
+   }
+  }
+  if (sOpenLinkLocation == "N") {
+   sPostLinkLocation = " target= \"_blank\" ";
+  } else {
+   sPostLinkLocation = " ";
+  }
+  sMoqueeHTMLEnd = "\</MARQUEE\>"
+   sHeadLines = "";
+   for (var nFeedCounter = 0; nFeedCounter < nMaxPosts; nFeedCounter++) {
+   var objPost = json.feed.entry[nFeedCounter];
+    if (nFeedCounter == json.feed.entry.length) break;
+    for (var nCounter = 0; nCounter < objPost.link.length; nCounter++) {
+    if (objPost.link[nCounter].rel == 'alternate') {
+     sPostURL = objPost.link[nCounter].href;
+     break;
+    }
+   }
+   sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
+sHeadlineTerminator;
+  }
+   if (sDirection == "left") {
+   sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
+  } else if (sDirection == "right") {
+   sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
+  } else if (sDirection == "up") {
+   sHeadLines = sHeadLines + "\<br/\>" + sHeadLines;
+  }
+  document.write(sMoqueeHTMLStart + sHeadLines + sMoqueeHTMLEnd)
+} catch (exception) {
+  alert(exception);
+}
+}</script>
+<script src="https://feed.rtcs.live/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
+type="text/javascript"></script>
+      
+    <script src="https://hosting.rtcs.live/rtcs/horizontal-panel-marquee.js"></script>
+     <script type="text/javascript">
+    $(window).load( function() {
+      $('#panel').hpanel({
+        duration: 80000
+      });
+    });
+    </script>
+<div class='stock-info'>
+<div class="breaking_news">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+</style>
+  <div class="label ripple">Breaking News</div>
+</div></div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+
+const title = urlParams.get('title');
+const subTitle = urlParams.get('subTitle');
+const once = urlParams.get('once');
+
+if (title) {
+  document.getElementById('titleText').innerHTML = title; 
+  document.getElementById('titleContainer').style.display = 'block'; 
+}
+
+if (subTitle) {
+  document.getElementById('subTitleText').innerHTML = subTitle;  
+  document.getElementById('subTitleContainer').style.display = 'block'; 
+}
+
+if (!title && !subTitle) {
+  document.getElementById('titleContainer').style.display = 'block';
+  document.getElementById('subTitleContainer').style.display = 'block';
+}
+</script>
+</body>
+</html>
