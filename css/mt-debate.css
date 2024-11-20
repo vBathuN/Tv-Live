@@ -40,7 +40,7 @@ body {
   text-align: center;
   width: 75%;
   height: 120px;
-  margin-top: 500px;
+  margin-top: 550px;
 }
 
 .cur-event .top, .cur-event .glow, .cur-event .bttm {
@@ -173,10 +173,10 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    width: 640px;
+    width: 650px;
     height: 505px;
     margin-bottom: 100px;
-    margin-right: 320px;
+    margin-right: 310px;
     position: absolute;
     vertical-align: middle;
     z-index: -5;
@@ -185,7 +185,7 @@ body {
 .rtcs-slider {
     background: #2a366a;
     display: inline-block;
-    width: 330px;
+    width: 320px;
     height: 505px;
     margin-bottom: 115px;
     margin-right: 0px;
@@ -275,8 +275,8 @@ body {
   display: inline-block;
   opacity: .9;
   position: absolute;
-  margin-left: -466px;
-  margin-top: 30px;
+  margin-left: -1353px;
+  margin-top: 0px;
 }
 
 .onair {
