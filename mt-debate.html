@@ -11,6 +11,76 @@
 <!-- partial:index.partial.html -->
 <div class='main'>
 <div class='ticker-top'>
+<div class='logo'>
+<style>
+.logo {
+  width: 410px;
+  height: 58px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 55px;
+  margin-right: -18px;
+}
+.waviy {
+  background: #c60203;
+  position: relative;
+  padding: 0px 10px 5px 8px;
+  margin-top: 2px;
+  border-radius: 20px;
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 55px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  -webkit-text-stroke: 1.5px #c9a050;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+.live {
+  background: #19f radial-gradient(transparent, #02c);
+  position: relative;
+  padding: 0px 12px 5px 10px;
+  margin-top: 7px;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 55px;
+  font-weight: 900;
+  color: #2a366a;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  border-radius: 20px;
+  -webkit-text-stroke: 1px red;
+  letter-spacing: 5px;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+</style>
+<div class="waviy">
+   <span style="--i:1">M</span>
+   <span style="--i:2">e</span>
+   <span style="--i:3">d</span>
+   <span style="--i:4">i</span>
+   <span style="--i:5">a</span>
+   
+   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;">T</span><span>rial</span></div></div>
 
 <div class="custom-logo">
 <div class="custom-animated">
@@ -87,10 +157,10 @@
   <i class="fa fa-facebook custom-animated__angle custom-animated__angle--2"></i>
   <i class="fa fa-twitter custom-animated__angle custom-animated__angle--3"></i>
   <i class="fa fa-instagram custom-animated__angle custom-animated__angle--4"></i>
-</div></div></div>
+</div></div></div></div>
 
 <div class='rtcs-ad'>
-<iframe name="rtcs-ad" width="320px" height="664px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+<iframe name="rtcs-ad" width="320px" height="670px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
 </div></div></div>
 
 <div class="rtcs-stream">
@@ -98,7 +168,7 @@
 </div>
 
 <div class="rtcs-slider">
-<iframe name="rtcs-ad" width="330px" height="515px" src="https://www.rtcs.live/img-slider/slider320" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+<iframe name="rtcs-ad" width="320px" height="515px" src="https://www.rtcs.live/img-slider/slider320" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
 </div>
 
 <div class='rtcs-anchor'>
@@ -458,77 +528,7 @@ function RTCSliveTicker(t) {
   <span>@themediatrial</span>
   <span>tv.rtcs.live</span>
 </div></div>
-
-<div class='logo'>
-<style>
-.logo {
-  width: 322px;
-  height: 60px;
-  float: right;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60px;
-  margin-right: 0px;
-}
-.waviy {
-  background: #c60203;
-  position: relative;
-  padding: 0px 0px 0px 10px;
-  border-radius: 20px;
-}
-.waviy span {
-  position: relative;
-  display: inline-block;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 46px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -5px;
-  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  -webkit-text-stroke: 1.5px #c9a050;
-  text-transform: none;
-  animation: flip 2s infinite;
-  animation-delay: calc(.1s * var(--i))
-}
-@keyframes flip {
-  0%,80% {
-    transform: rotateY(360deg) 
-  }
-}
-
-.live {
-  background: #19f radial-gradient(transparent, #02c);
-  position: relative;
-  padding: 5px 10px 5px 10px;
-  display: inline-block;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 46px;
-  font-weight: 900;
-  color: #2a366a;
-  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  border-radius: 20px;
-  -webkit-text-stroke: 1px red;
-  text-transform: none;
-  animation: flip 2s infinite;
-  animation-delay: calc(.1s * var(--i))
-}
-@keyframes flip {
-  0%,80% {
-    transform: rotateY(360deg) 
-  }
-}
-</style>
-<div class="waviy">
-   <span style="--i:1">M</span>
-   <span style="--i:2">e</span>
-   <span style="--i:3">d</span>
-   <span style="--i:4">i</span>
-   <span style="letter-spacing: 1px;--i:5">a</span>
-
-   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
-</div></div>
- 
+  
   <div class='cur-event'>
     <div class='top'></div>
     <div class='glow'></div>
