@@ -261,16 +261,6 @@ body {
   h1 {text-shadow: 0 0 .3em #000;}
 }
 
-.location {
-  opacity: .9;
-  position: absolute;
-  z-index: 1;
-  margin-top: -515px;
-  margin-right: 735px;
-  text-shadow: 0 0 .3em #000;
-  
-}
-
 .custom-logo {
   display: inline-block;
   opacity: .9;
