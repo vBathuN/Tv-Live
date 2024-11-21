@@ -185,9 +185,9 @@ body {
 
 .rtcs-slider {
     display: inline-block;
-    width: 320px;
+    width: 310px;
     height: 400px;
-    margin-bottom: 200px;
+    margin-bottom: 210px;
     margin-right: 0px;
     position: absolute;
     vertical-align: middle;
@@ -250,8 +250,8 @@ body {
   height: 50px;
   box-sizing: border-box;
   padding: 0px 0px ;
-  margin-right: 630px;
-  margin-top: -100px;
+  margin-right: 430px;
+  margin-top: 150px;
   line-height: 1.5;
   text-align: right;
   text-transform:none;
