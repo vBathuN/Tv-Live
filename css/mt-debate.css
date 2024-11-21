@@ -11,6 +11,7 @@ html { max-width: 1280px; margin: 0 auto;}
 }
 
 body {
+  background: #c9a050;
   important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
   color: #ffffff;
   display: -webkit-flex;
@@ -25,7 +26,6 @@ body {
 }
 
 .main {
-  
   display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-end;
