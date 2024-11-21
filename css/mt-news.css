@@ -151,7 +151,6 @@ body {
 }
 
 .rtcs {
-    background: #2a366a;
     display: inline-block;
     vertical-align: top;
     width: 1280px;
@@ -175,10 +174,10 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    width: 640px;
-    height: 360px;
-    margin-bottom: 240px;
-    margin-right: 320px;
+    width: 960px;
+    height: 535px;
+    margin-bottom: 65px;
+    margin-right: 0px;
     position: absolute;
     vertical-align: middle;
     z-index: -5;
@@ -187,12 +186,12 @@ body {
 .rtcs-slider {
     display: inline-block;
     width: 320px;
-    height: 500px;
-    margin-bottom: 110px;
+    height: 400px;
+    margin-bottom: 200px;
     margin-right: 0px;
     position: absolute;
     vertical-align: middle;
-    z-index: -6;
+    z-index: 2;
     
 }
 
