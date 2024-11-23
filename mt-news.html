@@ -598,7 +598,6 @@ animation:blink 1.5s linear infinite alternate 1.5s;
   }
 }
 
-}
 #rtcslive-widget img {
 }
 #rtcslive-widget img {
@@ -693,11 +692,11 @@ display:none;
 .sliderImage span {
 background-color:#c60203;
 border-radius: 20px;
-opacity:.8;
-filter:alpha(opacity=80);
+opacity:.9;
+filter:alpha(opacity=90);
 left:0;
 right:0;
-bottom:10;
+bottom:0;
 text-align: center;
 color:white;
 padding:20px 10px 12px;
@@ -711,23 +710,8 @@ important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
 text-align: center;
 line-height: 1.8;
 text-shadow: 0 0 .3em #000;
-animation:blink 1.5s linear infinite alternate 1.5s;
-
 }
 
-@keyframes blink {
-  80% {
-    color:white;
-  }
-  90% {
-    color:#fff000;
-  }
-  100% {
-    color:white;
-  }
-}
-
-}
 </style>
 <script>
 slideOpenNewTab = false,
@@ -741,7 +725,7 @@ home_page       = "https://feed.rtcs.live";//URL Blog
 
 $(window).bind('load', function() {
 $('#slider').s3Slider({
-timeOut:3500
+timeOut:5000
 });
 });
 
@@ -749,7 +733,7 @@ timeOut:3500
 (function($) {
     $.fn.s3Slider = function(vars) {
         var element = this;
-        var timeOut = (vars.timeOut != undefined) ? vars.timeOut : 4000;
+        var timeOut = (vars.timeOut != undefined) ? vars.timeOut : 10000;
         var current = null;
         var timeOutFn = null;
         var faderStat = true;
@@ -859,7 +843,7 @@ document.write('<li class="sliderImage"><a href="' + link + '"' + (slideOpenNewT
 }
 document.write('</ul></div>');
 }
-document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/\/$/,"") + "/feeds/posts/summary/" + (slidebyLabels ? '-/' + slideLabelName : '') + "?max-results=" + numposts_g + "&orderby=published&alt=json-in-script&callback=s3SliderGallery'><\/scr" + "ipt>");
+document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/\/$/,"") + "/feeds/posts/default/" + (slidebyLabels ? '-/' + slideLabelName : '') + "?max-results=" + numposts_g + "&orderby=published&alt=json-in-script&callback=s3SliderGallery'><\/scr" + "ipt>");
 </script>
 </div>
 
