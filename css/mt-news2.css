@@ -68,22 +68,22 @@ body {
   top: 0;
   right: 0;
   width: 220px;
-  height: 60px;
+  height: 50px;
 }
 
 .breaking_news {
   float:right;
   width:100%;
   font-family: "Agdasima", sans-serif;
-  font-size: 48px;
-  margin-top: 0.3px;
+  font-size: 44px;
+  margin-top: 1.9px;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   letter-spacing: 2px;
 }
 
 .label {
   float:right;
-  padding:0px 9px 8px 11px;
+  padding:3px 9px 8px 11px;
   background:#c60203;
   color:#FFF;
   font-weight: bold;
