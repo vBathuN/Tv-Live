@@ -34,7 +34,7 @@ body {
 
 .cur-event {
   background: #2a366a;
-  background-image: url("images/dark-blue.gif");
+  background-image: url('images/dark-blue.gif');
   font-weight: 600;
   overflow: hidden;
   position: relative;
@@ -57,7 +57,7 @@ body {
 
 .ticker {
   background: #2a366a;
-  background-image: url("images/dark-blue.gif");
+  background-image: url('images/dark-blue.gif');
   width: 100%;
   height: 50px;
   overflow: hidden;
@@ -143,7 +143,7 @@ body {
 
 .ticker-top {
   background: #2a366a;
-  background-image: url("images/dark-blue.gif");
+  background-image: url('images/dark-blue.gif');
   font-weight: 600;
   overflow: hidden;
   position: absolute;
