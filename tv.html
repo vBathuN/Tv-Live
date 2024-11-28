@@ -461,7 +461,44 @@ new Vue({
   <i class="fa fa-facebook custom-animated__angle custom-animated__angle--2"></i>
   <i class="fa fa-twitter custom-animated__angle custom-animated__angle--3"></i>
   <i class="fa fa-instagram custom-animated__angle custom-animated__angle--4"></i>
-</div></div></div>
+</div></div>
+
+<div class="flip-text">
+<style>
+.verticalflip {
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.verticalflip span {
+  animation: vertical 7.5s linear infinite 0s;
+  -ms-animation: vertical 7.5s linear infinite 0s;
+  -webkit-animation: vertical 7.5s linear infinite 0s;
+  color: #fff;
+  position: absolute;
+  opacity: 0;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+
+.verticalflip span:nth-child(2) {
+  -ms-animation-delay: 2.5s;
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
+.verticalflip span:nth-child(3) {
+  -ms-animation-delay: 5s;
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s;
+}
+</style>
+<div class="verticalflip">
+  <span>FollowUs</span>
+  <span>@themediatrial</span>
+  <span>tv.rtcs.live</span>
+</div></div>
+</div>
 
 <div class='rtcs-ad'>
 <iframe name="rtcs-ad" width="330px" height="680px" src="https://www.rtcs.live/img-slider/slide670" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
@@ -780,42 +817,6 @@ function RTCSliveTicker(t) {
 //]]>
   </script><script src='https://feed.rtcs.live/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
 </div>
-
-<div class="flip-text">
-<style>
-.verticalflip {
-  font-size: 38px;
-  font-weight: bold;
-}
-
-.verticalflip span {
-  animation: vertical 7.5s linear infinite 0s;
-  -ms-animation: vertical 7.5s linear infinite 0s;
-  -webkit-animation: vertical 7.5s linear infinite 0s;
-  color: #fff;
-  position: absolute;
-  opacity: 0;
-  padding: 10px 15px 10px 15px;
-  border-radius: 10px;
-}
-
-.verticalflip span:nth-child(2) {
-  -ms-animation-delay: 2.5s;
-  -webkit-animation-delay: 2.5s;
-  animation-delay: 2.5s;
-}
-
-.verticalflip span:nth-child(3) {
-  -ms-animation-delay: 5s;
-  -webkit-animation-delay: 5s;
-  animation-delay: 5s;
-}
-</style>
-<div class="verticalflip">
-  <span>Follow Us</span>
-  <span>@themediatrial</span>
-  <span>tv.rtcs.live</span>
-</div></div>
  
   <div class='cur-event'>
     <div class='top'></div>
