@@ -238,7 +238,6 @@ body {
   margin-top: -515px;
   margin-right: 735px;
   text-shadow: 0 0 .3em #000;
-  
 }
 
 .custom-logo {
@@ -257,8 +256,8 @@ body {
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   opacity: .9;
-  padding-right: 772px;
-  margin-top: -735px;
+  margin-left: -130px;
+  margin-top: -6px;
 }
 
 @keyframes vertical {
