@@ -21,6 +21,7 @@
     <div v-else-if="status === -1"><i>😡</i> <br /> Error connecting to the Socket API</div>
   </div>
 </div>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
 <script>
 // common number filters
@@ -326,17 +327,16 @@ new Vue({
   width: 320px;
   height: 60px;
   float: right;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: right;
   min-height: 50px;
-  margin-right: -5px;
+  
 }
 .waviy {
   background: #c60203;
   position: relative;
-  padding: 0px 0px 10px 40px;
-  
+  padding: 0px 0px 15px 35px;
+  margin-top: -5px;
+  margin-left: 11px;
 }
 .waviy span {
   position: relative;
@@ -361,7 +361,7 @@ new Vue({
 .live {
   background: #19f radial-gradient(transparent, #02c);
   position: relative;
-  padding: 0px 10px 10px 10px;
+  padding: 0px 5px 15px 10px;
   display: inline-block;
   font-family: "Archivo Black", sans-serif;
   font-size: 36px;
