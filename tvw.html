@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/tvw.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="app" v-cloak>
@@ -18,7 +21,6 @@
     <div v-else-if="status === -1"><i>😡</i> <br /> Error connecting to the Socket API</div>
   </div>
 </div>
-
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
 <script>
 // common number filters
@@ -320,27 +322,28 @@ new Vue({
 <div class='logo'>
 <style>
 .logo {
+  background: #c60203;
   width: 320px;
-  height: 50px;
+  height: 60px;
   float: right;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 50px;
-  margin-right: 0px;
+  margin-right: -5px;
 }
 .waviy {
   background: #c60203;
   position: relative;
-  padding: 12px 0px 0px 10px;
+  padding: 0px 0px 10px 40px;
   
 }
 .waviy span {
   position: relative;
   display: inline-block;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 45px;
-  font-weight: 900;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 35px;
+  font-weight: 700;
   color: #fff;
   letter-spacing: -5px;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
@@ -358,11 +361,11 @@ new Vue({
 .live {
   background: #19f radial-gradient(transparent, #02c);
   position: relative;
-  padding: 0px 10px 5px 12px;
+  padding: 0px 10px 10px 10px;
   display: inline-block;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 47px;
-  font-weight: 900;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 35px;
+  font-weight: 700;
   color: #2a366a;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   
@@ -411,7 +414,7 @@ new Vue({
   .custom-animated__angle {
     transform: rotate(-0deg);
     margin-left: 1rem;
-    font-size: 2em;
+    font-size: 1.5em;
   }
 }
 .custom-animated__angle--1 {
@@ -467,7 +470,7 @@ new Vue({
 <div class="flip-text">
 <style>
 .verticalflip {
-  font-size: 38px;
+  font-size: 26px;
   font-weight: bold;
 }
 
@@ -499,6 +502,12 @@ new Vue({
   <span>@themediatrial</span>
   <span>tv.rtcs.live</span>
 </div></div>
+
+<div class="time-logo" id="wrapper">
+  <span id="localDate"></span>
+  <spam id="localTime"></spam>
+</div>
+
 </div>
 
 <div class='rtcs-ad'>
@@ -821,10 +830,7 @@ function RTCSliveTicker(t) {
   <center><spam id="cityName"></spam>
   <span class="wi" id ="main-icon"></span>
   <span id="mainTemperature"></span><a class="active" style="font-size: 1rem;" id="celcius">°C</a>
-  <span id="tempDescription"></span>
-  <br>
-  <span id="localDate"></span>
-  <spam id="localTime"></spam></center>
+  <span id="tempDescription"></span></center>
 </div>
  
   <div class='cur-event'>
@@ -998,7 +1004,7 @@ display:none;
 overflow: hidden;
 }
 .sliderImage span a {
-font-size:24px;
+font-size:22px;
 color:white;
 text-decoration:none;
 important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
@@ -1786,7 +1792,7 @@ $("#farenheit").on("click", function(){
 
 // Applies the following format to date: WeekDay, Month Day, Year
 function getFormattedDate(date){
-  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(date * 1000).toLocaleDateString("en-US",options);
 }
 
