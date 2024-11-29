@@ -244,8 +244,8 @@ body {
   display: inline-block;
   opacity: .9;
   position: absolute;
-  left: 0px;
-  margin-top: 15px;
+  margin-left: -305px;
+  margin-top: 30px;
 }
 
 .flip-text {
@@ -255,9 +255,9 @@ body {
   font-family: "Agdasima", sans-serif;
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  align-items: center;
-  left: 120px;
-  margin-top: -8px;
+  opacity: .9;
+  margin-left: 0px;
+  margin-top: -6px;
 }
 
 @keyframes vertical {
@@ -294,18 +294,19 @@ body {
 
 .weather {
   background: #c60203;
-  top: 33px;
-  left: 335px;
-  padding: 2px 5px 0px 5px;
-  border-radius: 10px;
-  opacity: .9;
+  width: 293px;
+  height: 45px;
+  padding: 10px 5px 5px 10px;
   position: absolute;
   font-family: "Agdasima", sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 1.5px;
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   z-index: 7;
+  margin-top: -660px;
+  margin-right: 652px;
+  overflow: hidden;
 }
 
 .loader-wrap {
