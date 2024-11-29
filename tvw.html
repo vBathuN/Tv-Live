@@ -411,7 +411,7 @@ new Vue({
   .custom-animated__angle {
     transform: rotate(-0deg);
     margin-left: 1rem;
-    font-size: 1em;
+    font-size: 2em;
   }
 }
 .custom-animated__angle--1 {
@@ -467,7 +467,7 @@ new Vue({
 <div class="flip-text">
 <style>
 .verticalflip {
-  font-size: 22px;
+  font-size: 38px;
   font-weight: bold;
 }
 
@@ -499,15 +499,6 @@ new Vue({
   <span>@themediatrial</span>
   <span>tv.rtcs.live</span>
 </div></div>
-</div>
-
-<div class="weather" id="wrapper">
-  <spam id="cityName"></spam>
-  <span class="wi" id ="main-icon"></span>
-  <span id="mainTemperature"></span><a class="active" style="font-size: 1rem;" id="celcius">°C</a>
-  <span id="tempDescription"></span>
-  <span id="localDate"></span>
-  <spam id="localTime"></spam>
 </div>
 
 <div class='rtcs-ad'>
@@ -824,6 +815,16 @@ function RTCSliveTicker(t) {
 }(jQuery);
 //]]>
   </script><script src='https://feed.rtcs.live/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
+</div>
+
+<div class="weather" id="wrapper">
+  <center><spam id="cityName"></spam>
+  <span class="wi" id ="main-icon"></span>
+  <span id="mainTemperature"></span><a class="active" style="font-size: 1rem;" id="celcius">°C</a>
+  <span id="tempDescription"></span>
+  <br>
+  <span id="localDate"></span>
+  <spam id="localTime"></spam></center>
 </div>
  
   <div class='cur-event'>
