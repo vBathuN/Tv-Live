@@ -208,7 +208,7 @@ body {
     z-index: 5;
     width: 45px;
     height: 45px;
-    padding-right: 335px;
+    padding-right: 316px;
     margin-bottom: 660px;
     position: absolute;  
 }
@@ -220,8 +220,8 @@ body {
   height: 50px;
   box-sizing: border-box;
   padding: 0px 0px ;
-  margin-right: 430px;
-  margin-top: 150px;
+  margin-right: 300px;
+  margin-top: 100px;
   line-height: 1.5;
   text-align: right;
   text-transform:none;
@@ -249,15 +249,15 @@ body {
 }
 
 .flip-text {
-  display: inline-block;
+  width: 600px
   position: absolute;
   letter-spacing: 1.5px;
   font-family: "Agdasima", sans-serif;
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   opacity: .9;
-  margin-left: -130px;
-  margin-top: -6px;
+  margin-left: -265px;
+  margin-top: 2px;
 }
 
 @keyframes vertical {
