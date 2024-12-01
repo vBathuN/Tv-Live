@@ -1139,7 +1139,7 @@ document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/
 .breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 2px; }
 </style>
 <script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
-var nMaxPosts =50;
+var nMaxPosts =10;
         var nWidth = 100;
         var nScrollDelay = 0;
         var sDirection = "left";
@@ -1193,7 +1193,7 @@ var sPostLinkLocation;
    sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
 sHeadlineTerminator;
   }
-   if (sDirection == "left") {
+   if (sDirection == "right") {
    sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
   } else if (sDirection == "right") {
    sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
