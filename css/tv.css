@@ -208,7 +208,7 @@ body {
     z-index: 5;
     width: 45px;
     height: 45px;
-    padding-right: 316px;
+    padding-right: 320px;
     margin-bottom: 660px;
     position: absolute;  
 }
@@ -221,7 +221,7 @@ body {
   box-sizing: border-box;
   padding: 0px 0px ;
   margin-right: 300px;
-  margin-top: 100px;
+  margin-top: 0px;
   line-height: 1.5;
   text-align: right;
   text-transform:none;
