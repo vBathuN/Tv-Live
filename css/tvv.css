@@ -249,15 +249,15 @@ body {
 }
 
 .flip-text {
-  display: inline-block;
+  width: 600px
   position: absolute;
   letter-spacing: 1.5px;
   font-family: "Agdasima", sans-serif;
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   opacity: .9;
-  margin-left: -130px;
-  margin-top: -6px;
+  margin-left: -265px;
+  margin-top: 2px;
 }
 
 @keyframes vertical {
