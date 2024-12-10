@@ -11,6 +11,7 @@ html { max-width: 1280px; margin: 0 auto;}
 }
 
 body {
+  background: #c9a050;
   important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
   color: #ffffff;
   display: -webkit-flex;
@@ -25,7 +26,6 @@ body {
 }
 
 .main {
-  
   display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -33,14 +33,15 @@ body {
 }
 
 .cur-event {
-  background: #fff000;
+  background: #2a366a;
+  background-image: url('https://hosting.rtcs.live/rtcs/dark-blue.gif');
   font-weight: 600;
   overflow: hidden;
   position: relative;
   text-align: center;
-  width: 74.6%;
+  width: 75%;
   height: 120px;
-  margin-top: 558px;
+  margin-top: 550px;
 }
 
 .cur-event .top, .cur-event .glow, .cur-event .bttm {
@@ -56,8 +57,9 @@ body {
 
 .ticker {
   background: #2a366a;
+  background-image: url('https://hosting.rtcs.live/rtcs/dark-blue.gif');
   width: 100%;
-  height: 47px;
+  height: 50px;
   overflow: hidden;
   position: relative;
   white-space: nowrap;
@@ -68,7 +70,7 @@ body {
   top: 0;
   right: 0;
   width: 190px;
-  height: 48px;
+  height: 50px;
 }
 
 .breaking_news {
@@ -76,21 +78,19 @@ body {
   width:100%;
   font-family: "Agdasima", sans-serif;
   font-size: 40px;
-  margin-top:-4px;
+  margin-top: 1px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  letter-spacing: 2px;
 }
 
 .label {
   float:right;
-  padding:0px 8px;
+  padding:0.4px 7px 8px 10px;
   background:#c60203;
-  border-radius: 15px 0px 0px 15px;
   color:#FFF;
   font-weight: bold;
   text-transform: uppercase;
-  border-top: 2px solid #c9a050;
-  border-left: 2px solid #c9a050;
-  border-right: 2px solid #c9a050;
-  border-bottom: 2px solid #c9a050;
+  
 }
 
 /* Ripple magic */
@@ -138,16 +138,17 @@ body {
     z-index: 1;
     line-height: 1.8;
     word-spacing: -5px;
-    margin: -54px 5px;
+    margin: -54px 3.2px;
 }
 
 .ticker-top {
-  background: #c60203;
+  background: #2a366a;
+  background-image: url('https://hosting.rtcs.live/rtcs/dark-blue.gif');
   font-weight: 600;
   overflow: hidden;
   position: absolute;
   text-align: center;
-  width: 74.8%;
+  width: 75%;
   height: 60px;
   z-index: -4;
 }
@@ -155,38 +156,32 @@ body {
 .rtcs {
     display: inline-block;
     vertical-align: top;
-    width: 1270px;
+    width: 1280px;
     height: 720px;
     margin-right: 0px;
     position: absolute;
-    border-right: 5px solid #c9a050;
-    border-left: 5px solid #c9a050;
-    border-top: 5px solid #c9a050;
+    z-index: -6;
 }
 
 .rtcs-ad {
-    opacity: .9;
     display: inline-block;
-    vertical-align: top;
-    z-index: 1;
-    width: 320px;
-    height: 672px;
-    padding-right: 950px;
-    margin-top: 0px;
+    z-index: -5;
+    width: 330px;
+    height: 680px;
+    padding-right: 958px;
+    margin-top: -8px;
     position: absolute;  
 }
 
 .rtcs-stream {
     display: inline-block;
-    width: 946px;
+    width: 640px;
     height: 535px;
-    margin-bottom: 60px;
-    margin-right: 7px;
+    margin-bottom: 65px;
+    margin-right: 320px;
     position: absolute;
     vertical-align: middle;
-    z-index: -2;
-    border-left: 2.8px solid #c9a050;
-    border-top: 2px solid #c9a050;
+    z-index: -5;
 }
 
 .rtcs-anchor {
@@ -194,17 +189,21 @@ body {
     position: absolute;
     width: 206px;
     height: 366px;
-    padding-right: 749px;
+    padding-right: 729px;
     margin-bottom: -110px;
 }
 
-.rtcs-slider {
+.rtcs-text {
+    background: #2a366a;
+    background-image: url('https://hosting.rtcs.live/rtcs/dark-blue.gif');
     display: inline-block;
+    width: 320px;
+    height: 535px;
+    margin-bottom: 65px;
+    margin-right: 0px;
     position: absolute;
-    width: 205px;
-    height: 505px;
-    padding-right: 5px;
-    margin-bottom: 99px;
+    vertical-align: middle;
+    z-index: -5;
 }
 
 .rtcs-lt {
@@ -220,30 +219,11 @@ body {
 .pulse-logo {
     display: inline-block;
     z-index: 5;
-    width: 75px;
-    height: 75px;
-    padding-right: 985px;
-    margin-top: 160px;
+    width: 45px;
+    height: 45px;
+    padding-right: 340px;
+    margin-bottom: 660px;
     position: absolute;  
-}
-
-.button {
-  opacity: .9;
-  margin-left: -180px;
-  margin-top: 107px;  
-  position: absolute;
-  font-family: Helvetica, Sans-serif;
-  font-size: 32px;
-  text-transform:lowercase;
-  background-color:transparent;
-  border-radius:0px;
-  background-color:rgba(27, 24, 27, .30);
-  padding:5px 10px;
-  border-radius:0px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  letter-spacing: 2px;
 }
 
 .watermark {
@@ -253,8 +233,8 @@ body {
   height: 50px;
   box-sizing: border-box;
   padding: 0px 0px ;
-  margin-right: 320px;
-  margin-top: 180px;
+  margin-right: 855px;
+  margin-top: 150px;
   line-height: 1.5;
   text-align: right;
   text-transform:none;
@@ -271,72 +251,27 @@ body {
   margin-top: -515px;
   margin-right: 735px;
   text-shadow: 0 0 .3em #000;
-  
 }
 
 .custom-logo {
   display: inline-block;
   opacity: .9;
   position: absolute;
-  margin-left: -1307px;
-  margin-top: -3px;
+  margin-left: -305px;
+  margin-top: 30px;
 }
 
-.onair {
-  opacity: .5;
+.flip-text {
+  width: 600px
   position: absolute;
-  z-index: 1;
-  margin-top: -645px;
-  margin-right: 890px;
+  letter-spacing: 1.5px;
+  font-family: "Agdasima", sans-serif;
+  text-transform: none;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  opacity: .9;
+  margin-left: -265px;
+  margin-top: 2px;
 }
-
-#box > svg {
-  height: 54px;
-  width: 54px;
-/*   transform: scale(2); */
-}
-
-#box > svg path#on-air-out {
-  animation: on-air-out 2s infinite;
-}
-
-#box > svg path#on-air-in {
-  animation: on-air-in 2s infinite;
-}
-
-#box > svg ellipse {
-  transform-origin: 50% 50%;
-  animation: on-air-circle 2s infinite;
-}
-
-@keyframes on-air-circle {
-  0% {
-    opacity: .1;
-    transform: scale(1);
-  }
-  25%  { opacity: 1;
-  transform: scale(2);}
-  50%  { opacity: 1;}
-  75%  { opacity: 1;
-  transform: scale(1)}
-  100% { opacity: .3; }
-}
-
-@keyframes on-air-in {
-  0%   { opacity: .3; }
-  25%  { opacity: .3; }
-  50%  { opacity: 1; }
-  75%  { opacity: 1; }
-  100% { opacity: .3; }
-}
-
-@keyframes on-air-out {
-  0%   { opacity: .3; }
-  50%  { opacity: .3; }
-  75%  { opacity: 1; }
-  100% { opacity: .3; }
-}
-
 
 @keyframes vertical {
   0% {
@@ -370,13 +305,32 @@ body {
   }
 }
 
-.flip-text {
-  display: inline-block;
-  position: absolute;
-  letter-spacing: 1.5px;
-  font-family: "Agdasima", sans-serif;
-  text-transform: none;
-  opacity: .9;
-  padding-right: 772px;
-  margin-top: -724px;
+.loader-wrap {
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #c9a050;
+  text-align: center;
+  z-index: 9999;
+}
+.loader-wrap.visible {
+  display: flex;
+}
+.loader-wrap .loader-content {
+  padding: 1em 2em;
+  font-size: 200%;
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 150px;
+}
+.loader-wrap .loader-content i {
+  font-style: normal;
+  font-size: 600%;
+  line-height: normal;
 }
