@@ -173,6 +173,19 @@ body {
     position: absolute;  
 }
 
+.rtcs-streambg {
+    background: #2a366a;
+    background-image: url('https://host.rtbs.in/media/rtcslive-bg.jpg');
+    display: inline-block;
+    width: 960px;
+    height: 535px;
+    margin-bottom: 65px;
+    margin-right: 0px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: -10;
+}
+
 .rtcs-stream {
     display: inline-block;
     width: 640px;
@@ -185,17 +198,6 @@ body {
 }
 
 .rtcs-anchor {
-    display: inline-block;
-    position: absolute;
-    width: 206px;
-    height: 366px;
-    padding-right: 729px;
-    margin-bottom: -110px;
-}
-
-.rtcs-text {
-    background: #2a366a;
-    background-image: url('https://host.rtbs.in/rtcs/dark-blue.gif');
     display: inline-block;
     width: 320px;
     height: 535px;
