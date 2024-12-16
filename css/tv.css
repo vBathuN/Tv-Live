@@ -41,7 +41,7 @@ body {
   text-align: center;
   width: 75%;
   height: 70px;
-  margin-top: 550px;
+  margin-top: 600px;
 }
 
 .cur-event .top, .cur-event .glow, .cur-event .bttm {
@@ -178,8 +178,8 @@ body {
     background-image: url('https://host.rtbs.in/media/rtcslive-bg.jpg');
     display: inline-block;
     width: 960px;
-    height: 535px;
-    margin-bottom: 65px;
+    height: 540px;
+    margin-bottom: 60px;
     margin-right: 0px;
     position: absolute;
     vertical-align: middle;
@@ -189,8 +189,8 @@ body {
 .rtcs-stream {
     display: inline-block;
     width: 640px;
-    height: 535px;
-    margin-bottom: 65px;
+    height: 540px;
+    margin-bottom: 60px;
     margin-right: 320px;
     position: absolute;
     vertical-align: middle;
@@ -200,8 +200,8 @@ body {
 .rtcs-anchor {
     display: inline-block;
     width: 320px;
-    height: 535px;
-    margin-bottom: 65px;
+    height: 540px;
+    margin-bottom: 60px;
     margin-right: 0px;
     position: absolute;
     vertical-align: middle;
@@ -211,7 +211,7 @@ body {
 .rtcs-board {
     display: inline-block;
     width: 1020px;
-    height: 535px;
+    height: 540px;
     margin-top: 30px;
     margin-right: 0px;
     position: absolute;
