@@ -340,7 +340,7 @@ body {
 }
 /* SPINNER ANIMATION */
 .spinner {
-  z-index: 1001;
+  z-index: 0;
   position: relative;
   top: 30.4%;
   left: 87px;
