@@ -537,51 +537,48 @@ function RTCSliveTicker(t) {
     <div class='bttm'></div>
 
 <div class='textrss'>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div id='breakingnews'><span class='breakhead'><div id='adbreakingnews'></div>
 <style type="text/css">
-#rtcslive-widget {
-important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
-overflow: hidden;
-padding: 0px 0px;
-height: 60px;
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+         url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*<![CDATA[*/  
+
+/* CSS Breaking News */
+#breakingnews {
 text-align: center;
 background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
 background-image: url('https://host.rtbs.in/rtcs/dot-bg.gif');
 background-size:100% 100%;
 border-radius: 15px 30px 15px 30px;
 border: 2px solid #fff000;
+    width: 950px;
+    height: 58px ;
+    overflow: hidden;
+  
 }
 
-#rtcslive-widget ul {
-width: 99%;
-overflow: hidden;
-list-style-type: none;
-padding: 0px 0px;
-margin: 0px 0px;
+#breakingnews .breakhead {
+    
 }
-
-#rtcslive-widget li {
-width: 940px;
-padding: 9px 5px;
-margin: 0px 0px 5px 0px;
-list-style-type: none;
-float: none;
-height: 60px;
-overflow: hidden;
-background: transparent;
-}
-
-#rtcslive-widget li a {
-text-decoration: none;
-color: #ffffff;
-font-size: 28px;
-font-weight: bold;
-height: 24px;
-overflow: hidden;
-margin: 0px 0px;
-padding: 0px 0px 0px 0px;
-text-shadow: 0 0 .3em #000;
-animation:blink 1.5s linear infinite alternate 1.5s;
-
+#adbreakingnews li a {
+    important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal; font-size: 30px;
+    text-align: justify;
+    justify-content: center;
+    color: #fff;
+    word-spacing: -5px; 
+    padding: 0 0px;
+    transition: all 0.5s ease-in-out;
+    text-decoration: none;
+    text-shadow: 0 0 .3em #000;
+    animation:blink 1.4s linear infinite alternate 1.4s; 
 }
 
 @keyframes blink {
@@ -596,59 +593,26 @@ animation:blink 1.5s linear infinite alternate 1.5s;
   }
 }
 
-#rtcslive-widget img {
-}
-#rtcslive-widget img {
-}
-#rtcslive-widget img:hover {
+
+#adbreakingnews {
+    float: none;
+    margin-right: 0px;
+    margin-top: 0px;
 }
 
-.spydate {
-display: none;
+#adbreakingnews ul,#adbreakingnews li {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
 }
 
-.spycomment {
-display: none;
-}
-</style>
+/*]]></style>
 
-<script language='JavaScript'>
-imgr = new Array();
-imgr[0] = "";
-imgr[1] = "";
-imgr[2] = "";
-imgr[3] = "";
-imgr[4] = "";
-showRandomImg = false;
-boxwidth = 880;
-cellspacing = 6;
-borderColor = "#232c35";
-bgTD = "#000000";
-thumbwidth = 0;
-thumbheight = 0;
-fntsize = 20;
-acolor = "#666";
-aBold = false;
-icon = "";
-text = "Comments";
-showPostDate = false;
-summaryPost = 70;
-summaryFontsize = 20;
-summaryColor = "#666";
-icon2 = " ";
-numposts = 10;
-home_page = "https://feed.rtbs.in/";
-limitspy=4;
-intervalspy=8000;
-</script><br />
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script><br />
-<div id="rtcslive-widget">
-<script type='text/javascript'>
+<script type='text/javascript'> 
 //<![CDATA[
-jQuery(function(){jQuery("ul.spy").simpleSpy(limitspy,intervalspy).bind("mouseenter",function(){jQuery(this).trigger("stop")}).bind("mouseleave",function(){jQuery(this).trigger("start")})});(function(e){e.fn.simpleSpy=function(f,g){f=f||4;g=g||5000;return this.each(function(){var l=e(this),k=true,i=[],m=f,o=0,h=l.find("> li:first").height();l.find("> li").each(function(){i.push("<li>"+e(this).html()+"</li>")});o=i.length;l.wrap('<div class="spyWrapper" />').parent().css({height:h*f});l.find("> li").filter(":gt("+(f-1)+")").remove();l.bind("stop",function(){k=false}).bind("start",function(){k=true});function n(){if(k){var p=e(i[m]).css({height:0,opacity:0,display:"none"}).prependTo(l);l.find("> li:last").animate({opacity:0},1000,function(){p.animate({height:h},1000).animate({opacity:1},1000);e(this).remove()});m++;if(m>=o){m=0}}setTimeout(n,g)}n()})}})(jQuery);function showrecentposts(z){document.write('<ul class="spy">');j=(showRandomImg)?Math.floor((imgr.length+1)*Math.random()):0;img=new Array();for(var o=0;o<numposts;o++){var w=z.feed.entry[o];var g=w.title.$t;var f;var p;if(o==z.feed.entry.length){break}for(var l=0;l<w.link.length;l++){if(w.link[l].rel=="alternate"){p=w.link[l].href;break}}for(var l=0;l<w.link.length;l++){if(w.link[l].rel=="replies"&&w.link[l].type=="text/html"){f=w.link[l].title.split(" ")[0];break}}if("content" in w){var r=w.content.$t}else{if("summary" in w){var r=w.summary.$t}else{var r=""}}postdate=w.published.$t;if(j>imgr.length-1){j=0}img[o]=imgr[j];s=r;a=s.indexOf("<img");b=s.indexOf('src="',a);c=s.indexOf('"',b+5);d=s.substr(b+5,c-b-5);if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")){img[o]=d}cmtext=(text!="no")?'<i><font color="'+acolor+'">('+f+" "+text+")</font></i>":"";var q=[1,2,3,4,5,6,7,8,9,10,11,12];var x=["January","February","March","April","May","June","July","August","September","October","November","December"];var u=postdate.split("-")[2].substring(0,2);var h=postdate.split("-")[1];var t=postdate.split("-")[0];for(var e=0;e<q.length;e++){if(parseInt(h)==q[e]){h=x[e];break}}var n=(showPostDate)?'<i><font color="'+acolor+'"> ('+u+" "+h+" "+t+")</font></i>":"";g=(aBold)?"<b>"+g+"</b>":g;var v='<li><a href="'+p+'"><img src="'+img[o]+'" width="'+thumbwidth+'" height="'+thumbheight+'" class="recent-thumb"/></a><a href="'+p+'" class="recent-link">'+g+'</a><div class="spydate">'+n+'</div><div class="spycomment">'+cmtext+"</div>";document.write(v);j++}document.write("</ul>")}document.write('<script src="'+home_page+"feeds/posts/default/-/sliding?max-results="+numposts+'&orderby=published&alt=json-in-script&callback=showrecentposts"><\/script>');
-//]]>
-</script>
-</div></div></div>
+$(document).ready(function(){var e="https://feed.rtbs.in",t=20;$.ajax({url:""+e+"/feeds/posts/default/-/sliding?alt=json-in-script&max-results="+t,type:"get",dataType:"jsonp",success:function(e){function t(){$("#adbreakingnews li:first").slideUp(function(){$(this).appendTo($("#adbreakingnews ul")).slideDown()})}var n,r,s="",a=e.feed.entry;if(void 0!==a){s="<ul>";for(var l=0;l<a.length;l++){for(var o=0;o<a[l].link.length;o++)if("alternate"==a[l].link[o].rel){n=a[l].link[o].href;break}r=a[l].title.$t,s+='<li><a href="'+n+'" target="_blank">'+r+"</a></li>"}s+="</ul>",$("#adbreakingnews").html(s),setInterval(function(){t()},5e3)}else $("#adbreakingnews").html("<span>No result!</span>")},error:function(){$("#adbreakingnews").html("<strong>Loading error!</strong>")}})});
+//]]></script></span></div>
+</div></div>
 
 <div class="textslider">
 <style>
