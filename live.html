@@ -36,8 +36,9 @@ document.oncontextmenu=new Function("alert(message);return false")
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
     html body {
-      width: 100%;
-      height: 100%;
+      display: flex;
+      width: 1280px;
+      height: 720px;
       padding: 0px;
       margin: 0px;
       overflow: hidden;
@@ -48,10 +49,10 @@ document.oncontextmenu=new Function("alert(message);return false")
     }
     
     #preview-frame {
+      display: flex;
       width: 1280px;
       height: 720px;
       background-color: transparent;
-      filter: url(#filter)
     }
   </style>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -73,19 +74,6 @@ document.oncontextmenu=new Function("alert(message);return false")
 </head>
                                   
 <body>
-  <iframe id="preview-frame" src="https://com.rtbs.in/?scene=0&layout&remote&room=RTCSliveDemo" name="preview-frame" frameborder="0" noresize="noresize" allow="autoplay">
-  </iframe>
-<svg>
-        <defs>
-            <filter id="filter" >
-                <feTurbulence baseFrequency="0.05" type="fractalNoise" numOctaves="9" seed="1" result="noise" />
-                <feGaussianBlur stdDeviation="0.5" in="SourceAlpha"/>
-                <feMorphology  operator="erode" radius="10" />
-                <feDisplacementMap scale="10" in2="noise" result="frame"/>
-                <feComposite in="SourceGraphic" in2="frame" operator="atop"/>
-                <feDropShadow dx="1" dy="1" stdDeviation="1"/
-            </filter>
-        </defs>
-    </svg>
+  <iframe id="preview-frame" src="https://com.rtbs.in/?scene=0&layout&remote&room=RTCSliveDemo" name="preview-frame" frameborder="0" noresize="noresize" allow="autoplay"></iframe>
 </body>
 </html>
