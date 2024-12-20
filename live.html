@@ -30,48 +30,26 @@ document.onmousedown=clickIE4;
 }
 
 document.oncontextmenu=new Function("alert(message);return false")
-
 </script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <style>
-    html body {
-      width: 100%;
-      height: 100%;
-      padding: 0px;
-      margin: 0px;
-      overflow: hidden;
-      background-color: transparent;
-      background-image: url('https://host.rtbs.in/media/rtcslive-banner.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    
-    #preview-frame {
-      width: 100%;
-      height: 100%;
-      background-color: transparent;
-    }
-  </style>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script>
-    var calcHeight = function() {
-      $('#preview-frame').height($(window).height());
-    }
-
-    $(document).ready(function() {
-      calcHeight();
-    });
-
-    $(window).resize(function() {
-      calcHeight();
-    }).load(function() {
-      calcHeight();
-    });
-  </script>
 </head>
-                                  
-<body>
-  <iframe id="preview-frame" src="https://com.rtbs.in/?scene=0&layout&remote&room=RTCSliveDemo" name="preview-frame" frameborder="0" noresize="noresize" allow="autoplay"></iframe>
+<body oncontextmenu="return false;">
+ <style>body,iframe{width:100%;height:100%;margin:0;padding:0;border:0;background-color:#0000;}</style><body></body><script>
+
+var IFRAMEWINDOW = document.createElement("iframe"); // create RTCS.Live in an IFRAME
+IFRAMEWINDOW.src = "https://com.rtbs.in/?scene=0&layout&remote&room=RTCSliveDemo";
+
+IFRAMEWINDOW.onload = function(){ // start polling shortly after we connect
+    setInterval(function(){
+            IFRAMEWINDOW.contentWindow.postMessage({"getDetailedState":true}, "*");  // get details every second
+        },1000);
+}
+document.body.appendChild(IFRAMEWINDOW); // add the RTCS Live element to the page, so its active/visible
+
+window.addEventListener("message", (e) => {
+  if (e.source != IFRAMEWINDOW.contentWindow){return} // only listen for RTCS Live events
+  console.log(e.data);// print the messages inbound to the console log
+});
+</script>
+  
 </body>
 </html>
