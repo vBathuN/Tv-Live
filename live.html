@@ -1,4 +1,4 @@
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <script language=JavaScript>
 //Disable right mouse click Script
@@ -30,25 +30,28 @@ document.onmousedown=clickIE4;
 }
 
 document.oncontextmenu=new Function("alert(message);return false")
+
 </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
     html body {
-      width: 100%;
-      height: 100%;
+      width: 1280px;
+      height: 720px;
       padding: 0px;
       margin: 0px;
       overflow: hidden;
-      font-family: arial;
-      font-size: 10px;
-      color: #6e6e6e;
-      background-color: #000;
+      background-color: transparent;
+      background-image: url('https://host.rtbs.in/media/rtcslive-banner.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     
     #preview-frame {
       width: 100%;
-      background-color: #fff;
+      height: 100%;
+      background-color: transparent;
+      filter: url(#filter)
     }
   </style>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -68,9 +71,21 @@ document.oncontextmenu=new Function("alert(message);return false")
     });
   </script>
 </head>
+                                  
 <body>
-  <iframe id="preview-frame" src="https://www.youtube.com/embed/live_stream?channel=UCufpv-cDBheNtKZrhYupqeQ" name="preview-frame" frameborder="0" noresize="noresize" allow="autoplay;fullscreen;picture-in-picture;">
+  <iframe id="preview-frame" src="https://com.rtbs.in/?scene=0&layout&remote&room=RTCSliveDemo" name="preview-frame" frameborder="0" noresize="noresize" allow="autoplay">
   </iframe>
+<svg>
+        <defs>
+            <filter id="filter" >
+                <feTurbulence baseFrequency="0.05" type="fractalNoise" numOctaves="9" seed="1" result="noise" />
+                <feGaussianBlur stdDeviation="0.5" in="SourceAlpha"/>
+                <feMorphology  operator="erode" radius="10" />
+                <feDisplacementMap scale="10" in2="noise" result="frame"/>
+                <feComposite in="SourceGraphic" in2="frame" operator="atop"/>
+                <feDropShadow dx="1" dy="1" stdDeviation="1"/
+            </filter>
+        </defs>
+    </svg>
 </body>
-
 </html>
