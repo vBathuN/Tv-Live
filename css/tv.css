@@ -268,8 +268,8 @@ body {
   display: inline-block;
   opacity: .9;
   position: absolute;
-  margin-left: -480px;
-  margin-top: -30px;
+  margin-left: -315px;
+  margin-top: 30px;
 }
 
 .flip-text {
@@ -280,8 +280,8 @@ body {
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   opacity: .9;
-  margin-left: -620px;
-  margin-top: -57px;
+  margin-left: -285px;
+  margin-top: 2px;
 }
 
 @keyframes vertical {
