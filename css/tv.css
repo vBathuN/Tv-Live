@@ -20,16 +20,12 @@ body {
   height: 100vh;
   overflow:hidden;
   margin: 0;
-  text-transform: uppercase;
-  vertical-align: middle;
   justify-content:center;
 }
 
 .main {
   display: -webkit-flex;
-  flex-direction: row;
   justify-content: flex-end;
-  
 }
 
 .cur-event {
@@ -152,7 +148,6 @@ body {
 }
 
 .rtcs {
-    display: inline-block;
     vertical-align: top;
     width: 1280px;
     height: 720px;
@@ -162,7 +157,6 @@ body {
 }
 
 .rtcs-ad {
-    display: inline-block;
     width: 330px;
     height: 680px;
     padding-right: 958px;
@@ -174,7 +168,6 @@ body {
 .rtcs-streambg {
     background: #2a366a;
     background-image: url('https://host.rtbs.in/media/rtcslive-bg.jpg');
-    display: inline-block;
     width: 960px;
     height: 540px;
     margin-bottom: 60px;
@@ -185,7 +178,6 @@ body {
 }
 
 .rtcs-stream {
-    display: inline-block;
     width: 640px;
     height: 540px;
     margin-bottom: 60px;
@@ -196,7 +188,6 @@ body {
 }
 
 .rtcs-anchor {
-    display: inline-block;
     width: 320px;
     height: 540px;
     margin-bottom: 60px;
@@ -207,7 +198,6 @@ body {
 }
 
 .rtcs-rstream {
-    display: inline-block;
     width: 960px;
     height: 540px;
     margin-bottom: 60px;
@@ -218,7 +208,6 @@ body {
 }
 
 .rtcs-lt {
-    display: inline-block;
     vertical-align: top;
     width: 1280px;
     height: 720px;
@@ -228,7 +217,6 @@ body {
 }
 
 .pulse-logo {
-    display: inline-block;
     z-index: 5;
     width: 45px;
     height: 45px;
@@ -338,7 +326,6 @@ body {
 }
 /* SPINNER ANIMATION */
 .spinner {
-  
   z-index: 0;
   position: relative;
   top: 30.4%;
