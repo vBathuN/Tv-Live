@@ -5,8 +5,314 @@
   <title>RTCS Live TV</title>
   <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/mt-news.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css'>
 </head>
 <body>
+<div id="app" v-cloak>
+<!-- socket loader -->
+<div class="loader-wrap" :class="{ 'visible': loaderVisible }">
+  <div class="loader-content">
+    <div v-if="status === 0"><i>🛰️</i> <br /> Connecting to Socket API ...</div>
+    <div v-else-if="status === 1"><i>📡</i> <br /> Waiting for data from Socket API ...</div>
+    <div v-else-if="status === 2"><i>😃</i> <br /> Connected to the Socket API</div>
+    <div v-else-if="status === -1"><i>😡</i> <br /> Error connecting to the Socket API</div>
+  </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+<script>
+// common number filters
+Vue.filter( 'toFixed', ( num, asset ) => {
+  if ( typeof asset === 'number' ) return Number( num ).toFixed( asset );
+  return Number( num ).toFixed( ( asset === 'USDT' ) ? 3 : 8 );
+});
+Vue.filter( 'toMoney', num => {
+  return Number( num ).toFixed( 0 ).replace( /./g, ( c, i, a ) => {
+    return i && c !== "." && ( ( a.length - i ) % 3 === 0 ) ? ',' + c : c;
+  });
+});
+
+// component for creating line chart
+Vue.component( 'linechart', {
+  props: {
+    width: { type: Number, default: 400, required: true },
+    height: { type: Number, default: 40, required: true },
+    values: { type: Array, default: [], required: true },
+  },
+  data() {
+    return { cx: 0, cy: 0 };
+  },
+  computed: {
+    viewBox() {
+      return '0 0 '+ this.width +' '+ this.height;
+    },
+    chartPoints() {
+      let data = this.getPoints();
+      let last = data.length ? data[ data.length - 1 ] : { x: 0, y: 0 };
+      let list = data.map( d => ( d.x - 10 ) +','+ d.y );
+      this.cx  = last.x - 5;
+      this.cy  = last.y;
+      return list.join( ' ' );
+    },
+  },
+  methods: {
+    getPoints() {
+      this.width  = parseFloat( this.width ) || 0;
+      this.height = parseFloat( this.height ) || 0;
+      let min     = this.values.reduce( ( min, val ) => val < min ? val : min, this.values[ 0 ] );
+      let max     = this.values.reduce( ( max, val ) => val > max ? val : max, this.values[ 0 ] );
+      let len     = this.values.length;
+      let half    = this.height / 2;
+      let range   = ( max > min ) ? ( max - min ) : this.height;
+      let gap     = ( len > 1 ) ? ( this.width / ( len - 1 ) ) : 1;
+      let points  = [];
+
+      for ( let i = 0; i < len; ++i ) {
+        let d = this.values[ i ];
+        let val = 2 * ( ( d - min ) / range - 0.5 );
+        let x = i * gap;
+        let y = -val * half * 0.8 + half;
+        points.push( { x, y } );
+      }
+      return points;
+    }
+  },
+  template: `
+  <svg :viewBox="viewBox" xmlns="http://www.w3.org/2000/svg">
+    <polyline class="color" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" :points="chartPoints" />
+    <circle class="color" :cx="cx" :cy="cy" r="4" fill="#fff" stroke="none" />
+  </svg>`,
+});
+
+// vue instance
+new Vue({
+  // mount point
+  el: '#app',
+
+  // app data
+  data: {
+    endpoint : 'wss://stream.binance.com:9443/ws/!ticker@arr',
+    iconbase : 'https://raw.githubusercontent.com/rainner/binance-watch/master/public/images/icons/',
+    cache    : {},             // coins data cache
+    coins    : [],             // live coin list from api
+    asset    : 'BTC',          // filter by base asset pair
+    search   : '',             // filter by search string
+    sort     : 'assetVolume',  // sort by param
+    order    : 'desc',         // sort order ( asc, desc )
+    limit    : 50,             // limit list
+    status   : 0,              // socket status ( 0: closed, 1: open, 2: active, -1: error )
+    sock     : null,           // socket inst
+    cx       : 0,
+    cy       : 0,
+  },
+
+  // computed methods
+  computed: {
+
+    // process coins list
+    coinsList() {
+      let list = this.coins.slice();
+      let search = this.search.replace( /[^\s\w\-\.]+/g, '' ).replace( /[\r\s\t\n]+/g, ' ' ).trim();
+
+      if ( this.asset ) {
+        list = list.filter( i => i.asset === this.asset );
+      }
+      if ( search && search.length > 1 ) {
+        let reg = new RegExp( '^('+ search +')', 'i' );
+        list = list.filter( i => reg.test( i.token ) );
+      }
+      if ( this.sort ) {
+        list = this.sortList( list, this.sort, this.order );
+      }
+      if ( this.limit ) {
+        list = list.slice( 0, this.limit );
+      }
+      return list;
+    },
+
+    // show socket connection loader
+    loaderVisible() {
+      return ( this.status === 2 ) ? false : true;
+    },
+
+    // sort-by label for buttons, etc
+    sortLabel() {
+      switch ( this.sort ) {
+        case 'token'       :  return 'Token';
+        case 'percent'     :  return 'Percent';
+        case 'close'       :  return 'Price';
+        case 'change'      :  return 'Change';
+        case 'assetVolume' :  return 'Volume';
+        case 'tokenVolume' :  return 'Volume';
+        case 'trades'      :  return 'Trades';
+        default            :  return 'Default';
+      }
+    },
+  },
+
+  // custom methods
+  methods: {
+
+    // apply sorting and toggle order
+    sortBy( key, order ) {
+      if ( this.sort !== key ) { this.order = order || 'asc'; }
+      else { this.order = ( this.order === 'asc' ) ? 'desc' : 'asc'; }
+      this.sort = key;
+    },
+
+    // filter by asset
+    filterAsset( asset ) {
+      this.asset = String( asset || 'BTC' );
+    },
+
+    // set list limit
+    setLimit( limit ) {
+      this.limit = parseInt( limit ) || 0;
+    },
+
+    // on socket connected
+    onSockOpen( e ) {
+      this.status = 1; // open
+      console.info( 'WebSocketInfo:', 'Connection open ('+ this.endpoint +').' );
+    },
+
+    // on socket closed
+    onSockClose( e ) {
+      this.status = 0; // closed
+      console.info( 'WebSocketInfo:', 'Connection closed ('+ this.endpoint +').' );
+      setTimeout( this.sockInit, 10000 ); // try again
+    },
+
+    // on socket error
+    onSockError( err ) {
+      this.status = -1; // error
+      console.error( 'WebSocketError:', err.message || err );
+      setTimeout( this.sockInit, 10000 ); // try again
+    },
+
+    // process data from socket
+    onSockData( e ) {
+      let list = JSON.parse( e.data ) || [];
+
+      for ( let item of list ) {
+        // cleanup data for each coin
+        let c = this.getCoinData( item );
+        // keep to up 100 previous close prices in hostiry for each coin
+        c.history = this.cache.hasOwnProperty( c.symbol ) ? this.cache[ c.symbol ].history : this.fakeHistory( c.close );
+        if ( c.history.length > 100 ) c.history = c.history.slice( c.history.length - 100 );
+        c.history.push( c.close );
+        // add coin data to cache
+        this.cache[ c.symbol ] = c;
+      }
+      // convert cache object to final prices list for each symbol
+      this.coins = Object.keys( this.cache ).map( s => this.cache[ s ] );
+      this.status = 2; // active
+    },
+
+    // start socket connection
+    sockInit() {
+      if ( this.status > 0 ) return;
+      try {
+        this.status = 0; // closed
+        this.sock = new WebSocket( this.endpoint );
+        this.sock.addEventListener( 'open', this.onSockOpen );
+        this.sock.addEventListener( 'close', this.onSockClose );
+        this.sock.addEventListener( 'error', this.onSockError );
+        this.sock.addEventListener( 'message', this.onSockData );
+      }
+      catch( err ) {
+        console.error( 'WebSocketError:', err.message || err );
+        this.status = -1; // error
+        this.sock = null;
+      }
+    },
+
+    // start socket connection
+    sockClose() {
+      if ( this.sock ) {
+        this.sock.close();
+      }
+    },
+
+    // come up with some fake history prices to fill in the initial line chart
+    fakeHistory( close ) {
+      let num = close * 0.0001; // faction of current price
+      let min = -Math.abs( num );
+      let max = Math.abs( num );
+      let out = [];
+
+      for ( let i = 0; i < 50; ++i ) {
+        let rand = Math.random() * ( max - min ) + min;
+        out.push( close + rand );
+      }
+      return out;
+    },
+
+    // finalize data for each coin from socket
+    getCoinData( item ) {
+      let reg         = /^([A-Z]+)(BTC|ETH|BNB|USDT|TUSD)$/;
+      let symbol      = String( item.s ).replace( /[^\w\-]+/g, '' ).toUpperCase();
+      let token       = symbol.replace( reg, '$1' );
+      let asset       = symbol.replace( reg, '$2' );
+      let name        = token;
+      let pair        = token +'/'+ asset;
+      let icon        = this.iconbase + token.toLowerCase() + '_.png';
+      let open        = parseFloat( item.o );
+      let high        = parseFloat( item.h );
+      let low         = parseFloat( item.l );
+      let close       = parseFloat( item.c );
+      let change      = parseFloat( item.p );
+      let percent     = parseFloat( item.P );
+      let trades      = parseInt( item.n );
+      let tokenVolume = Math.round( item.v );
+      let assetVolume = Math.round( item.q );
+      let sign        = ( percent >= 0 ) ? '+' : '';
+      let arrow       = ( percent >= 0 ) ? '▲' : '▼';
+      let info        = [ pair, close.toFixed( 8 ), '(', arrow, sign + percent.toFixed( 2 ) +'%', '|', sign + change.toFixed( 8 ), ')' ].join( ' ' );
+      let style       = '';
+
+      if ( percent > 0 ) style = 'gain';
+      if ( percent < 0 ) style = 'loss';
+
+      return { symbol, token, asset, name, pair, icon, open, high, low, close, change, percent, trades, tokenVolume, assetVolume, sign, arrow, style, info };
+    },
+
+    // sort an array by key and order
+    sortList( list, key, order ) {
+      return list.sort( ( a, b ) => {
+        let _a = a[ key ];
+        let _b = b[ key ];
+
+        if ( _a && _b ) {
+          _a = ( typeof _a === 'string' ) ? _a.toUpperCase() : _a;
+          _b = ( typeof _b === 'string' ) ? _b.toUpperCase() : _b;
+
+          if ( order === 'asc' ) {
+            if ( _a < _b ) return -1;
+            if ( _a > _b ) return 1;
+          }
+          if ( order === 'desc' ) {
+            if ( _a > _b ) return -1;
+            if ( _a < _b ) return 1;
+          }
+        }
+        return 0;
+      });
+    },
+  },
+
+  // app mounted
+  mounted() {
+    this.sockInit();
+  },
+
+  // app destroyed
+  destroyed() {
+    this.sockClose();
+  }
+});
+</script>
+</div>
 <div class='rtcs'>
 <!-- partial:index.partial.html -->
 <div class='main'>
@@ -14,20 +320,18 @@
 <div class='logo'>
 <style>
 .logo {
-  width: 320px;
-  height: 50px;
+  width: 350px;
+  height: 60px;
   float: right;
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 50px;
-  margin-right: 0px;
+  margin-right: -2px;
 }
 .waviy {
   background: #c60203;
   position: relative;
-  padding: 12px 0px 0px 10px;
-  
+  padding: 0px 0px 0px 44px;
+  border-radius: 20px 0 0 20px;
 }
 .waviy span {
   position: relative;
@@ -52,7 +356,7 @@
 .live {
   background: #19f radial-gradient(transparent, #02c);
   position: relative;
-  padding: 0px 10px 5px 12px;
+  padding: 0px 8px 5px 10px;
   display: inline-block;
   font-family: Tahoma, Verdana, sans-serif;
   font-size: 47px;
@@ -156,30 +460,67 @@
   <i class="fa fa-facebook custom-animated__angle custom-animated__angle--2"></i>
   <i class="fa fa-twitter custom-animated__angle custom-animated__angle--3"></i>
   <i class="fa fa-instagram custom-animated__angle custom-animated__angle--4"></i>
-</div></div></div>
+</div></div>
+
+<div class="flip-text">
+<style>
+.verticalflip {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.verticalflip span {
+  animation: vertical 21s linear infinite 0s;
+  -ms-animation: vertical 21s linear infinite 0s;
+  -webkit-animation: vertical 21s linear infinite 0s;
+  color: #fff;
+  position: absolute;
+  opacity: 0;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+
+.verticalflip span:nth-child(2) {
+  -ms-animation-delay: 7s;
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+}
+
+.verticalflip span:nth-child(3) {
+  -ms-animation-delay: 14s;
+  -webkit-animation-delay: 14s;
+  animation-delay: 14s;
+}
+</style>
+<div class="verticalflip">
+  <span>Follow Us @themediatrial</span>
+  <span><a id="localDate"></a> <a id="localTime"></a></span>
+  <span> <a id="cityName"></a> <a class="wi" id="main-icon"></a>&nbsp;<a id="mainTemperature"></a><a class="active" style="font-size: 1.3rem;" id="celcius">°C</a> <a id="tempDescription"></a></span>
+</div></div>
+</div>
 
 <div class='rtcs-ad'>
-<iframe name="rtcs-ad" width="320px" height="670px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+<iframe name="rtcs-ad" width="330px" height="680px" src="https://www.rtbs.in/image-slider/slide670" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
 </div></div></div>
 
 <div class="rtcs-stream">
-<iframe class="rtcs-stream" width="100vh" height="720px" src="https://demo.rtcs.live/stream-live-mt" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+<iframe class="rtcs-stream" width="100vh" height="720px" src="https://demo.rtbs.in/stream-live-mt" allow="autoplay" frameborder="0" encrypted-media;></iframe>
 </div>
 
 <div class='rtcs-anchor'>
-<iframe name="anchor" width="206px" height="366px" src="https://com.rtcs.live/?view=Anchor&scene=1&room=RTCSliveDemo&916&cover&controls=0&transparent&rounded=50&border=4&bordercolor=c9a050" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+<iframe name="anchor" width="206px" height="366px" src="https://com.rtbs.in/?view=Anchor&scene=1&room=RTCSliveDemo&916&cover&controls=0&transparent&rounded=50&border=4&bordercolor=c9a050" allow="autoplay" frameborder="0" encrypted-media;></iframe>
 </div>
 
 <div class="rtcs-lt">
-<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtcs.live/" frameborder="0" encrypted-media;></iframe>
+<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtbs.in/" frameborder="0" encrypted-media;></iframe>
 </div>
 
 <div class="pulse-logo">
 <style>
 
 .round-image {
-  width: 75px;
-  height: 75px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   z-index: 1;
   position: relative;
@@ -193,11 +534,11 @@
 .pulse2,
 .pulse3 {
   position: absolute;
-  width: 75px;
-  height: 75px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   z-index: 0;
-  background: red;
+  background: #fff;
   animation: pulse 3s infinite;
 }
 
@@ -226,12 +567,11 @@
       <div class="pulse2"></div>
       <div class="pulse3"></div>
 
-      <img class="round-image" src="https://www.rtcs.live/animated-logo/bathu/images/hero.jpg" alt="" />
+      <img class="round-image" src="https://host.rtbs.in/media/logo.gif" alt="" />
     </div>
-<a class="button">www.rtcs.live</a>
 </div>
  
- <div class="watermark"><h1>www.rtcs.live</h1></div>
+ <div class="watermark"><marquee width="950%" direction="right"><h1>www.rtbs.in</h1></marquee></div>
 
 <div class="location">
 <!--[ Location Ticker Code ]-->
@@ -284,8 +624,6 @@
 }
 
 #ticker ul li h3 a {
-  background: rgb(0 0 0 / 70%);
-  border-radius: 10px;
   color: #fff;
   text-decoration: none;
   padding: 0px 5px 0px 5px;
@@ -474,55 +812,8 @@ function RTCSliveTicker(t) {
   }
 }(jQuery);
 //]]>
-  </script><script src='https://feed.rtcs.live/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
+  </script><script src='https://feed.rtbs.in/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
 </div>
-
-<div class='onair'>
-<div id="box">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
-  <g fill="#ffffff" fill-rule="evenodd">
-    <ellipse cx="12" cy="8.705" rx="3" ry="3"/>
-    <path id="on-air-out" d="M3.51471863.219669914C-1.17157288 4.90596141-1.17157288 12.5039412 3.51471863 17.1902327 3.80761184 17.4831259 4.28248558 17.4831259 4.5753788 17.1902327 4.86827202 16.8973394 4.86827202 16.4224657 4.5753788 16.1295725.474873734 12.0290674.474873734 5.38083515 4.5753788 1.28033009 4.86827202.987436867 4.86827202.512563133 4.5753788.219669914 4.28248558-.0732233047 3.80761184-.0732233047 3.51471863.219669914zM20.4852814 17.1902327C25.1715729 12.5039412 25.1715729 4.90596141 20.4852814.219669914 20.1923882-.0732233047 19.7175144-.0732233047 19.4246212.219669914 19.131728.512563133 19.131728.987436867 19.4246212 1.28033009 23.5251263 5.38083515 23.5251263 12.0290674 19.4246212 16.1295725 19.131728 16.4224657 19.131728 16.8973394 19.4246212 17.1902327 19.7175144 17.4831259 20.1923882 17.4831259 20.4852814 17.1902327z"/>
-    <path id="on-air-in" d="M17.3033009 14.0082521C18.7217837 12.5897693 19.4928584 10.6983839 19.4999509 8.73215792 19.507111 6.74721082 18.7352286 4.8335782 17.3033009 3.40165043 17.0104076 3.10875721 16.5355339 3.10875721 16.2426407 3.40165043 15.9497475 3.69454365 15.9497475 4.16941738 16.2426407 4.4623106 17.3890249 5.6086948 18.0056933 7.13752465 17.9999607 8.72674718 17.9942823 10.30094 17.3782748 11.8119579 16.2426407 12.947592 15.9497475 13.2404852 15.9497475 13.7153589 16.2426407 14.0082521 16.5355339 14.3011454 17.0104076 14.3011454 17.3033009 14.0082521zM6.69669914 3.40165043C3.76776695 6.33058262 3.76776695 11.07932 6.69669914 14.0082521 6.98959236 14.3011454 7.46446609 14.3011454 7.75735931 14.0082521 8.05025253 13.7153589 8.05025253 13.2404852 7.75735931 12.947592 5.41421356 10.6044462 5.41421356 6.80545635 7.75735931 4.4623106 8.05025253 4.16941738 8.05025253 3.69454365 7.75735931 3.40165043 7.46446609 3.10875721 6.98959236 3.10875721 6.69669914 3.40165043z"/>
-  </g>
-</svg>
-</div></div>
-
-<div class="flip-text">
-<style>
-.verticalflip {
-  font-size: 38px;
-  font-weight: bold;
-}
-
-.verticalflip span {
-  animation: vertical 7.5s linear infinite 0s;
-  -ms-animation: vertical 7.5s linear infinite 0s;
-  -webkit-animation: vertical 7.5s linear infinite 0s;
-  color: #fff;
-  position: absolute;
-  opacity: 0;
-  padding: 10px 15px 10px 15px;
-  border-radius: 10px;
-}
-
-.verticalflip span:nth-child(2) {
-  -ms-animation-delay: 2.5s;
-  -webkit-animation-delay: 2.5s;
-  animation-delay: 2.5s;
-}
-
-.verticalflip span:nth-child(3) {
-  -ms-animation-delay: 5s;
-  -webkit-animation-delay: 5s;
-  animation-delay: 5s;
-}
-</style>
-<div class="verticalflip">
-  <span>Follow Us</span>
-  <span>@themediatrial</span>
-  <span>tv.rtcs.live</span>
-</div></div>
  
   <div class='cur-event'>
     <div class='top'></div>
@@ -538,19 +829,10 @@ padding: 0px 0px;
 height: 110px;
 text-align: center;
 background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
-background-size:300% 50%;
-animation: shine 3s infinite;
+background-image: url('https://host.rtbs.in/rtcs/dot-bg.gif');
+background-size:100% 100%;
 border-radius: 15px 30px 15px 30px;
 border: 2px solid #fff000;
-}
-
-@keyframes shine {
-  0% {
-    background-position: right;    
-  }
-  /*100% {
-    background-position: left; it's the default value, no need to define it
-  }*/
 }
 
 #rtcslive-widget ul {
@@ -639,7 +921,7 @@ summaryFontsize = 20;
 summaryColor = "#666";
 icon2 = " ";
 numposts = 10;
-home_page = "https://feed.rtcs.live/";
+home_page = "https://feed.rtbs.in/";
 limitspy=4;
 intervalspy=8000;
 </script><br />
@@ -656,8 +938,8 @@ jQuery(function(){jQuery("ul.spy").simpleSpy(limitspy,intervalspy).bind("mouseen
 <style>
 @font-face {
     font-family: 'Tamil039';
-    src: url('https://www.rtcs.live/font/Tamil039.woff2') format('woff2'),
-        url('https://www.rtcs.live/font/Tamil039.woff') format('woff');
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -699,7 +981,7 @@ right:0;
 bottom:0;
 text-align: center;
 color:white;
-padding:20px 10px 12px;
+padding:22px 10px 13px;
 display:none;
 overflow: hidden;
 }
@@ -719,11 +1001,11 @@ overflow: hidden;
 slideOpenNewTab = false,
 idMode          = true,
 slidebyLabels   = true,
-slideLabelName  = "textslide",
+slideLabelName  = "txtslide",
 thumbWidth      = 420,
 pBlank          = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1DBQz7KbG9ycllCVxo8gAW5jB2qzUFZp-bIXc8t55QxC70eugjthx2OjzDxyEYLp0ObVlWGITcypy7oIUyO7y1AMCAu5RlUei6a6V7HWoW5Vl-PzPUYBNRrq7cXMbafC4bsWCz0JO6fRCzejdKC1EynC5MsaCQLTewDJ3r1cMVAp95eeD2L8f3kKzZu4/s500/20241120_144504.png",//Ảnh đại diện khi bài ko có ảnh
-numposts_g      = 10,//Số bài cần trình chiếu
-home_page       = "https://feed.rtcs.live";//URL Blog
+numposts_g      = 4,//Số bài cần trình chiếu
+home_page       = "https://feed.rtbs.in";//URL Blog
 
 $(window).bind('load', function() {
 $('#slider').s3Slider({
@@ -852,10 +1134,10 @@ document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/
 <div class='ticker'>
   <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
 <style>
-.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 1px; }
+.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 2px; }
 </style>
 <script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
-var nMaxPosts =50;
+var nMaxPosts =10;
         var nWidth = 100;
         var nScrollDelay = 0;
         var sDirection = "left";
@@ -909,7 +1191,7 @@ var sPostLinkLocation;
    sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
 sHeadlineTerminator;
   }
-   if (sDirection == "left") {
+   if (sDirection == "right") {
    sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
   } else if (sDirection == "right") {
    sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
@@ -921,10 +1203,10 @@ sHeadlineTerminator;
   alert(exception);
 }
 }</script>
-<script src="https://feed.rtcs.live/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
+<script src="https://feed.rtbs.in/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
 type="text/javascript"></script>
       
-    <script src="https://hosting.rtcs.live/rtcs/horizontal-panel-marquee.js"></script>
+    <script src="https://host.rtbs.in/rtcs/horizontal-panel-marquee.js"></script>
      <script type="text/javascript">
     $(window).load( function() {
       $('#panel').hpanel({
@@ -960,6 +1242,565 @@ if (subTitle) {
 if (!title && !subTitle) {
   document.getElementById('titleContainer').style.display = 'block';
   document.getElementById('subTitleContainer').style.display = 'block';
+}
+</script>
+
+<script>
+var unitIsCelcius = true;
+var globalForecast = [];
+
+// Maps the API's icons to the ones from https://erikflowers.github.io/weather-icons/
+var weatherIconsMap = {
+  "01d": "wi-day-sunny",
+  "01n": "wi-night-clear",
+  "02d": "wi-day-cloudy",
+  "02n": "wi-night-cloudy",
+  "03d": "wi-cloud",
+  "03n": "wi-cloud",
+  "04d": "wi-cloudy",
+  "04n": "wi-cloudy",
+  "09d": "wi-showers",
+  "09n": "wi-showers",
+  "10d": "wi-day-hail",
+  "10n": "wi-night-hail",
+  "11d": "wi-thunderstorm",
+  "11n": "wi-thunderstorm",
+  "13d": "wi-snow",
+  "13n": "wi-snow",
+  "50d": "wi-fog",
+  "50n": "wi-fog"
+};
+
+
+$(function(){
+  getClientPosition();
+  startClock();  
+});
+
+
+function startClock(){
+  setInterval(function(){
+    $("#localTime").text(new Date().toLocaleTimeString());
+  }, 1000);
+}
+
+
+function getClientPosition(){
+  $.getJSON("https://ipapi.co/json/", function(position) {
+    $("#cityName").text(position.city);
+    $("#cityCode").text(position.country);
+    
+    getWeatherData(position.latitude, position.longitude);
+  });
+}
+
+
+function getWeatherData(latitude, longitude){
+  $.ajax({
+    type: "GET",
+    url: "https://api.openweathermap.org/data/2.5/forecast/daily?APPID=9b4bbf30228eb8528d36e79d05da1fac&lat=" + latitude + "&lon=" + longitude + "&units=metric&cnt=5",
+    cache: true,
+    // headers: {
+      // "Access-Control-Allow-Headers": "x-requested-with"
+    // },
+    success: function(forecast){
+      globalForecast = forecast;
+      updateForecast(forecast);
+
+      // Stops Refresh button's spinning animation
+      $("#refreshButton").html("<i class='fa fa-refresh fa-fw'></i> Refresh");
+    },
+    error: function(error){
+      console.log("Error with ajax: "+ error);
+    }
+  });
+}
+
+
+// Update view values from passed forecast
+function updateForecast(forecast){
+
+  // Present day
+  var today = forecast.list[0];
+  $("#tempDescription").text(toCamelCase(today.weather[0].description));
+  $("#humidity").text(today.humidity);
+  $("#wind").text(today.speed);
+  $("#localDate").text(getFormattedDate(today.dt));
+  $("#main-icon").addClass(weatherIconsMap[today.weather[0].icon]);
+  $("#mainTemperature").text(Math.round(today.temp.day));
+  $("#mainTempHot").text(Math.round(today.temp.max));
+  $("#mainTempLow").text(Math.round(today.temp.min));
+
+
+  // Following days data
+  for(var i = 1; i < (forecast.list).length; i++){
+    var day = forecast.list[i];
+
+    // Day short format e.g. Mon
+    var dayName = getFormattedDate(day.dt).substring(0,3);
+
+    // weather icon from map
+    var weatherIcon = weatherIconsMap[day.weather[0].icon];
+
+    $("#forecast-day-" + i + "-name").text(dayName);
+    $("#forecast-day-" + i + "-icon").addClass(weatherIcon);
+    $("#forecast-day-" + i + "-main").text(Math.round(day.temp.day));
+    $("#forecast-day-" + i + "-ht").text(Math.round(day.temp.max));
+    $("#forecast-day-" + i + "-lt").text(Math.round(day.temp.min));
+  }
+
+  console.log($('#cityName').html());
+  console.log($('#cityCode').html());
+
+  console.log($('#mainTemperature').html());
+  console.log($('#tempDescription').html());
+
+  console.log($('#mainTempHot').html());
+  console.log($('#mainTempLow').html());
+  
+  console.log($('#humidity').html());
+  console.log($('#wind').html());
+
+
+var cc = {
+'AF': 'Afghanistan',
+'AL': 'Albania',
+'DZ': 'Algeria',
+'AS': 'American Samoa',
+'AD': 'Andorra',
+'AO': 'Angola',
+'AI': 'Anguilla',
+'AQ': 'Antarctica',
+'AG': 'Antigua and Barbuda',
+'AR': 'Argentina',
+'AM': 'Armenia',
+'AW': 'Aruba',
+'AU': 'Australia',
+'AT': 'Austria',
+'AZ': 'Azerbaijan',
+'BS': 'Bahamas ',
+'BH': 'Bahrain',
+'BD': 'Bangladesh',
+'BB': 'Barbados',
+'BY': 'Belarus',
+'BE': 'Belgium',
+'BZ': 'Belize',
+'BJ': 'Benin',
+'BM': 'Bermuda',
+'BT': 'Bhutan',
+'BO': 'Bolivia ',
+'BQ': 'Bonaire, Sint Eustatius and Saba',
+'BA': 'Bosnia and Herzegovina',
+'BW': 'Botswana',
+'BV': 'Bouvet Island',
+'BR': 'Brazil',
+'IO': 'British Indian Ocean Territory ',
+'BN': 'Brunei Darussalam',
+'BG': 'Bulgaria',
+'BF': 'Burkina Faso',
+'BI': 'Burundi',
+'CV': 'Cabo Verde',
+'KH': 'Cambodia',
+'CM': 'Cameroon',
+'CA': 'Canada',
+'KY': 'Cayman Islands ',
+'CF': 'Central African Republic ',
+'TD': 'Chad',
+'CL': 'Chile',
+'CN': 'China',
+'CX': 'Christmas Island',
+'CC': 'Cocos ',
+'CO': 'Colombia',
+'KM': 'Comoros ',
+'CD': 'Congo ',
+'CG': 'Congo ',
+'CK': 'Cook Islands ',
+'CR': 'Costa Rica',
+'HR': 'Croatia',
+'CU': 'Cuba',
+'CW': 'Curaçao',
+'CY': 'Cyprus',
+'CZ': 'Czechia',
+'CI': 'Côte d Ivoire',
+'DK': 'Denmark',
+'DJ': 'Djibouti',
+'DM': 'Dominica',
+'DO': 'Dominican Republic ',
+'EC': 'Ecuador',
+'EG': 'Egypt',
+'SV': 'El Salvador',
+'GQ': 'Equatorial Guinea',
+'ER': 'Eritrea',
+'EE': 'Estonia',
+'SZ': 'Eswatini',
+'ET': 'Ethiopia',
+'FK': 'Falkland Islands ',
+'FO': 'Faroe Islands ',
+'FJ': 'Fiji',
+'FI': 'Finland',
+'FR': 'France',
+'GF': 'French Guiana',
+'PF': 'French Polynesia',
+'TF': 'French Southern Territories ',
+'GA': 'Gabon',
+'GM': 'Gambia ',
+'GE': 'Georgia',
+'DE': 'Germany',
+'GH': 'Ghana',
+'GI': 'Gibraltar',
+'GR': 'Greece',
+'GL': 'Greenland',
+'GD': 'Grenada',
+'GP': 'Guadeloupe',
+'GU': 'Guam',
+'GT': 'Guatemala',
+'GG': 'Guernsey',
+'GN': 'Guinea',
+'GW': 'Guinea-Bissau',
+'GY': 'Guyana',
+'HT': 'Haiti',
+'HM': 'Heard Island and McDonald Islands',
+'VA': 'Holy See ',
+'HN': 'Honduras',
+'HK': 'Hong Kong',
+'HU': 'Hungary',
+'IS': 'Iceland',
+'IN': 'India',
+'ID': 'Indonesia',
+'IR': 'Iran ',
+'IQ': 'Iraq',
+'IE': 'Ireland',
+'IM': 'Isle of Man',
+'IL': 'Israel',
+'IT': 'Italy',
+'JM': 'Jamaica',
+'JP': 'Japan',
+'JE': 'Jersey',
+'JO': 'Jordan',
+'KZ': 'Kazakhstan',
+'KE': 'Kenya',
+'KI': 'Kiribati',
+'KP': 'Korea ',
+'KR': 'Korea ',
+'KW': 'Kuwait',
+'KG': 'Kyrgyzstan',
+'LA': 'Lao Peoples Democratic Republic ',
+'LV': 'Latvia',
+'LB': 'Lebanon',
+'LS': 'Lesotho',
+'LR': 'Liberia',
+'LY': 'Libya',
+'LI': 'Liechtenstein',
+'LT': 'Lithuania',
+'LU': 'Luxembourg',
+'MO': 'Macao',
+'MG': 'Madagascar',
+'MW': 'Malawi',
+'MY': 'Malaysia',
+'MV': 'Maldives',
+'ML': 'Mali',
+'MT': 'Malta',
+'MH': 'Marshall Islands ',
+'MQ': 'Martinique',
+'MR': 'Mauritania',
+'MU': 'Mauritius',
+'YT': 'Mayotte',
+'MX': 'Mexico',
+'FM': 'Micronesia ',
+'MD': 'Moldova ',
+'MC': 'Monaco',
+'MN': 'Mongolia',
+'ME': 'Montenegro',
+'MS': 'Montserrat',
+'MA': 'Morocco',
+'MZ': 'Mozambique',
+'MM': 'Myanmar',
+'NA': 'Namibia',
+'NR': 'Nauru',
+'NP': 'Nepal',
+'NL': 'Netherlands ',
+'NC': 'New Caledonia',
+'NZ': 'New Zealand',
+'NI': 'Nicaragua',
+'NE': 'Niger ',
+'NG': 'Nigeria',
+'NU': 'Niue',
+'NF': 'Norfolk Island',
+'MP': 'Northern Mariana Islands ',
+'NO': 'Norway',
+'OM': 'Oman',
+'PK': 'Pakistan',
+'PW': 'Palau',
+'PS': 'Palestine, State of',
+'PA': 'Panama',
+'PG': 'Papua New Guinea',
+'PY': 'Paraguay',
+'PE': 'Peru',
+'PH': 'Philippines ',
+'PN': 'Pitcairn',
+'PL': 'Poland',
+'PT': 'Portugal',
+'PR': 'Puerto Rico',
+'QA': 'Qatar',
+'MK': 'Republic of North Macedonia',
+'RO': 'Romania',
+'RU': 'Russian Federation ',
+'RW': 'Rwanda',
+'RE': 'Réunion',
+'BL': 'Saint Barthélemy',
+'SH': 'Saint Helena, Ascension and Tristan da Cunha',
+'KN': 'Saint Kitts and Nevis',
+'LC': 'Saint Lucia',
+'MF': 'Saint Martin ',
+'PM': 'Saint Pierre and Miquelon',
+'VC': 'Saint Vincent and the Grenadines',
+'WS': 'Samoa',
+'SM': 'San Marino',
+'ST': 'Sao Tome and Principe',
+'SA': 'Saudi Arabia',
+'SN': 'Senegal',
+'RS': 'Serbia',
+'SC': 'Seychelles',
+'SL': 'Sierra Leone',
+'SG': 'Singapore',
+'SX': 'Sint Maarten ',
+'SK': 'Slovakia',
+'SI': 'Slovenia',
+'SB': 'Solomon Islands',
+'SO': 'Somalia',
+'ZA': 'South Africa',
+'GS': 'South Georgia and the South Sandwich Islands',
+'SS': 'South Sudan',
+'ES': 'Spain',
+'LK': 'Sri Lanka',
+'SD': 'Sudan ',
+'SR': 'Suriname',
+'SJ': 'Svalbard and Jan Mayen',
+'SE': 'Sweden',
+'CH': 'Switzerland',
+'SY': 'Syrian Arab Republic',
+'TW': 'Taiwan ',
+'TJ': 'Tajikistan',
+'TZ': 'Tanzania, United Republic of',
+'TH': 'Thailand',
+'TL': 'Timor-Leste',
+'TG': 'Togo',
+'TK': 'Tokelau',
+'TO': 'Tonga',
+'TT': 'Trinidad and Tobago',
+'TN': 'Tunisia',
+'TR': 'Turkey',
+'TM': 'Turkmenistan',
+'TC': 'Turks and Caicos Islands ',
+'TV': 'Tuvalu',
+'UG': 'Uganda',
+'UA': 'Ukraine',
+'AE': 'United Arab Emirates ',
+'GB': 'United Kingdom of Great Britain and Northern Ireland ',
+'UM': 'United States Minor Outlying Islands ',
+'US': 'United States of America ',
+'UY': 'Uruguay',
+'UZ': 'Uzbekistan',
+'VU': 'Vanuatu',
+'VE': 'Venezuela ',
+'VN': 'Viet Nam',
+'VG': 'Virgin Islands ',
+'VI': 'Virgin Islands ',
+'WF': 'Wallis and Futuna',
+'EH': 'Western Sahara',
+'YE': 'Yemen',
+'ZM': 'Zambia',
+'ZW': 'Zimbabwe',
+'AX': 'Åland Islands'
+}
+
+
+  console.log("Country name is " + cc[$('#cityCode').html()]);
+
+  
+  setTimeout(function (){
+  
+  // Something you want delayed.
+
+    responsiveVoice.speak("Temperature in "+$('#cityName').html()+","+cc[$('#cityCode').html()]+" is. "+$('#mainTemperature').html()+" Degree Celcius."+" Its description is. "+$('#tempDescription').html()+". Today's expected minimum temperature is "+$('#mainTempLow').html()+" degree celcius. Expected maximum temperature is "+$('#mainTempHot').html()+" degree celcius. Humidity is "+$('#humidity').html()+" percent. Wind speed is "+$('#wind').html()+" meter per second.", 'UK English Female', parameters);    
+            
+}, 16000); // How long you want the delay to be, measured in milliseconds.
+
+
+
+var days = {
+   'Mon': 'Monday',
+   'Tue': 'Tuesday',
+   'Wed': 'Wednesday',
+   'Thu': 'Thursday',
+   'Fri': 'Friday',
+   'Sat': 'Saturday',
+   'Sun': 'Sunday'
+}
+
+// days[date]
+
+  console.log(days[$('#forecast-day-1-name').html()]);
+  console.log($('#forecast-day-1-main').html());
+  console.log($('#forecast-day-1-ht').html());
+  console.log($('#forecast-day-1-lt').html());
+
+  console.log(days[$('#forecast-day-2-name').html()]);
+  console.log($('#forecast-day-2-main').html());
+  console.log($('#forecast-day-2-ht').html());
+  console.log($('#forecast-day-2-lt').html());
+
+  console.log(days[$('#forecast-day-3-name').html()]);
+  console.log($('#forecast-day-3-main').html());
+  console.log($('#forecast-day-3-ht').html());
+  console.log($('#forecast-day-3-lt').html());
+
+  console.log(days[$('#forecast-day-4-name').html()]);
+  console.log($('#forecast-day-4-main').html());
+  console.log($('#forecast-day-4-ht').html());
+  console.log($('#forecast-day-4-lt').html());
+
+
+
+  setTimeout(function (){
+  
+  // Something you want delayed.
+
+    responsiveVoice.speak("Forecast Temperature for "+days[$('#forecast-day-1-name').html()]+" is "+$('#forecast-day-1-main').html()+" degree celcius. Expected high is "+$('#forecast-day-1-ht').html()+" degree celcius. Expected low is "+$('#forecast-day-1-lt').html()+" degree celcius.", 'UK English Female', parameters);    
+            
+}, 36000); // How long you want the delay to be, measured in milliseconds.
+
+
+  setTimeout(function (){
+  
+  // Something you want delayed.
+
+    responsiveVoice.speak("Forecast Temperature for "+days[$('#forecast-day-2-name').html()]+" is "+$('#forecast-day-2-main').html()+" degree celcius. Expected high is "+$('#forecast-day-2-ht').html()+" degree celcius. Expected low is "+$('#forecast-day-2-lt').html()+" degree celcius.", 'UK English Female', parameters);    
+            
+}, 48000); // How long you want the delay to be, measured in milliseconds.
+
+
+
+  setTimeout(function (){
+  
+  // Something you want delayed.
+
+    responsiveVoice.speak("Forecast Temperature for "+days[$('#forecast-day-3-name').html()]+" is "+$('#forecast-day-3-main').html()+" degree celcius. Expected high is "+$('#forecast-day-3-ht').html()+" degree celcius. Expected low is "+$('#forecast-day-3-lt').html()+" degree celcius.", 'UK English Female', parameters);    
+            
+}, 60000); // How long you want the delay to be, measured in milliseconds.
+
+
+  setTimeout(function (){
+  
+  // Something you want delayed.
+
+    responsiveVoice.speak("Forecast Temperature for "+days[$('#forecast-day-4-name').html()]+" is "+$('#forecast-day-4-main').html()+" degree celcius. Expected high is "+$('#forecast-day-4-ht').html()+" degree celcius. Expected low is "+$('#forecast-day-4-lt').html()+" degree celcius.", 'UK English Female', parameters);    
+            
+}, 72000); // How long you want the delay to be, measured in milliseconds.
+
+  
+}
+
+
+// Refresh button handler
+$("#refreshButton").on("click", function(){
+  // Starts Refresh button's spinning animation
+  $("#refreshButton").html("<i class='fa fa-refresh fa-spin fa-fw'></i>");
+  getWeatherData();
+});
+
+
+// Celcius button handler.
+// Converts every shown value to Celcius
+$("#celcius").on("click", function(){
+  if(!unitIsCelcius){
+    $("#farenheit").removeClass("active");
+    this.className = "active";
+
+    // main day
+    var today = globalForecast.list[0];
+    today.temp.day = toCelcius(today.temp.day);
+    today.temp.max = toCelcius(today.temp.max);
+    today.temp.min = toCelcius(today.temp.min);
+    globalForecast.list[0] = today;
+
+    // week
+    for(var i = 1; i < 5; i ++){
+      var weekDay = globalForecast.list[i];
+      weekDay.temp.day = toCelcius(weekDay.temp.day);
+      weekDay.temp.max = toCelcius(weekDay.temp.max);
+      weekDay.temp.min = toCelcius(weekDay.temp.min);
+      globalForecast[i] = weekDay;
+    }
+
+    // update view with updated values
+    updateForecast(globalForecast);
+
+    unitIsCelcius = true;
+  }
+});
+
+
+// Farenheit button handler
+// Converts every shown value to Farenheit
+$("#farenheit").on("click", function(){  
+  if(unitIsCelcius){
+    $("#celcius").removeClass("active");
+    this.className = "active";
+    
+    // main day
+    var today = globalForecast.list[0];
+    today.temp.day = toFerenheit(today.temp.day);
+    today.temp.max = toFerenheit(today.temp.max);
+    today.temp.min = toFerenheit(today.temp.min);
+    globalForecast.list[0] = today;
+
+    // week
+    for(var i = 1; i < 5; i ++){
+      var weekDay = globalForecast.list[i];
+      weekDay.temp.day = toFerenheit(weekDay.temp.day);
+      weekDay.temp.max = toFerenheit(weekDay.temp.max);
+      weekDay.temp.min = toFerenheit(weekDay.temp.min);
+      globalForecast[i] = weekDay;
+    }
+
+    // update view with updated values
+    updateForecast(globalForecast);
+    
+    unitIsCelcius = false;
+  }
+});
+
+
+// Applies the following format to date: WeekDay, Month Day, Year
+function getFormattedDate(date){
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(date * 1000).toLocaleDateString("en-US",options);
+}
+
+
+// Formats the text to CamelCase
+function toCamelCase(str) {
+  var arr = str.split(" ").map(
+    function(sentence){
+      return sentence.charAt(0).toUpperCase() + sentence.substring(1);
+    }
+  );
+  return arr.join(" ");
+}
+
+
+// Converts to Celcius
+function toCelcius(val){
+  return Math.round((val - 32) * (5/9));
+}
+
+
+// Converts to Farenheit
+function toFerenheit(val){
+  var degrees = (val * 1.8) + 32;
+  var rounded = Math.round(degrees);
+  return rounded;
 }
 </script>
 </body>
