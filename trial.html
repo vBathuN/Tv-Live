@@ -2,213 +2,200 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>RTCS Live TV</title>
+  <title>RTBS TV</title>
   <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/trial.css">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css'>
 </head>
 <body>
+<div class="page-loader">
+	<div class="spinner"></div>
+	<div class="txt"><img src="https://host.rtbs.in/media/isat-dish.gif"><br>Connection Establishing...</div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+$(window).on('load',function(){
+	setTimeout(function(){ // allowing 3 secs to fade out loader
+	$('.page-loader').fadeOut('slow');
+	},3500);
+});
+</script>
+
 <div class='rtcs'>
 <!-- partial:index.partial.html -->
 <div class='main'>
 <div class='ticker-top'>
-<div class='logo'><img src="images/logo.gif" alt="Logo" width="300" height="45" style="vertical-align: middle;margin-left:635px;padding-top:7px;">
-
-<div class='logo-text'>
-  <style type="text/css">
-    .ml15 {
-  important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
-  font-weight: 800;
-  font-size: 2em;
-  text-transform: uppercase;
-  letter-spacing: 0em;
-  margin-top: -53px;
-  margin-left: 35px;
-  float:left;
-  vertical-align: middle;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #ffffff;
-}
-
-.ml15 .word {
-  display: inline-block;
-  line-height: 0em;
-}
-    </style>
-<h1 class="ml15">
-  <span class="fas fa-solid fa-dice-d6"></span>
-  <span class="word" style="color:white;">மூன்றாம்</span>
-  <span class="word" style="color:white;">கோணம்</span>
-</h1>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js'></script><script type="text/javascript">
-anime.timeline({loop: true})
-  .add({
-    targets: '.ml15 .word',
-    scale: [2,1],
-    opacity: [0,1],
-    easing: "easeOutCirc",
-    duration: 800,
-    delay: (el, i) => 800 * i
-  }).add({
-    targets: '.ml15',
-    opacity: 0,
-    duration: 1000,
-    easing: "easeOutExpo",
-    delay: 1000
-  });
-</script>
-</div>
-
-<div class="custom-logo">
-<div class="custom-animated">
-
+<div class='logo'>
 <style>
-.custom-animated {
+.logo {
+  width: 320px;
+  height: 60px;
+  float: right;
   display: flex;
-  flex-direction: column;
+  min-height: 50px;
+  margin-right: 0px;
 }
-@media (min-width: 740px) {
-  .custom-animated {
-    flex-direction: row;
+.waviy {
+  background: #c60203;
+  position: relative;
+  padding: 0px 0px 0px 10px;
+  
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -5px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  -webkit-text-stroke: 1.5px #c9a050;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
   }
-}
-.custom-animated__angle {
-  color: #c9a050;
-  font-size: 10rem;
-  line-height: 0rem;
-  -webkit-animation: blink 1s infinite;
-          animation: blink 1s infinite;
-}
-@media (min-width: 340px) {
-  .custom-animated__angle {
-    transform: rotate(-90deg);
-    margin-left: -4.5rem;
-    font-size: 9em;
-  }
-}
-.custom-animated__angle--1 {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
-}
-.custom-animated__angle--2 {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-}
-.custom-animated__angle--3 {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-.custom-animated__angle--4 {
-  -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
-}
-.custom-animated__angle--5 {
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-}
-.custom-animated__angle--6 {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s;
 }
 
-@-webkit-keyframes blink {
-  0% {
-    opacity: 1;
+.live {
+  background: #19f radial-gradient(transparent, #02c);
+  position: relative;
+  padding: 0px 8px 5px 10px;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  color: #2a366a;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  
+  -webkit-text-stroke: 1px red;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
   }
-  100% {
-    opacity: 0.4;
-  }
+}
+</style>
+<div class="waviy">
+   <span style="--i:1">M</span>
+   <span style="--i:2">e</span>
+   <span style="--i:3">d</span>
+   <span style="--i:4">i</span>
+   <span style="letter-spacing: 1px;--i:5">a</span>
+
+   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
+</div></div>
+
+<div class='textrss'>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div id='breakingnews'><span class='breakhead'><div id='adbreakingnews'></div>
+<style type="text/css">
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+         url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*<![CDATA[*/  
+
+/* CSS Breaking News */
+#breakingnews {
+text-align: center;
+background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
+background-image: url('https://host.rtbs.in/rtcs/dot-bg.gif');
+background-size:100% 100%;
+    width: 960px;
+    height: 60px ;
+    overflow: hidden;
+  
+}
+
+#breakingnews .breakhead {
+    
+}
+#adbreakingnews li a {
+    important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal; font-size: 30px;
+    text-align: justify;
+    justify-content: center;
+    color: #fff;
+    word-spacing: -5px; 
+    padding: 0 0px;
+    font-weight: 900;
+    transition: all 0.5s ease-in-out;
+    text-decoration: none;
+    text-shadow: -1px -1px 1px #c60203, 1px 1px 1px #fff;
+    animation:blink 1.4s linear infinite alternate 1.4s; 
 }
 
 @keyframes blink {
-  0% {
-    opacity: 1;
+  80% {
+    color:white;
+  }
+  90% {
+    color:red;
   }
   100% {
-    opacity: 0.4;
+    color:white;
   }
 }
-</style>
 
-<i class="fas fa-angle-down custom-animated__angle custom-animated__angle--1"></i>
-  <i class="fas fa-angle-down custom-animated__angle custom-animated__angle--2"></i>
-  <i class="fas fa-angle-down custom-animated__angle custom-animated__angle--3"></i>
-  <i class="fas fa-angle-down custom-animated__angle custom-animated__angle--4"></i>
-  <i class="fas fa-angle-down custom-animated__angle custom-animated__angle--5"></i>
-  <i class="fas fa-angle-down custom-animated__angle custom-animated__angle--6"></i>
-</div></div></div></div>
 
-<div class='rtcs-ad'>
-<iframe name="rtcs-ad" width="320px" height="670px" src="https://www.rtcs.live/slider" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+#adbreakingnews {
+    float: none;
+    margin-right: 0px;
+    margin-top: 3px;
+}
+
+#adbreakingnews ul,#adbreakingnews li {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+}
+
+/*]]></style>
+
+<script type='text/javascript'> 
+//<![CDATA[
+$(document).ready(function(){var e="https://feed.rtbs.in",t=20;$.ajax({url:""+e+"/feeds/posts/default/-/sliding?alt=json-in-script&max-results="+t,type:"get",dataType:"jsonp",success:function(e){function t(){$("#adbreakingnews li:first").slideUp(function(){$(this).appendTo($("#adbreakingnews ul")).slideDown()})}var n,r,s="",a=e.feed.entry;if(void 0!==a){s="<ul>";for(var l=0;l<a.length;l++){for(var o=0;o<a[l].link.length;o++)if("alternate"==a[l].link[o].rel){n=a[l].link[o].href;break}r=a[l].title.$t,s+='<li><a href="'+n+'" target="_blank">'+r+"</a></li>"}s+="</ul>",$("#adbreakingnews").html(s),setInterval(function(){t()},5e3)}else $("#adbreakingnews").html("<span>No result!</span>")},error:function(){$("#adbreakingnews").html("<strong>Loading error!</strong>")}})});
+//]]></script></span></div></div>
 </div></div></div>
 
+<div class='rtcs-streambg'>
+<iframe class="rtcs-streambg" width="100vh" height="600px" src="https://www.rtbs.in/bg/rtbs" frameborder="0" encrypted-media;></iframe>
+</div>
+
 <div class="rtcs-stream">
-<script language=javascript>
-  var _0x691f71=_0x2125;function _0x3832(){var _0x3d5c38=['63%72%79%7','2%20%77%69','1686sgYSEK','2%61%6D%65','3D%22%31%3','%6D%2D%6C%','3D%22%61%7','0%73%72%63','69%76%65%2','64%65%72%3','%61%73%73%','%3C%69%66%','%20%65%6E%','%22%20%68%','65%69%67%6','%64%74%68%','%37%32%30%','2%20%61%6C','D%22%30%22','120787fbrgbq','0%74%65%64','22%20%66%7','%6C%69%76%','%6C%61%79%','4727080rzIgdX','18qHueuJ','3%3A%2F%2F','3D%22%72%7','4%63%73%2E','5%74%6F%70','12ppYiDv','4%72%65%61','65%61%6D%2','%3D%22%68%','%64%65%6D%','74%74%70%7','B%3E%3C%2F','%73%74%72%','72%61%6D%6','8095AODQfB','%2D%6D%65%','603576rWqyMH','16CoRRQV','%69%66%72%','4%63%73%2D','70%78%22%2','65%2F%73%7','4840330kAFfUY','%62%6F%72%','64%69%61%3','4557770SUJdgj','61%6D%65%3','705880dhZKPl','write','0%30%76%68','%6C%6F%77%','5%20%63%6C','6F%2E%72%7','8%74%3D%22'];_0x3832=function(){return _0x3d5c38;};return _0x3832();}function _0x2125(_0x122b97,_0x344e04){var _0x4a5e79=_0x3832();return _0x2125=function(_0x4da740,_0x21ea5d){_0x4da740=_0x4da740-(-0x1*0x1ec5+0x193f+0x707);var _0x68dbd3=_0x4a5e79[_0x4da740];return _0x68dbd3;},_0x2125(_0x122b97,_0x344e04);}(function(_0x59e5d0,_0x14e9dd){var _0x5a73f6=_0x2125,_0x386dcc=_0x59e5d0();while(!![]){try{var _0x4b7401=-parseInt(_0x5a73f6(0x1b5))/(0xfa6+-0x2*0x53+-0xeff)*(parseInt(_0x5a73f6(0x185))/(-0x985*0x3+-0x468+0x20f9))+parseInt(_0x5a73f6(0x190))/(-0x1d50+0x1*0x84e+0x1505)*(parseInt(_0x5a73f6(0x191))/(0x4*0x4a5+0x3ee*0x2+-0x1a6c))+-parseInt(_0x5a73f6(0x18e))/(-0x1481+0x10f*-0x1f+0x3557)*(parseInt(_0x5a73f6(0x1a4))/(0xe*0x56+-0xbb0+0x702))+parseInt(_0x5a73f6(0x199))/(0x1762+-0x1a91+-0x2*-0x19b)+parseInt(_0x5a73f6(0x19b))/(0x22d*0xb+-0x1ed1+0x6ea)*(parseInt(_0x5a73f6(0x1bb))/(-0x151a+-0x4fc+0x1a1f))+-parseInt(_0x5a73f6(0x1ba))/(-0x911*0x1+0x1fa1+-0xba*0x1f)+parseInt(_0x5a73f6(0x196))/(-0x203e+-0x8c0+0x2909);if(_0x4b7401===_0x14e9dd)break;else _0x386dcc['push'](_0x386dcc['shift']());}catch(_0x75bf65){_0x386dcc['push'](_0x386dcc['shift']());}}}(_0x3832,-0x27d4a+0x52849+0x19e2*0x25),document[_0x691f71(0x19c)](unescape(_0x691f71(0x1ad)+_0x691f71(0x18d)+_0x691f71(0x19f)+_0x691f71(0x1ac)+_0x691f71(0x182)+_0x691f71(0x193)+_0x691f71(0x18c)+_0x691f71(0x187)+_0x691f71(0x1a3)+_0x691f71(0x1b1)+_0x691f71(0x1a6)+_0x691f71(0x19d)+_0x691f71(0x1af)+_0x691f71(0x1b0)+_0x691f71(0x1a1)+_0x691f71(0x1b2)+_0x691f71(0x194)+_0x691f71(0x1a9)+_0x691f71(0x188)+_0x691f71(0x18a)+_0x691f71(0x181)+_0x691f71(0x189)+_0x691f71(0x1a0)+_0x691f71(0x183)+_0x691f71(0x1b8)+_0x691f71(0x195)+_0x691f71(0x186)+_0x691f71(0x1a7)+_0x691f71(0x1aa)+_0x691f71(0x1b3)+_0x691f71(0x19e)+_0x691f71(0x1a8)+_0x691f71(0x184)+_0x691f71(0x1b9)+_0x691f71(0x1b7)+_0x691f71(0x1a5)+_0x691f71(0x197)+_0x691f71(0x1ab)+_0x691f71(0x1b4)+_0x691f71(0x1ae)+_0x691f71(0x1a2)+_0x691f71(0x1b6)+_0x691f71(0x18f)+_0x691f71(0x198)+_0x691f71(0x18b)+_0x691f71(0x192)+_0x691f71(0x19a)+'E')));
-</script>
+<iframe class="rtcs-stream" width="100vh" height="600px" src="https://demo.rtbs.in/stream-mt" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class='rtcs-ad'>
+<iframe name="rtcs-ad" width="330px" height="620px" src="https://www.rtbs.in/image-slider/slide600" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="rtcs-anchor">
+<iframe name="anchor" width="320px" height="610px" src="https://com.rtbs.in/?view=Anchor&scene=1&room=RTCSliveDemo&916&cover&controls=0&transparent" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="rtcs-rstream">
+<iframe class="rtcs-rstream" width="100vh" height="720px" src="https://com.rtbs.in/?scene=0&layout&remote&room=RTBSDemo&cv&transparency" allow="autoplay" frameborder="0" encrypted-media;></iframe>
 </div>
 
 <div class="rtcs-lt">
-<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtcs.live/" frameborder="0" encrypted-media;></iframe>
-</div>
-
-<div class="pulse-logo">
-<style>
-
-.round-image {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  z-index: 1;
-  position: relative;
-}
-
-.pulse-container {
-  position: relative;
-}
-
-.pulse1,
-.pulse2,
-.pulse3 {
-  position: absolute;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  z-index: 0;
-  background: red;
-  animation: pulse 3s infinite;
-}
-
-.pulse2 {
-  animation-delay: 1s;
-}
-
-.pulse3 {
-  animation-delay: 2s;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-</style>
-   <div class="pulse-container">
-      <div class="pulse1"></div>
-      <div class="pulse2"></div>
-      <div class="pulse3"></div>
-
-      <img class="round-image" src="https://www.rtcs.live/animated-logo/bathu/images/hero.jpg" alt="" />
-    </div>
-<a class="button">www.rtcs.live</a>
+<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtbs.in/" frameborder="0" encrypted-media;></iframe>
 </div>
  
- <div class="watermark"><h1>www.rtcs.live</h1></div>
+ <div class="watermark"><marquee width="100%" direction="right"><h1>www.rtbs.in</h1></marquee></div>
 
 <div class="location">
 <!--[ Location Ticker Code ]-->
@@ -221,7 +208,7 @@ anime.timeline({loop: true})
   /* CSS News Ticker */
 
 .ticker-wrap {
-  width: 180px;
+  width: 200px;
   display: block;
   border-radius: 21px;
   text-align: center;
@@ -242,7 +229,7 @@ anime.timeline({loop: true})
 }
 
 #ticker ul li {
-  height: 50px;
+  height: 32px;
   white-space: nowrap
 }
 
@@ -251,7 +238,7 @@ anime.timeline({loop: true})
   float: left;
   width: 25px;
   height: 25px;
-  margin: 3px 3px -15px 0px
+  margin: 5px 3px 0px 0px
 }
 
 #ticker ul li h3 {
@@ -263,7 +250,7 @@ anime.timeline({loop: true})
 #ticker ul li h3 a {
   color: #fff;
   text-decoration: none;
-  line-height: 25px!important
+  padding: 0px 5px 0px 5px;
 }
 
 #ticker ul li .tickermeta {
@@ -449,136 +436,219 @@ function RTCSliveTicker(t) {
   }
 }(jQuery);
 //]]>
-  </script><script src='https://feed.rtcs.live/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
+  </script><script src='https://feed.rtbs.in/feeds/posts/default/-/location?alt=json&callback=RTCSliveTicker'></script>
 </div>
-  
+ 
   <div class='cur-event'>
-    <div class='top'></div>
-    <div class='glow'></div>
-    <div class='bttm'></div>
+  </div>
 
-<div class='textrss'>
-<style type="text/css">
-#rtcslive-widget {
-important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+<div class="textslider">
+<style>
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+#slider,#sliderContent,#slider img{
+width:310px;  
+height:600px; /* Chiều cao slideshow */
+position:absolute;
+}
+#sliderContent {
+bottom:605px;
+left:965px;
+margin:0 0;
+padding:0 0;
 overflow: hidden;
-padding: 0px 0px;
-height: 120px;
+}
+#slider img {
+border:none;
+padding:10 0;
+margin:0 0;
+height:auto;
+outline:none;
+display:none;
+}
+.sliderImage {
+list-style:none;
+margin:0 0;
+padding:0 0;
+display:none;
+}
+.sliderImage span {
+background-color:#c60203;
+border-radius: 20px;
+opacity:.9;
+filter:alpha(opacity=90);
+left:0;
+right:0;
+bottom:0;
 text-align: center;
-}}
-
-#rtcslive-widget ul {
-width: 99%;
+color:white;
+padding:22px 10px 13px;
+display:none;
 overflow: hidden;
-list-style-type: none;
-padding: 0px 0px;
-margin: 0px 0px;
 }
-
-#rtcslive-widget li {
-width: 940px;
-padding: 5px 5px;
-margin: 0px 0px 5px 0px;
-list-style-type: none;
-float: none;
-height: 120px;
+.sliderImage span a {
+font-size:24px;
+color:white;
+text-decoration:none;
+important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+text-align: center;
+line-height: 1.8;
+text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
 overflow: hidden;
-background: transparent;
 }
 
-#rtcslive-widget li a {
-text-decoration: none;
-color: #c9a050;
-font-size: 28px;
-font-weight: bold;
-height: 24px;
-overflow: hidden;
-margin: 0px 0px;
-padding: 0px 0px 2px 0px;
-text-shadow: 0 0 .2em #000;
-animation:blink 1.5s linear infinite alternate 1.5s;
-
-}
-
-@keyframes blink {
-  80% {
-    color:white;
-  }
-  90% {
-    color:red;
-  }
-  100% {
-    color:white;
-  }
-}
-
-}
-#rtcslive-widget img {
-}
-#rtcslive-widget img {
-}
-#rtcslive-widget img:hover {
-}
-
-.spydate {
-display: none;
-}
-
-.spycomment {
-display: none;
-}
 </style>
+<script>
+slideOpenNewTab = false,
+idMode          = true,
+slidebyLabels   = true,
+slideLabelName  = "txtslide",
+thumbWidth      = 420,
+pBlank          = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1DBQz7KbG9ycllCVxo8gAW5jB2qzUFZp-bIXc8t55QxC70eugjthx2OjzDxyEYLp0ObVlWGITcypy7oIUyO7y1AMCAu5RlUei6a6V7HWoW5Vl-PzPUYBNRrq7cXMbafC4bsWCz0JO6fRCzejdKC1EynC5MsaCQLTewDJ3r1cMVAp95eeD2L8f3kKzZu4/s500/20241120_144504.png",//Ảnh đại diện khi bài ko có ảnh
+numposts_g      = 10,//Số bài cần trình chiếu
+home_page       = "https://feed.rtbs.in";//URL Blog
 
-<script language='JavaScript'>
-imgr = new Array();
-imgr[0] = "";
-imgr[1] = "";
-imgr[2] = "";
-imgr[3] = "";
-imgr[4] = "";
-showRandomImg = false;
-boxwidth = 880;
-cellspacing = 6;
-borderColor = "#232c35";
-bgTD = "#000000";
-thumbwidth = 0;
-thumbheight = 0;
-fntsize = 20;
-acolor = "#666";
-aBold = false;
-icon = "";
-text = "Comments";
-showPostDate = false;
-summaryPost = 70;
-summaryFontsize = 20;
-summaryColor = "#666";
-icon2 = " ";
-numposts = 10;
-home_page = "https://feed.rtcs.live/";
-limitspy=4;
-intervalspy=8000;
-</script><br />
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script><br />
-<div id="rtcslive-widget">
-<script type='text/javascript'>
-//<![CDATA[
-jQuery(function(){jQuery("ul.spy").simpleSpy(limitspy,intervalspy).bind("mouseenter",function(){jQuery(this).trigger("stop")}).bind("mouseleave",function(){jQuery(this).trigger("start")})});(function(e){e.fn.simpleSpy=function(f,g){f=f||4;g=g||5000;return this.each(function(){var l=e(this),k=true,i=[],m=f,o=0,h=l.find("> li:first").height();l.find("> li").each(function(){i.push("<li>"+e(this).html()+"</li>")});o=i.length;l.wrap('<div class="spyWrapper" />').parent().css({height:h*f});l.find("> li").filter(":gt("+(f-1)+")").remove();l.bind("stop",function(){k=false}).bind("start",function(){k=true});function n(){if(k){var p=e(i[m]).css({height:0,opacity:0,display:"none"}).prependTo(l);l.find("> li:last").animate({opacity:0},1000,function(){p.animate({height:h},1000).animate({opacity:1},1000);e(this).remove()});m++;if(m>=o){m=0}}setTimeout(n,g)}n()})}})(jQuery);function showrecentposts(z){document.write('<ul class="spy">');j=(showRandomImg)?Math.floor((imgr.length+1)*Math.random()):0;img=new Array();for(var o=0;o<numposts;o++){var w=z.feed.entry[o];var g=w.title.$t;var f;var p;if(o==z.feed.entry.length){break}for(var l=0;l<w.link.length;l++){if(w.link[l].rel=="alternate"){p=w.link[l].href;break}}for(var l=0;l<w.link.length;l++){if(w.link[l].rel=="replies"&&w.link[l].type=="text/html"){f=w.link[l].title.split(" ")[0];break}}if("content" in w){var r=w.content.$t}else{if("summary" in w){var r=w.summary.$t}else{var r=""}}postdate=w.published.$t;if(j>imgr.length-1){j=0}img[o]=imgr[j];s=r;a=s.indexOf("<img");b=s.indexOf('src="',a);c=s.indexOf('"',b+5);d=s.substr(b+5,c-b-5);if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")){img[o]=d}cmtext=(text!="no")?'<i><font color="'+acolor+'">('+f+" "+text+")</font></i>":"";var q=[1,2,3,4,5,6,7,8,9,10,11,12];var x=["January","February","March","April","May","June","July","August","September","October","November","December"];var u=postdate.split("-")[2].substring(0,2);var h=postdate.split("-")[1];var t=postdate.split("-")[0];for(var e=0;e<q.length;e++){if(parseInt(h)==q[e]){h=x[e];break}}var n=(showPostDate)?'<i><font color="'+acolor+'"> ('+u+" "+h+" "+t+")</font></i>":"";g=(aBold)?"<b>"+g+"</b>":g;var v='<li><a href="'+p+'"><img src="'+img[o]+'" width="'+thumbwidth+'" height="'+thumbheight+'" class="recent-thumb"/></a><a href="'+p+'" class="recent-link">'+g+'</a><div class="spydate">'+n+'</div><div class="spycomment">'+cmtext+"</div>";document.write(v);j++}document.write("</ul>")}document.write('<script src="'+home_page+"feeds/posts/default/-/sliding?max-results="+numposts+'&orderby=published&alt=json-in-script&callback=showrecentposts"><\/script>');
-//]]>
+$(window).bind('load', function() {
+$('#slider').s3Slider({
+timeOut:5000
+});
+});
+
+
+(function($) {
+    $.fn.s3Slider = function(vars) {
+        var element = this;
+        var timeOut = (vars.timeOut != undefined) ? vars.timeOut : 10000;
+        var current = null;
+        var timeOutFn = null;
+        var faderStat = true;
+        var mOver = false;
+        var items = $("#" + element[0].id + "Content ." + element[0].id + "Image")
+        var itemsSpan = $("#" + element[0].id + "Content ." + element[0].id + "Image span");
+        items.each(function(i) {
+            $(items[i]).mouseover(function() {
+                mOver = true;
+            });
+            $(items[i]).mouseout(function() {
+                mOver = false;
+
+                fadeElement(true);
+            });
+        });
+        var fadeElement = function(isMouseOut) {
+            var thisTimeOut = (isMouseOut) ? (timeOut / 2) : timeOut;
+            thisTimeOut = (faderStat) ? 10 : thisTimeOut;
+            if (items.length > 0) {
+                timeOutFn = setTimeout(makeSlider, thisTimeOut);
+            } else {
+                console.log("Poof..");
+            }
+        }
+        var makeSlider = function() {
+            current = (current != null) ? current : items[(items.length - 1)];
+            var currNo = jQuery.inArray(current, items) + 1
+
+            currNo = (currNo == items.length) ? 0 : (currNo - 1);
+            var newMargin = $(element).width() * currNo;
+            if (faderStat == true) {
+                if (!mOver) {
+                    $(items[currNo]).fadeIn((timeOut / 6), function() {
+                        if ($(itemsSpan[currNo]).css('bottom') == 0) {
+                            $(itemsSpan[currNo]).slideUp((timeOut / 6), function() {
+                                faderStat = false;
+                                current = items[currNo];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        } else {
+                            $(itemsSpan[currNo]).slideDown((timeOut / 6), function() {
+                                faderStat = false;
+                                current = items[currNo];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        }
+                    });
+                }
+            } else {
+                if (!mOver) {
+                    if ($(itemsSpan[currNo]).css('bottom') == 0) {
+                        $(itemsSpan[currNo]).slideDown((timeOut / 6), function() {
+                            $(items[currNo]).fadeOut((timeOut / 6), function() {
+                                faderStat = true;
+                                current = items[(currNo + 1)];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        });
+                    } else {
+                        $(itemsSpan[currNo]).slideUp((timeOut / 6), function() {
+                            $(items[currNo]).fadeOut((timeOut / 6), function() {
+                                faderStat = true;
+                                current = items[(currNo + 1)];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        });
+                    }
+                }
+            }
+        }
+        makeSlider();
+    };
+})(jQuery);
+
+function s3SliderGallery(json) {
+document.write('<div id="slider"><ul id="sliderContent">');
+for (var i = 0; i < numposts_g; i++) {
+var entry = json.feed.entry[i],
+title = entry.title.$t,
+date = entry.published.$t,
+link, months, cm, img;
+if (i == entry.length) break;
+for (var j = 0, jen = entry.link.length; j < jen; j++) {
+if (entry.link[j].rel == 'alternate') {
+link = entry.link[j].href;
+break;
+}
+}
+for (var k = 0, ken = entry.link.length; k < ken; k++) {
+if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+cm = entry.link[k].title.split(' ')[0];
+break;
+}
+}
+document.write('<li class="sliderImage"><a href="' + link + '"' + (slideOpenNewTab ? ' target="_blank"' : '') + '><img src="' + img + '" alt="' + title + '" class="recent-thumb"></a><span><a href="' + link + '"' + (slideOpenNewTab ? ' target="_blank"' : '') + ' class="recent-link">' + title + '</a></span></li>');
+}
+document.write('</ul></div>');
+}
+document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/\/$/,"") + "/feeds/posts/default/" + (slidebyLabels ? '-/' + slideLabelName : '') + "?max-results=" + numposts_g + "&orderby=published&alt=json-in-script&callback=s3SliderGallery'><\/scr" + "ipt>");
 </script>
-</div></div></div>
+</div>
 
 <div class='ticker'>
   <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
 <style>
-.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; word-spacing: -5px; margin-top: 0px; }
+.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; word-spacing: -5px; margin-top: 2px; }
 </style>
 <script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
-var nMaxPosts =50;
+var nMaxPosts =10;
         var nWidth = 100;
         var nScrollDelay = 0;
         var sDirection = "left";
         var sOpenLinkLocation = "N";
-        var sBulletChar = "&#128313;"
+        var sBulletChar = "&#x2727;"
 </script>
 <script type="text/javascript">
 function RecentPostsScrollerv2(json) {
@@ -627,7 +697,7 @@ var sPostLinkLocation;
    sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
 sHeadlineTerminator;
   }
-   if (sDirection == "left") {
+   if (sDirection == "right") {
    sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
   } else if (sDirection == "right") {
    sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
@@ -639,10 +709,10 @@ sHeadlineTerminator;
   alert(exception);
 }
 }</script>
-<script src="https://feed.rtcs.live/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
+<script src="https://feed.rtbs.in/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
 type="text/javascript"></script>
       
-    <script src="https://hosting.rtcs.live/rtcs/horizontal-panel-marquee.js"></script>
+    <script src="https://host.rtbs.in/rtcs/horizontal-panel-marquee.js"></script>
      <script type="text/javascript">
     $(window).load( function() {
       $('#panel').hpanel({
@@ -680,5 +750,6 @@ if (!title && !subTitle) {
   document.getElementById('subTitleContainer').style.display = 'block';
 }
 </script>
+
 </body>
 </html>
