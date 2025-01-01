@@ -182,7 +182,7 @@ body {
     margin-right: 8px;
     position: absolute;
     vertical-align: middle;
-    z-index: -2;
+    z-index: -8;
 }
 
 .rtcs-anchor {
