@@ -167,10 +167,10 @@ body {
 }
 
 .rtcs-stream {
-    width: 640px;
+    width: 960px;
     height: 620px;
     margin-bottom: 0px;
-    margin-right: 320px;
+    margin-right: 0px;
     position: absolute;
     vertical-align: middle;
     z-index: -8;
@@ -187,10 +187,10 @@ body {
 }
 
 .rtcs-anchor {
-    width: 320px;
-    height: 610px;
-    margin-top: 10px;
-    padding-right: 0px;
+    width: 220px;
+    height: 360px;
+    margin-top: 20px;
+    padding-right: 730px;
     position: absolute;
     vertical-align: middle;
     z-index: 2;
