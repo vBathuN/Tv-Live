@@ -26,6 +26,73 @@ $(window).on('load',function(){
 <!-- partial:index.partial.html -->
 <div class='main'>
 <div class='top-wrap'>
+<div class='logo'>
+<style>
+.logo {
+  float: right;
+  display: flex;
+}
+.waviy {
+  background: #c60203;
+  width: 320px;
+  height: 60px;
+  position: relative;
+  padding: 0px 0px 0px 1px;
+  
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -5px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  -webkit-text-stroke: 1.5px #c9a050;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+.live {
+  background: #19f radial-gradient(transparent, #02c);
+  position: relative;
+  padding: 0px 8px 5px 10px;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  color: #2a366a;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  
+  -webkit-text-stroke: 1px red;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+</style>
+<div class="waviy">
+   <span style="--i:0"></span>
+   <span style="--i:1">M</span>
+   <span style="--i:2">e</span>
+   <span style="--i:3">d</span>
+   <span style="--i:4">i</span>
+   <span style="letter-spacing: 1px;--i:5">a</span>
+
+   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
+</div></div>
+
 <div class="social-icon">
 <div class="custom-animated">
 
@@ -137,73 +204,6 @@ $(window).on('load',function(){
   <span>Follow Us @themediatrial</span>
   <span><a id="localDate"></a> <a id="localTime"></a></span>
   <span> <a id="cityName"></a> <a class="wi" id="main-icon"></a>&nbsp;<a id="mainTemperature"></a><a class="active" style="font-size: 1.3rem;" id="celcius">°C</a> <a id="tempDescription"></a></span>
-</div></div>
-
-<div class='logo'>
-<style>
-.logo {
-  float: right;
-  display: flex;
-}
-.waviy {
-  background: #c60203;
-  width: 320px;
-  height: 60px;
-  position: relative;
-  padding: 0px 0px 0px 1px;
-  
-}
-.waviy span {
-  position: relative;
-  display: inline-block;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 46px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -5px;
-  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  -webkit-text-stroke: 1.5px #c9a050;
-  text-transform: none;
-  animation: flip 2s infinite;
-  animation-delay: calc(.1s * var(--i))
-}
-@keyframes flip {
-  0%,80% {
-    transform: rotateY(360deg) 
-  }
-}
-
-.live {
-  background: #19f radial-gradient(transparent, #02c);
-  position: relative;
-  padding: 0px 8px 5px 10px;
-  display: inline-block;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 46px;
-  font-weight: 900;
-  color: #2a366a;
-  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  
-  -webkit-text-stroke: 1px red;
-  text-transform: none;
-  animation: flip 2s infinite;
-  animation-delay: calc(.1s * var(--i))
-}
-@keyframes flip {
-  0%,80% {
-    transform: rotateY(360deg) 
-  }
-}
-</style>
-<div class="waviy">
-   <span style="--i:0"></span>
-   <span style="--i:1">M</span>
-   <span style="--i:2">e</span>
-   <span style="--i:3">d</span>
-   <span style="--i:4">i</span>
-   <span style="letter-spacing: 1px;--i:5">a</span>
-
-   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
 </div></div>
 </div>
 
