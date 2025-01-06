@@ -158,10 +158,20 @@ body {
   z-index: -4;
 }
 
-.rtcs {
-    background-image: url('https://host.rtbs.in/media/tv-bg.gif');
+.rtcs-bg {
+    background-image: url('https://host.rtbs.in/rtcs/dot-bg.gif');
     background-size: cover;
     background-repeat: no-repeat;
+    transform: rotate(0deg);
+    vertical-align: top;
+    width: 1280px;
+    height: 720px;
+    margin-right: 0px;
+    position: absolute;
+    z-index: -11;
+}
+
+.rtcs {
     vertical-align: top;
     width: 1280px;
     height: 720px;
