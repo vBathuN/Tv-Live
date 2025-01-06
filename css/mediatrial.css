@@ -284,14 +284,14 @@ body {
 }
 
 .flip-text {
-  width: 800px;
+  width: 820px;
   height: 50px;
   position: absolute;
   letter-spacing: 1.5px;
   font-family: "Agdasima", sans-serif;
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  margin-left: 140px;
+  margin-left: 120px;
   margin-top: 0px;
 }
 
