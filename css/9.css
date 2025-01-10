@@ -28,6 +28,12 @@ body {
   justify-content: flex-end;
 }
 
+.logo1 {
+  position: absolute;
+  margin-right: 930px;
+  margin-top: -5px;
+}
+
 .cur-event {
   overflow: hidden;
   position: relative;
