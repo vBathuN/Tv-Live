@@ -27,89 +27,6 @@ $(window).on('load',function(){
 <div class='rtcs'>
 <!-- partial:index.partial.html -->
 <div class='main'>
-<div class='logo1'>
-<style>
-.animation {
-  width: 22em;
-  height: 4em;
-  margin: 1em auto;
-  position: relative;
-  word-spacing: -10px;
-}
-
-
-.right {
-  color: yellow;
-  important; font-family: 'Tamil039'; font-weight: bold; font-style: normal;
-  letter-spacing: 1px;
-  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-}
-
-.left {
-  color: yellow;
-  important; font-family: 'Tamil039'; font-weight: bold; font-style: normal;
-  letter-spacing: 1px;
-  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-}
-
-.mask {
-  overflow: hidden;
-  position: relative;
-}
-
-/*********************
-* Animation 3
-*********************/
-
-@keyframes animation-3-left {
-  0% {transform: translate3d(100%, 0, 0);}  
-  30% {transform: translate3d(100%, 0, 0);}  
-  60% {transform: translate3d(0, 0, 0);}
-}
-
-@keyframes animation-3-right {
-  0% {transform: translate3d(-100%, 0, 0);}  
-  30% {transform: translate3d(-100%, 0, 0);}  
-  60% {transform: translate3d(0, 0, 0);}
-}
-
-#animation-3 {
-  
-  & > div {
-    display: inline-block;
-    width: 50%;
-    height: 2em;
-  }
-  
-  & > div:first-child {
-    font-size: 2em;
-    text-align: right;
-    
-    div {
-      animation: 2.2s ease-out infinite alternate both animation-3-left;
-    }
-  }
-  
-  & > div:last-child {
-    font-size: 2em;
-    line-height: 2.30;
-    
-    div {
-      animation: 2.2s ease-out infinite alternate both animation-3-right;
-    }
-  }
-}
-
-</style>
-<div id="animation-3" class="animation">
-    <div class="left mask">
-      <div>மூன்றாம்</div>
-    </div><div class="right mask">
-      <div>&nbsp;கோணம்</div>
-    </div>
-  </div>
-</div>
-
 <div class='top-wrap'>
 <div class='logo'>
 <style>
@@ -289,6 +206,90 @@ $(window).on('load',function(){
   <span><a id="localDate"></a> <a id="localTime"></a></span>
   <span> <a id="cityName"></a> <a class="wi" id="main-icon"></a>&nbsp;<a id="mainTemperature"></a><a class="active" style="font-size: 1.3rem;" id="celcius">°C</a> <a id="tempDescription"></a></span>
 </div></div>
+	
+<div class='logo1'>
+<style>
+.animation {
+  width: 22em;
+  height: 4em;
+  margin: 1em auto;
+  position: relative;
+  word-spacing: -10px;
+}
+
+
+.right {
+  color: yellow;
+  important; font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+  letter-spacing: 1px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+}
+
+.left {
+  color: yellow;
+  important; font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+  letter-spacing: 1px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+}
+
+.mask {
+  overflow: hidden;
+  position: relative;
+}
+
+/*********************
+* Animation 3
+*********************/
+
+@keyframes animation-3-left {
+  0% {transform: translate3d(100%, 0, 0);}  
+  30% {transform: translate3d(100%, 0, 0);}  
+  60% {transform: translate3d(0, 0, 0);}
+}
+
+@keyframes animation-3-right {
+  0% {transform: translate3d(-100%, 0, 0);}  
+  30% {transform: translate3d(-100%, 0, 0);}  
+  60% {transform: translate3d(0, 0, 0);}
+}
+
+#animation-3 {
+  
+  & > div {
+    display: inline-block;
+    width: 50%;
+    height: 2em;
+  }
+  
+  & > div:first-child {
+    font-size: 2em;
+    text-align: right;
+    
+    div {
+      animation: 2.2s ease-out infinite alternate both animation-3-left;
+    }
+  }
+  
+  & > div:last-child {
+    font-size: 2em;
+    line-height: 2.30;
+    
+    div {
+      animation: 2.2s ease-out infinite alternate both animation-3-right;
+    }
+  }
+}
+
+</style>
+<div id="animation-3" class="animation">
+    <div class="left mask">
+      <div>மூன்றாம்</div>
+    </div><div class="right mask">
+      <div>&nbsp;கோணம்</div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <div class='ticker-top'>
