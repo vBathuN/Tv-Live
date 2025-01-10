@@ -11,7 +11,8 @@ html { max-width: 1280px; margin: 0 auto;}
 }
 
 body {
-  background: #c9a050;
+  background: #cc8800;
+  background-image: url('https://host.rtbs.in/rtcs/3px-tile.png');
   important; font-family: 'Tamil039'; font-weight: bold; font-style: normal;
   color: #ffffff;
   display: -webkit-flex;
