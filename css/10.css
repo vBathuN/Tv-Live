@@ -28,6 +28,12 @@ body {
   justify-content: flex-end;
 }
 
+.title {
+  width: 320px;
+  margin-left: 0px;
+  margin-top: -10px;
+}
+
 .cur-event {
   overflow: hidden;
   position: relative;
