@@ -1,4 +1,4 @@
-<html lang="en" class="no-js">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -12,13 +12,16 @@
       overflow: hidden;
       font-family: arial;
       font-size: 10px;
-      color: #6e6e6e;
-      background-color: #000;
+      color: transparent;
+      background-color: transparent;
+      background-image: url('https://hosting.rtcs.live/media/rtcslive-banner.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     
     #preview-frame {
       width: 100%;
-      background-color: #fff;
+      background-color: transparent;
     }
   </style>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -38,11 +41,10 @@
     });
   </script>
 </head>
-
-<body oncontextmenu="return false;">
-  <iframe id="preview-frame" src="https://com.rtcs.live/whip" name="preview-frame" frameborder="0" noresize="noresize">
+                                  
+<body>
+  <iframe id="preview-frame" src="https://meshcast.io/view.html?geo=usc1&id=RTCSliveDemo" name="preview-frame" frameborder="0" noresize="noresize" allow="autoplay">
   </iframe>
-  
 </body>
 
 </html>
