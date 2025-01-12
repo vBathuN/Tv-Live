@@ -248,12 +248,12 @@ body {
     z-index: 100;
 }
 
-.pulse-logo {
+.social-logo {
     z-index: 5;
     width: 45px;
     height: 45px;
-    padding-right: 330px;
-    margin-bottom: 660px;
+    padding-right: 870px;
+    margin-bottom: 640px;
     position: absolute;  
 }
 
@@ -298,7 +298,7 @@ body {
   font-family: "Agdasima", sans-serif;
   text-transform: none;
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-  margin-left: 120px;
+  margin-left: 0px;
   margin-top: 0px;
 }
 
