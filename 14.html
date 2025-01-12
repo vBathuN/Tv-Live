@@ -94,83 +94,6 @@ $(window).on('load',function(){
    <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
 </div></div>
 
-<div class="social-icon">
-<div class="custom-animated">
-
-<style>
-.custom-animated {
-  display: flex;
-  flex-direction: column;
-}
-@media (min-width: 740px) {
-  .custom-animated {
-    flex-direction: row;
-  }
-}
-.custom-animated__angle {
-  color: #c9a050;
-  font-size: 10rem;
-  line-height: 0rem;
-  -webkit-animation: blink 1s infinite;
-          animation: blink 1s infinite;
-}
-@media (min-width: 340px) {
-  .custom-animated__angle {
-    transform: rotate(-0deg);
-    margin-left: 1rem;
-    font-size: 2em;
-  }
-}
-.custom-animated__angle--1 {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
-}
-.custom-animated__angle--2 {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-}
-.custom-animated__angle--3 {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-.custom-animated__angle--4 {
-  -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
-}
-.custom-animated__angle--5 {
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-}
-.custom-animated__angle--6 {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s;
-}
-
-@-webkit-keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.4;
-  }
-}
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.4;
-  }
-}
-</style>
-
-<i class="fa fa-youtube custom-animated__angle custom-animated__angle--1"></i>
-  <i class="fa fa-facebook custom-animated__angle custom-animated__angle--2"></i>
-  <i class="fa fa-twitter custom-animated__angle custom-animated__angle--3"></i>
-  <i class="fa fa-instagram custom-animated__angle custom-animated__angle--4"></i>
-</div></div>
-
 <div class="flip-text">
 <style>
 .verticalflip {
@@ -532,6 +455,61 @@ $(document).ready(function(){var e="https://feed.rtbs.in",t=20;$.ajax({url:""+e+
 
 <div class="rtcs-lt">
 <iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtbs.in/" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="social-logo">
+<style>
+.round-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  z-index: 1;
+  position: relative;
+}
+
+.pulse-container {
+  position: relative;
+}
+
+.pulse1,
+.pulse2,
+.pulse3 {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  z-index: 0;
+  background: #fff;
+  animation: pulse 3s infinite;
+}
+
+.pulse2 {
+  animation-delay: 1s;
+}
+
+.pulse3 {
+  animation-delay: 2s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+   <div class="pulse-container">
+      <div class="pulse1"></div>
+      <div class="pulse2"></div>
+      <div class="pulse3"></div>
+
+      <img class="round-image" src="https://host.rtbs.in/media/social.gif" alt="" />
+    </div>
 </div>
  
  <div class="watermark"><marquee width="98%" direction="right"><h1>www.rtbs.in</h1></marquee></div>
