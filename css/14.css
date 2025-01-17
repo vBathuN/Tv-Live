@@ -135,7 +135,6 @@ body {
 }
 
 .textrss {
-    opacity: .9;
     position: absolute;
     z-index: 1;
     margin: 0px 320px;
@@ -176,6 +175,7 @@ body {
     margin-right: 0px;
     position: absolute;
     z-index: -11;
+    opacity: .9;
 }
 
 .rtcs {
@@ -275,7 +275,6 @@ body {
 }
 
 .location {
-  opacity: .9;
   position: absolute;
   z-index: 4;
   margin-top: -375px;
@@ -300,6 +299,7 @@ body {
   text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   margin-left: 0px;
   margin-top: 0px;
+  opacity: .9;
 }
 
 @keyframes vertical {
