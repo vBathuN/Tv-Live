@@ -11,6 +11,8 @@ html { max-width: 720px; margin: 0 auto;}
 }
 
 body {
+  background: #cc8800;
+  background-image: url('https://host.rtbs.in/rtcs/3px-tile.png');
   important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
   color: #ffffff;
   display: -webkit-flex;
@@ -142,6 +144,20 @@ background:
     line-height: 1.8;
     word-spacing: -5px;
     margin: -50px -36px;
+}
+
+.rtcs-bg {
+    background-image: url('https://host.rtbs.in/media/rtbs-bg6.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(360deg);
+    vertical-align: top;
+    width: 720px;
+    height: 1280px;
+    margin-right: 0px;
+    position: absolute;
+    z-index: -11;
+    opacity: 0.9;
 }
 
 .rtcs {
