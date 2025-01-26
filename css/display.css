@@ -1,20 +1,18 @@
 .iframe{
 	width: 98%;
-	border:15px solid #fff;
-	outline-style:double;
 	outline-width:5px;
 	outline-color:#fc801c;
     box-shadow:0px 2px 3px rgba(0, 0, 0, 0.3);
 	margin:auto;
-	height:78vh;
+	height:82vh;
 }
 .btn{
 text-transform:uppercase;
-padding:15px 20px;
+padding:5px 5px;
 min-width:100px;
 min-width:auto;
 border:2px solid #dd6930;
-background:#fc801c;
+background:#0674cb;
 font-size:15px;
 color:#fff;
 font-weight:600;
@@ -26,9 +24,8 @@ cursor:pointer;
 }
 h2{
 	font-size:25px;
-  font-family: exo;
+        font-family: exo;
 	margin-left:1%;
-	border-left:2px solid #fc801c;
 	padding:5px 10px;
 	word-wrap: keep-all;
 	font-weight:700;
