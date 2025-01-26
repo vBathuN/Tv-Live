@@ -1,3 +1,7 @@
+body {
+ background-color: #778899;
+}
+
 .iframe{
 	width: 98%;
 	outline-width:5px;
