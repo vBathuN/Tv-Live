@@ -1,14 +1,12 @@
 body {
- background-color: #c9a050;
+ background-color: #000;
 }
 
 .iframe{
-	width: 98%;
-	outline-width:5px;
-	outline-color:#fc801c;
-    box-shadow:0px 2px 3px rgba(0, 0, 0, 0.3);
+	width: 100%;
 	margin:auto;
-	height:85vh;
+	height:90vh;
+        border:none;
 }
 
 .btn{
