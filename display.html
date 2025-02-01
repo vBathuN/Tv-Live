@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <script language=JavaScript>
-//Disable right mouse click Script
-
-var message="Function Disabled!";
-
-function clickIE4(){
-if (event.button==2){
-alert(message);
-return false;
- }
-}
-
-function clickNS4(e){
-if (document.layers||document.getElementById&&!document.all){
-if (e.which==2||e.which==3){
-alert(message);
-return false;
-}
-}
-}
-
-if (document.layers){
-document.captureEvents(Event.MOUSEDOWN);
-document.onmousedown=clickNS4;
-}
-else if (document.all&&!document.getElementById){
-document.onmousedown=clickIE4;
-}
-
-document.oncontextmenu=new Function("alert(message);return false")
-</script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0">
-  <title>RTBS Display Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTBS Tv App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="css/display.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="css/display.css">
 
 </head>
-<body>
+<body scroll="no" style="overflow: hidden">
 <!-- partial:index.partial.html -->
 <center>
-  <h2>RTBS Live | The Real Time Broadcast System</h2>
+  <iframe class='iframe' src='https://demo.rtbs.in/demoapp' allow='autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;usb;midi;geolocation;screen-wake-lock;'></iframe>
+</center>
+
+<div class="menu-wrapper">
+  <div class="menu-item">
+
+  <a class='link btn' href='https://demo.rtbs.in/demoapp'>HOME</a>
+  <a class='link btn' href='https://demo.rtbs.in/onlive'>Invite</a>
   <a class='link btn' href='https://tv.rtbs.in/tv'>RTBS Tv</a>
   <a class='link btn' href='https://tv.rtbs.in/news'>RTBS News</a>
   <a class='link btn' href='https://tv.rtbs.in/debate'>RTBS Debate</a>
-  <a class='link btn' href='https://mediatrial.rtbs.in/4'>Media Trial</a>
-  <a class='link btn' href='https://tv.rtbs.in'>RTBS.in</a>
-  <a class='link btn' href='https://demo.rtbs.in/onlive'>Live Camera</a>
-  <a class='link btn' href='https://www.rtbs.in'>RTBS Live</a>
-<br/>
-<hr/>
-  <iframe class='iframe' src='https://tv.rtbs.in/14'allow=' autoplay;camera;microphone;picture-in-picture;display-capture;midi;usb;geolocation;'></iframe>
-</center>
+  <a class='link btn' href='https://tv.rtbs.in/14'>RTBS Latest</a>
+  <a class='link btn' href='https://mediatrial.rtbs.in/portrait'>RTBS Tv</a>
+  <a class='link btn' href='https://tv.rtbs.in'>RTBS Whip Live</a>
+  <a class='link btn' href='https://www.rtbs.in'>RTBS.in</a>
+</div> 
+  <span class="pointer left-pointer dis">
+    <i class="fa fa-chevron-left"></i>
+  </span>
+  <span class="pointer right-pointer">
+    <i class="fa fa-chevron-right"></i>
+  </span>
+</div>
 <!-- partial -->
+  <script> 
+    <script>
+        const stopCam = () => {
+            const video = document.getElementById('video');
+            const stream = video.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+            video.srcObject = null;
+        };
+
+        const startCam = () => {
+            const video = document.getElementById('video');
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        video.srcObject = stream;
+                    })
+                    .catch(error => {
+                        console.error("Something went wrong!", error);
+                    });
+            } else {
+                console.log("getUserMedia not supported on your browser!");
+            }
+        };
+
+        $(document).ready(() => {
+            startCam();
+        });
+    </script>
+  </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script><script  src="js/display.js"></script>
 
 </body>
