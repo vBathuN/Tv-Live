@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RTBS TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/17.css">
+</head>
+<body>
+<div class="page-loader">
+	<div class="txt"><img src="https://host.rtbs.in/media/isat-glob.gif"><br>Connection Establishing...</div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+$(window).on('load',function(){
+	setTimeout(function(){ // allowing 3 secs to fade out loader
+	$('.page-loader').fadeOut('slow');
+	},3500);
+});
+</script>
+
+<div class='rtcs-bg'>
+</div>
+
+<div class='rtcs'>
+<!-- partial:index.partial.html -->
+<div class='main'>
+<div class='top-wrap'>
+<div class='logo'>
+<style>
+.logo {
+  float: right;
+  display: flex;
+}
+.waviy {
+  background: #c60203;
+  width: 274px;
+  height: 50px;
+  position: relative;
+  padding: 0px 0px 0px 7px;
+  
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -5px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  -webkit-text-stroke: 1.5px #c9a050;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+.live {
+  background: #19f radial-gradient(transparent, #02c);
+  position: relative;
+  padding: 0px 4px 2px 10px;
+  display: inline-block;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: #2a366a;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  
+  -webkit-text-stroke: 1px red;
+  text-transform: none;
+  animation: flip 2s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+</style>
+<div class="waviy">
+   <span style="--i:1">M</span>
+   <span style="--i:2">e</span>
+   <span style="--i:3">d</span>
+   <span style="--i:4">i</span>
+   <span style="letter-spacing: 0.1px;--i:5">a</span>
+
+   <div class="live"> <span style="color:#fff000;-webkit-text-stroke: 1px #c9a050;letter-spacing: 4px;">T</span><span style="letter-spacing: 4px;">r</span><span style="letter-spacing: 4px;">i</span><span style="letter-spacing: 4px;">a</span><span style="letter-spacing: 4px;">l</span></div>
+</div></div>
+</div>
+
+<div class='ticker-top'>
+<div class='textrss'>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div id='breakingnews'><span class='breakhead'><div id='adbreakingnews'></div>
+<style type="text/css">
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+         url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*<![CDATA[*/  
+
+/* CSS Breaking News */
+#breakingnews {
+text-align: center;
+background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
+border-radius: 15px;
+border: 2px solid #fff000;
+    width: 966px;
+    height: 50px ;
+    overflow: hidden;
+}
+
+#breakingnews .breakhead {
+    
+}
+#adbreakingnews li a {
+    important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal; font-size: 26px; word-spacing: -5px;
+    text-align: justify;
+    justify-content: center;
+    color: #fff; 
+    padding: 0 0px;
+    font-weight: 900;
+    text-decoration: none;
+    text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+    transition: all 0.5s ease-in-out; 
+}
+
+#adbreakingnews {
+    display: inline-block;
+    float: none;
+}
+
+#adbreakingnews ul,#adbreakingnews li {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+}
+
+/*]]></style>
+
+<script type='text/javascript'> 
+//<![CDATA[
+$(document).ready(function(){var e="https://feed.rtbs.in",t=2;$.ajax({url:""+e+"/feeds/posts/default/-/mtslidingtop?alt=json-in-script&max-results="+t,type:"get",dataType:"jsonp",success:function(e){function t(){$("#adbreakingnews li:first").slideUp(function(){$(this).appendTo($("#adbreakingnews ul")).slideDown()})}var n,r,s="",a=e.feed.entry;if(void 0!==a){s="<ul>";for(var l=0;l<a.length;l++){for(var o=0;o<a[l].link.length;o++)if("alternate"==a[l].link[o].rel){n=a[l].link[o].href;break}r=a[l].title.$t,s+='<li><a href="'+n+'" target="_blank">'+r+"</a></li>"}s+="</ul>",$("#adbreakingnews").html(s),setInterval(function(){t()},5e3)}else $("#adbreakingnews").html("<span>No result!</span>")},error:function(){$("#adbreakingnews").html("<strong>Loading error!</strong>")}})});
+//]]></script></span></div></div>
+</div></div>
+</div>
+
+<div class="rtcs-stream">
+<iframe class="rtcs-ad" width="293px" height="605px" src="https://www.rtbs.in/image-slider/slide670" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+
+<iframe class="rtcs-stream" width="100vh" height="599px" src="https://com.rtbs.in/?scene&room=RTCSliveDemo&scenetype=2&order=N&916&cover&exclude=Anchor&controls=0&cc&cv&transparency&margin=2&sl&fontsize=140&css=https://host.rtbs.in/rtcs/label-mt-debate.css" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="rtcs-rstream">
+<iframe class="rtcs-rstream" width="100vh" height="720px" src="https://com.rtbs.in/?scene=0&layout&remote&room=RTBSDemo&cv&transparency" allow="autoplay" frameborder="0" encrypted-media;></iframe>
+</div>
+
+<div class="rtcs-lt">
+<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtbs.in/" frameborder="0" encrypted-media;></iframe>
+</div>
+ 
+ <div class="watermark"><marquee width="100%" direction="right"><h1>www.rtbs.in</h1></marquee></div>
+ 
+  <div class='cur-event'>
+  </div>
+
+<div class='ticker'>
+  <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
+<style>
+.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; word-spacing: -5px; margin-top: 2px; }
+</style>
+<script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+var nMaxPosts =10;
+        var nWidth = 100;
+        var nScrollDelay = 0;
+        var sDirection = "left";
+        var sOpenLinkLocation = "N";
+        var sBulletChar = "&#x2727;"
+</script>
+<script type="text/javascript">
+function RecentPostsScrollerv2(json) {
+var sHeadLines;
+var sPostURL;
+var objPost;
+var sMoqueeHTMLStart;
+var sMoqueeHTMLEnd;
+var sPoweredBy;
+var sHeadlineTerminator;
+var sPostLinkLocation;
+  try {
+   sMoqueeHTMLStart = "\<MARQUEE behavior=\"scroll\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\" ";
+   if (nWidth) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"" + nWidth + "%\"";
+  } else {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"100%\"";
+  }
+  if (nScrollDelay) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " scrolldelay = \"" + nScrollDelay + "\"";
+  }
+  if (sDirection) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " direction = \"" + sDirection + "\"\>";
+    if (sDirection == "left" || sDirection == "right") {
+    sHeadlineTerminator = "&nbsp;&nbsp;";
+   } else {
+    sHeadlineTerminator = "\<br/\>";
+   }
+  }
+  if (sOpenLinkLocation == "N") {
+   sPostLinkLocation = " target= \"_blank\" ";
+  } else {
+   sPostLinkLocation = " ";
+  }
+  sMoqueeHTMLEnd = "\</MARQUEE\>"
+   sHeadLines = "";
+   for (var nFeedCounter = 0; nFeedCounter < nMaxPosts; nFeedCounter++) {
+   var objPost = json.feed.entry[nFeedCounter];
+    if (nFeedCounter == json.feed.entry.length) break;
+    for (var nCounter = 0; nCounter < objPost.link.length; nCounter++) {
+    if (objPost.link[nCounter].rel == 'alternate') {
+     sPostURL = objPost.link[nCounter].href;
+     break;
+    }
+   }
+   sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
+sHeadlineTerminator;
+  }
+   if (sDirection == "right") {
+   sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
+  } else if (sDirection == "right") {
+   sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
+  } else if (sDirection == "up") {
+   sHeadLines = sHeadLines + "\<br/\>" + sHeadLines;
+  }
+  document.write(sMoqueeHTMLStart + sHeadLines + sMoqueeHTMLEnd)
+} catch (exception) {
+  alert(exception);
+}
+}</script>
+<script src="https://feed.rtbs.in/feeds/posts/default/-/scrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
+type="text/javascript"></script>
+      
+    <script src="https://host.rtbs.in/rtcs/horizontal-panel-marquee.js"></script>
+     <script type="text/javascript">
+    $(window).load( function() {
+      $('#panel').hpanel({
+        duration: 80000
+      });
+    });
+    </script>
+<div class='stock-info'>
+<div class="breaking_news">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+</style>
+  <div class="label ripple">Breaking News</div>
+</div></div>
+
+</body>
+</html>
