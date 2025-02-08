@@ -197,7 +197,7 @@ body {
 .rtcs-stream {
     display: inline-block;
     background: #c60203;
-    width: 995px;
+    width: 992px;
     height: 599px;
     margin-bottom: -30px;
     position: absolute;
@@ -206,10 +206,11 @@ body {
 }
 
 .rtcs-ad {
-    width: 293px;
-    height: 605px;
-    margin-top: -8px;
-    margin-left: -293px;
+    scale: .9;
+    width: 330px;
+    height: 670px;
+    margin-top: -41px;
+    margin-left: -312px;
     position: absolute;
     vertical-align: middle;
     z-index: 2;
