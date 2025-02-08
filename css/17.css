@@ -206,14 +206,19 @@ body {
 }
 
 .rtcs-ad {
-    scale: .9;
     width: 330px;
     height: 670px;
-    margin-top: -41px;
-    margin-left: -312px;
+    margin-top: -7px;
+    margin-left: -295px;
     position: absolute;
     vertical-align: middle;
     z-index: 2;
+        -moz-transform: scale(0.9);
+        -moz-transform-origin: 0 0;
+        -o-transform: scale(0.9);
+        -o-transform-origin: 0 0;
+        -webkit-transform: scale(0.9);
+        -webkit-transform-origin: 0 0;
 }
 
 .rtcs-anchor {
