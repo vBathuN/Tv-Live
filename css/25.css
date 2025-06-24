@@ -165,11 +165,11 @@ body {
 }
 
 .rtcs-bg {
-    background: transparent;
+    background: #19f radial-gradient(transparent, #02c);
     vertical-align: top;
     width: 1280px;
-    height: 720px;
-    margin-right: 0px;
+    height: 75px;
+    margin-bottom: 645px;
     position: absolute;
     z-index: -11;
     opacity: 0.9;
@@ -207,7 +207,7 @@ body {
 .rtcs-ad {
     width: 330px;
     height: 670px;
-    margin-top: -7px;
+    margin-top: -6px;
     margin-left: -295px;
     position: absolute;
     vertical-align: middle;
