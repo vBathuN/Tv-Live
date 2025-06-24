@@ -276,10 +276,11 @@ body {
 }
 
 .location {
+  opacity: .9;
   position: absolute;
   z-index: 4;
-  margin-top: -475px;
-  margin-right: 1040px;
+  margin-top: -515px;
+  margin-right: 735px;
   text-shadow: 0 0 .3em #000;
 }
 
