@@ -484,6 +484,201 @@ function RTCSliveTicker(t) {
   <div class='cur-event'>
   </div>
 
+<div class="textslider">
+<style>
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+#slider,#sliderContent,#slider img{
+width:900px;  
+height:100px; /* Chiều cao slideshow */
+position:absolute;
+}
+#sliderContent {
+bottom:110px;
+left:350px;
+margin:0 0;
+padding:0 0;
+overflow: hidden;
+}
+#slider img {
+border:none;
+padding:10 0;
+margin:0 0;
+height:auto;
+outline:none;
+display:none;
+}
+.sliderImage {
+list-style:none;
+margin:0 0;
+padding:0 0;
+display:none;
+}
+.sliderImage span {
+background-color:#c60203;
+border-radius: 20px;
+opacity:.9;
+filter:alpha(opacity=90);
+left:0;
+right:0;
+bottom:0;
+text-align: center;
+color:white;
+padding:12px 10px 2px;
+display:none;
+overflow: hidden;
+}
+.sliderImage span a {
+font-size:24px;
+color:white;
+text-decoration:none;
+important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal; word-spacing: -5px;
+text-align: center;
+line-height: 1.8;
+text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+overflow: hidden;
+}
+
+</style>
+<script>
+slideOpenNewTab = false,
+idMode          = true,
+slidebyLabels   = true,
+slideLabelName  = "txtslide1",
+thumbWidth      = 420,
+pBlank          = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1DBQz7KbG9ycllCVxo8gAW5jB2qzUFZp-bIXc8t55QxC70eugjthx2OjzDxyEYLp0ObVlWGITcypy7oIUyO7y1AMCAu5RlUei6a6V7HWoW5Vl-PzPUYBNRrq7cXMbafC4bsWCz0JO6fRCzejdKC1EynC5MsaCQLTewDJ3r1cMVAp95eeD2L8f3kKzZu4/s500/20241120_144504.png",//Ảnh đại diện khi bài ko có ảnh
+numposts_g      = 4,//Số bài cần trình chiếu
+home_page       = "https://feed.rtbs.in";//URL Blog
+
+$(window).bind('load', function() {
+$('#slider').s3Slider({
+timeOut:5000
+});
+});
+
+
+(function($) {
+    $.fn.s3Slider = function(vars) {
+        var element = this;
+        var timeOut = (vars.timeOut != undefined) ? vars.timeOut : 10000;
+        var current = null;
+        var timeOutFn = null;
+        var faderStat = true;
+        var mOver = false;
+        var items = $("#" + element[0].id + "Content ." + element[0].id + "Image")
+        var itemsSpan = $("#" + element[0].id + "Content ." + element[0].id + "Image span");
+        items.each(function(i) {
+            $(items[i]).mouseover(function() {
+                mOver = true;
+            });
+            $(items[i]).mouseout(function() {
+                mOver = false;
+
+                fadeElement(true);
+            });
+        });
+        var fadeElement = function(isMouseOut) {
+            var thisTimeOut = (isMouseOut) ? (timeOut / 2) : timeOut;
+            thisTimeOut = (faderStat) ? 10 : thisTimeOut;
+            if (items.length > 0) {
+                timeOutFn = setTimeout(makeSlider, thisTimeOut);
+            } else {
+                console.log("Poof..");
+            }
+        }
+        var makeSlider = function() {
+            current = (current != null) ? current : items[(items.length - 1)];
+            var currNo = jQuery.inArray(current, items) + 1
+
+            currNo = (currNo == items.length) ? 0 : (currNo - 1);
+            var newMargin = $(element).width() * currNo;
+            if (faderStat == true) {
+                if (!mOver) {
+                    $(items[currNo]).fadeIn((timeOut / 6), function() {
+                        if ($(itemsSpan[currNo]).css('bottom') == 0) {
+                            $(itemsSpan[currNo]).slideUp((timeOut / 6), function() {
+                                faderStat = false;
+                                current = items[currNo];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        } else {
+                            $(itemsSpan[currNo]).slideDown((timeOut / 6), function() {
+                                faderStat = false;
+                                current = items[currNo];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        }
+                    });
+                }
+            } else {
+                if (!mOver) {
+                    if ($(itemsSpan[currNo]).css('bottom') == 0) {
+                        $(itemsSpan[currNo]).slideDown((timeOut / 6), function() {
+                            $(items[currNo]).fadeOut((timeOut / 6), function() {
+                                faderStat = true;
+                                current = items[(currNo + 1)];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        });
+                    } else {
+                        $(itemsSpan[currNo]).slideUp((timeOut / 6), function() {
+                            $(items[currNo]).fadeOut((timeOut / 6), function() {
+                                faderStat = true;
+                                current = items[(currNo + 1)];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        });
+                    }
+                }
+            }
+        }
+        makeSlider();
+    };
+})(jQuery);
+
+function s3SliderGallery(json) {
+document.write('<div id="slider"><ul id="sliderContent">');
+for (var i = 0; i < numposts_g; i++) {
+var entry = json.feed.entry[i],
+title = entry.title.$t,
+date = entry.published.$t,
+link, months, cm, img;
+if (i == entry.length) break;
+for (var j = 0, jen = entry.link.length; j < jen; j++) {
+if (entry.link[j].rel == 'alternate') {
+link = entry.link[j].href;
+break;
+}
+}
+for (var k = 0, ken = entry.link.length; k < ken; k++) {
+if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+cm = entry.link[k].title.split(' ')[0];
+break;
+}
+}
+document.write('<li class="sliderImage"><a href="' + link + '"' + (slideOpenNewTab ? ' target="_blank"' : '') + '><img src="' + img + '" alt="' + title + '" class="recent-thumb"></a><span><a href="' + link + '"' + (slideOpenNewTab ? ' target="_blank"' : '') + ' class="recent-link">' + title + '</a></span></li>');
+}
+document.write('</ul></div>');
+}
+document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/\/$/,"") + "/feeds/posts/default/" + (slidebyLabels ? '-/' + slideLabelName : '') + "?max-results=" + numposts_g + "&orderby=published&alt=json-in-script&callback=s3SliderGallery'><\/scr" + "ipt>");
+</script>
+</div>
+
 <div class='ticker'>
   <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
 <style>
