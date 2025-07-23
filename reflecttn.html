@@ -97,133 +97,81 @@ $(window).on('load',function(){
 
 <div class='ticker-top'>
 <div class='textrss'>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div id='breakingnews'><span class='breakhead'><div id='adbreakingnews'></div>
 <style type="text/css">
-        @font-face {
-            font-family: 'Tamil039';
-            src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
-                url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
-            font-weight: bold;
-            font-style: normal;
-            font-display: swap;
-        }
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+         url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
 
-        #breakingnews {
-            text-align: center;
-            background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
-            border-radius: 15px;
-            border: 2px solid #fff000;
-            width: 982px;
-            height: 50px ;
-            overflow: hidden;
+/*<![CDATA[*/  
 
-        }
+/* CSS Breaking News */
+#breakingnews {
+    text-align: center;
+    background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
+    border-radius: 15px;
+    border: 2px solid #fff000;
+    width: 982px;
+    height: 50px ;
+    overflow: hidden;
+  
+}
 
-        #adbreakingnews li a {
-            font-family: 'Tamil039';
-            font-weight: bold;
-            font-style: normal;
-            font-size: 26px;
-            word-spacing: -5px;
-            text-align: justify;
-            justify-content: center;
-            color: #fff;
-            padding: 0 0px;
-            font-weight: 900;
-            transition: all 1.5s ease-in-out;
-            text-decoration: none;
-            text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
-        }
+#breakingnews .breakhead {
+    
+}
+#adbreakingnews li a {
+    important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal; font-size: 26px;
+    text-align: justify;
+    justify-content: center;
+    color: #fff;
+    word-spacing: -5px; 
+    padding: 0 0px;
+    font-weight: 900;
+    transition: all 0.5s ease-in-out;
+    text-decoration: none;
+    text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+    animation:blink 1.5s linear infinite alternate 1.5s; 
+}
 
-        #adbreakingnews {
-            float: none;
-            margin-right: 0px;
-            margin-top: 0px;
-        }
-
-        #adbreakingnews ul,
-        #adbreakingnews li {
-            list-style: none;
-            margin: 0;
-            padding: 0px;
-        }
-
-
-        .af_news {
-            height: 0px;
-            overflow: hidden;
-            transition: height 0.5s ease-in-out;
-        }
-
-        .af_news.active {
-            height: 400px;
-        }
-    </style>
-
-<div id="breakingnews">
-        <div id='adbreakingnews'></div>
-    </div>
-
-<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var feedUrl = "https://reflecttn.blogspot.com";
-            var maxResults = 5;
-
-            var script = document.createElement("script");
-            script.src = feedUrl + "/feeds/posts/default/-/slidingtop?alt=json-in-script&max-results=" + maxResults + "&callback=processFeed";
-            document.body.appendChild(script);
-        });
+@keyframes blink {
+  80% {
+    color:white;
+  }
+  90% {
+    color:red;
+  }
+  100% {
+    color:white;
+  }
+}
 
 
-        function processFeed(response) {
-            var newsContainer = document.getElementById("adbreakingnews");
-            var newsList = "";
-            var entries = response.feed.entry;
-            var len = entries.length;
+#adbreakingnews {
+    float: none;
+    margin-right: 0px;
+    margin-top: 3px;
+}
 
-            if (entries !== undefined) {
-                newsList = "<ul>";
+#adbreakingnews ul,#adbreakingnews li {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+}
 
-                entries.forEach(function(entry) {
-                    var postTitle = entry.title.$t;
-                    var postLink = "";
-                    entry.link.forEach(function(link) {
-                        if (link.rel === "alternate") {
-                            postLink = link.href;
-                        }
-                    });
+/*]]></style>
 
-                    newsList += '<li class="af_news"><a href="' + postLink + '" target="_blank">' + postTitle + "</a></li>";
-                });
-                newsList += "</ul>";
-
-                newsContainer.innerHTML = newsList;
-
-                let af_now = 0;
-                const af_boxes = document.querySelectorAll(".af_news");
-
-                if (af_boxes.length > 0) {
-                    af_boxes[af_now].classList.add("active");
-
-                    setInterval(() => {
-                        af_boxes[af_now].classList.remove("active");
-
-                        af_now = (af_now + 1) % af_boxes.length;
-
-                        setTimeout(() => {
-                            af_boxes[af_now].classList.add("active");
-                        }, 500);
-                    }, 4000);
-                } else {
-                    console.warn("No elements found with class 'af_news'");
-                }
-
-            } else {
-                newsContainer.innerHTML = "<span>No result!</span>";
-            }
-        }
-    </script>
-
-</div></div></div></div>
+<script type='text/javascript'> 
+//<![CDATA[
+$(document).ready(function(){var e="https://reflecttn.blogspot.com",t=1;$.ajax({url:""+e+"/feeds/posts/default/-/slidingtop?alt=json-in-script&max-results="+t,type:"get",dataType:"jsonp",success:function(e){function t(){$("#adbreakingnews li:first").slideUp(function(){$(this).appendTo($("#adbreakingnews ul")).slideDown()})}var n,r,s="",a=e.feed.entry;if(void 0!==a){s="<ul>";for(var l=0;l<a.length;l++){for(var o=0;o<a[l].link.length;o++)if("alternate"==a[l].link[o].rel){n=a[l].link[o].href;break}r=a[l].title.$t,s+='<li><a href="'+n+'" target="_blank">'+r+"</a></li>"}s+="</ul>",$("#adbreakingnews").html(s),setInterval(function(){t()},5e3)}else $("#adbreakingnews").html("<span>No result!</span>")},error:function(){$("#adbreakingnews").html("<strong>Loading error!</strong>")}})});
+//]]></script></span></div></div>	
+</div></div></div>
 
 <div class="rtcs-stream">
 <iframe class="rtcs-ad" width="320px" height="670px" src="https://www.rtbs.in/image-slider/slide670" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
