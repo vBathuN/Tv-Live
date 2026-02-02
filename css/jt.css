@@ -231,10 +231,10 @@ body {
 }
 
 .rtcs-rstream {
-    width: 992px;
-    height: 558px;
-    margin-bottom: 16px;
-    margin-right: 0px;
+    width: 1280px;
+    height: 720px;
+    margin-bottom: 0px;
+    margin-right: -120px;
     position: absolute;
     vertical-align: middle;
     z-index: -7;
