@@ -205,10 +205,10 @@ body {
 }
 
 .rtcs-ad {
-    width: 1290px;
+    width: 1280px;
     height: 670px;
     margin-top: -6px;
-    margin-left: -295px;
+    margin-left: -160px;
     position: absolute;
     vertical-align: middle;
     z-index: 2;
