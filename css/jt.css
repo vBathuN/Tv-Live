@@ -233,11 +233,11 @@ body {
 .rtcs-rstream {
     width: 1280px;
     height: 720px;
-    margin-bottom: 0px;
-    margin-right: -120px;
+    margin-bottom: -137px;
+    margin-right: -243px;
     position: absolute;
     vertical-align: middle;
-    z-index: -7;
+    z-index: -1;
     -webkit-transform: scale(0.9);
     -webkit-transform-origin: 0 0;
 }
