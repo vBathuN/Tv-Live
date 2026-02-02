@@ -202,8 +202,6 @@ body {
     position: absolute;
     vertical-align: middle;
     z-index: -8;
-    -webkit-transform: scale(0.9);
-    -webkit-transform-origin: 0 0;
 }
 
 .rtcs-ad {
@@ -240,6 +238,8 @@ body {
     position: absolute;
     vertical-align: middle;
     z-index: -7;
+    -webkit-transform: scale(0.9);
+    -webkit-transform-origin: 0 0;
 }
 
 .rtcs-lt {
