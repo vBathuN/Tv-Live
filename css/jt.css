@@ -208,7 +208,7 @@ body {
     width: 1280px;
     height: 670px;
     margin-top: -6px;
-    margin-left: -160px;
+    margin-left: -295px;
     position: absolute;
     vertical-align: middle;
     z-index: 2;
@@ -238,6 +238,8 @@ body {
     position: absolute;
     vertical-align: middle;
     z-index: -7;
+    -webkit-transform: scale(0.9);
+    -webkit-transform-origin: 0 0;
 }
 
 .rtcs-lt {
