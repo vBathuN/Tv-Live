@@ -1,0 +1,360 @@
+/* Depends on length of ticker text */
+html { max-width: 1280px; margin: 0 auto;}
+
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+  background: transparent;
+  important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+  color: #ffffff;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: flex-end;
+  height: 100vh;
+  overflow:hidden;
+  margin: 0;
+  justify-content:center;
+}
+
+.main {
+  display: -webkit-flex;
+  justify-content: flex-end;
+}
+
+.title {
+  position: absolute;
+  width: 320px;
+  margin-left: 0px;
+  margin-top: -10px;
+  animation: huechange linear infinite 2s;
+}
+
+.cur-event {
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 75%;
+  height: 70px;
+  margin-top: 599px;
+}
+
+.cur-event .top, .cur-event .glow, .cur-event .bttm {
+  position: absolute;
+  right: 0;
+}
+.cur-event .top {
+  background: radial-gradient(#fff, transparent 60%);
+  top: 0;
+  height: 5px;
+  width: 95%;
+}
+
+.ticker {
+  background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
+  background-image: url('https://host.rtbs.in/media/tv-bg.gif');
+  background-size:100% 100%;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+.ticker .stock-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 50px;
+}
+
+.breaking_news {
+  float:right;
+  width:100%;
+  font-family: "Agdasima", sans-serif;
+  font-size: 40px;
+  margin-top: 0px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  letter-spacing: 2px;
+}
+
+.label {
+  float:right;
+  padding:1.4px 7px 7px 10px;
+  background:#c60203;
+  color:#FFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  
+}
+
+/* Ripple magic */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 5px;
+  background: rgba(255, 255, 255, .5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+.ripple::after {
+  animation: ripple 1.5s ease-out  infinite;
+}
+
+.textrss {
+    position: absolute;
+    z-index: 1;
+    margin: 0px 0px;
+}
+
+.top-wrap {
+  font-weight: 600;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  width: 96.9%;
+  height: 60px;
+  margin-top: 11px;
+  margin-right: 10px;
+  z-index: 15;
+}
+
+.ticker-top {
+  font-weight: 600;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  width: 96.9%;
+  height: 60px;
+  margin-top: 10px;
+  margin-right: 31px;
+  z-index: 15;
+}
+
+.rtcs-bg {
+    background: #19f radial-gradient(transparent, #02c);
+    vertical-align: top;
+    width: 1280px;
+    height: 75px;
+    margin-bottom: 645px;
+    position: absolute;
+    z-index: -11;
+    opacity: 0.9;
+}
+
+.rtcs {
+    vertical-align: top;
+    width: 1280px;
+    height: 720px;
+    margin-right: 0px;
+    position: absolute;
+    z-index: 10;
+}
+
+.rtcs-streambg {
+    width: 1280px;
+    height: 670px;
+    margin-bottom: 50px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: -10;
+}
+
+.rtcs-stream {
+    display: inline-block;
+    background: transparent;
+    width: 992px;
+    height: 605px;
+    margin-bottom: -30px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: -8;
+}
+
+.rtcs-ad {
+    width: 1290px;
+    height: 670px;
+    margin-top: -6px;
+    margin-left: -295px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: 2;
+        -moz-transform: scale(0.9);
+        -moz-transform-origin: 0 0;
+        -o-transform: scale(0.9);
+        -o-transform-origin: 0 0;
+        -webkit-transform: scale(0.9);
+        -webkit-transform-origin: 0 0;
+}
+
+.rtcs-anchor {
+    width: 220px;
+    height: 320px;
+    margin-top: 20px;
+    padding-right: 0px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: -11;
+}
+
+.rtcs-rstream {
+    width: 992px;
+    height: 558px;
+    margin-bottom: 16px;
+    margin-right: 0px;
+    position: absolute;
+    vertical-align: middle;
+    z-index: -7;
+}
+
+.rtcs-lt {
+    vertical-align: top;
+    width: 1280px;
+    height: 720px;
+    margin-top: 0px;
+    position: absolute;
+    z-index: 100;
+}
+
+.social-logo {
+    z-index: 5;
+    width: 45px;
+    height: 45px;
+    padding-right: 870px;
+    margin-bottom: 640px;
+    position: absolute;  
+}
+
+.watermark {
+  opacity: .3;
+  position: absolute;
+  width: 992px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0px 0px ;
+  margin-top: 180px;
+  line-height: 1.5;
+  text-align: left;
+  text-transform:none;
+  letter-spacing: 2px;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 10px;
+  h1 {text-shadow: 0 0 .3em #000;}
+}
+
+.location {
+  opacity: .9;
+  position: absolute;
+  z-index: 4;
+  margin-top: -485px;
+  margin-right: 765px;
+  text-shadow: 0 0 .3em #000;
+}
+
+.social-icon {
+  display: inline-block;
+  position: absolute;
+  margin-left: -120px;
+  margin-top: 27px;
+}
+
+.flip-text {
+  width: 820px;
+  height: 50px;
+  position: absolute;
+  letter-spacing: 1.5px;
+  font-family: "Agdasima", sans-serif;
+  text-transform: none;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  margin-left: 0px;
+  margin-top: 0px;
+  opacity: 0.9;
+}
+
+@keyframes vertical {
+  0% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 0;
+    -webkit-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+  }
+  10% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  38% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  45% {
+    opacity: 0;
+    -webkit-transform: translateY(-90px);
+    transform: translateY(-90px);
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* PRELOADER CSS */
+.page-loader {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0%;
+  background: #cc8800;
+  background-image: url('https://host.rtbs.in/rtcs/3px-tile.png');
+  z-index: 100;
+}
+.page-loader .txt {
+  color: #c60203;
+  text-align: center;
+  top: 22%;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1.5;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+}
