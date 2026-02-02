@@ -237,7 +237,7 @@ body {
     margin-right: -120px;
     position: absolute;
     vertical-align: middle;
-    z-index: -20;
+    z-index: -19;
     -webkit-transform: scale(0.92);
     -webkit-transform-origin: 0 0;
 }
