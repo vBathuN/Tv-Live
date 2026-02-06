@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* அதே ஸ்டைல் - மாற்றம் இல்லை */
   body, html {
     margin: 0;
     padding: 0;
@@ -12,16 +11,21 @@
     background-color: transparent; 
   }
 
+  /* கன்டெய்னர்: திரையின் மையத்தில் பெட்டியை வைக்கும் */
   .news-wrapper {
     position: absolute;
-    bottom: 20px;
+    top: 50%;
     left: 0;
     width: 100%;
+    transform: translateY(-50%); /* செங்குத்தாக மையப்படுத்துதல் */
     display: flex;
-    justify-content: flex-start;
-    padding-left: 0;
+    justify-content: center; /* பெட்டியையும் திரையின் நடுவில் வைக்கும் */
+    padding: 0;
+    z-index: 9999;
+    pointer-events: none;
   }
 
+  /* செய்திப் பெட்டி */
   .news-box {
     background-color: rgba(0, 0, 0, 0.9);
     color: #ffffff;
@@ -29,48 +33,48 @@
     font-size: 24px;
     font-weight: bold;
     line-height: 1.5;
-    padding: 15px 25px;
-    display: inline-block; 
-    max-width: 90%;
-    border-left: 8px solid #cc0000;
-    border-radius: 0 10px 10px 0;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    padding: 20px 30px;
+    
+    /* --- மாற்றம் செய்யப்பட்ட பகுதி --- */
+    text-align: center; /* எழுத்துக்களை மையப்படுத்துதல் */
+    display: flex;
+    align-items: center; 
+    justify-content: center; /* Flex-box உள்ளேயும் மையப்படுத்துதல் */
+    /* ------------------------------ */
+
+    max-width: 80%; /* அதிகபட்ச அகலம் */
+    
+    border-left: 8px solid #cc0000;  /* இடது பக்கம் சிவப்பு கோடு */
+    border-right: 8px solid #cc0000; /* வலது பக்கமும் சிவப்பு கோடு (அழகுக்காக) */
+    border-radius: 15px; /* நான்கு பக்கமும் வளைவு */
+    
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.6);
+    
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   .news-box.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 </style>
 </head>
 <body>
 
 <div class="news-wrapper">
-  <div id="news-content" class="news-box">Updates Loading...</div>
+  <div id="news-content" class="news-box">Loading...</div>
 </div>
 
 <script>
-  // --- முக்கிய அமைப்புகள் (Settings) ---
-  
-  // 1. உங்கள் பிளாக் முகவரி
+  // --- அமைப்புகள் ---
   var blogDomain = "https://feed.rtbs.in"; 
-
-  // 2. எந்த லேபிள் உள்ள செய்திகள் மட்டும் வர வேண்டும்? 
-  // (இங்கு 'Ticker' என்று இருந்தால், உங்கள் பிளாக்கில் 'Ticker' என லேபிள் இட்ட பதிவுகள் மட்டும் வரும்)
   var filterLabel = "jscrolling"; 
-  
-  var displayTime = 6000; // செய்தி நிற்கும் நேரம்
-  var fadeSpeed = 800;    // அனிமேஷன் வேகம்
+  var displayTime = 6000; 
+  var fadeSpeed = 500;    
 
-  // -----------------------------
-
-  // URL-ல் லேபிளை இணைத்தல் (முக்கியமான மாற்றம் இங்கே தான் உள்ளது)
-  // வடிவம்: /feeds/posts/default/-/[LabelName]
   var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
-  
   var newsItems = [];
   var currentIndex = 0;
 
@@ -82,8 +86,9 @@
       }
       startTicker();
     } else {
-      document.getElementById("news-content").innerHTML = "No news found with label: " + filterLabel;
-      document.getElementById("news-content").classList.add("active");
+      var box = document.getElementById("news-content");
+      box.innerHTML = "No news found with label: " + filterLabel;
+      box.classList.add("active");
     }
   }
 
