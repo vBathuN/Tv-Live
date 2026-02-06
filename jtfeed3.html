@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <style>
+  /* எழுத்துருக்கள் */
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
-
+  
   @font-face {
     font-family: 'Tamil039';
     src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
@@ -22,54 +23,138 @@
     background-color: transparent; 
   }
 
-  /* மையப்படுத்தும் கன்டெய்னர் */
-  .news-wrapper {
+  /* --- 1. டிக்கர் பெட்டியின் அமைப்பு (Red Box) --- */
+  .ticker-container {
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  /* சிவப்பு பெட்டி (நிலையானது) */
-  .news-box {
-    background-color: #c60203;
-    color: #ffffff;
-    font-family: 'Roboto', 'Tamil039', sans-serif; 
-    font-size: 26px; 
-    font-weight: bold;
-    line-height: 1.5; 
+    bottom: 30px; /* திரையின் கீழே இருக்க */
+    left: 50%;
+    transform: translateX(-50%); /* மையப்படுத்த */
     
-    /* பெட்டியின் அளவு */
-    width: auto;
-    min-width: 400px;
-    max-width: 85%;
-    height: 120px; /* உயரத்தை நிலையாக வைத்துள்ளேன், அப்போதுதான் Swipe தெளிவாகத் தெரியும் */
+    width: 80%;       /* அகலம் */
+    max-width: 900px;
+    height: 110px;    /* 2 வரிகள் தெரியச் சரியான உயரம் */
     
-    border: 6px solid #cc0000; 
-    border-radius: 15px;      
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
+    background-color: #c60203; /* சிவப்பு நிறம் */
+    border: 5px solid #e60000;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.6);
     
-    /* மிக முக்கியம்: பெட்டியை விட்டு வெளியே செல்லும் எழுத்துக்களை மறைக்க */
+    /* பெட்டியை விட்டு எழுத்து வெளியே போனால் மறைக்க */
     overflow: hidden; 
-    position: relative;
+    
+    /* எழுத்துக்களை மையப்படுத்த */
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    /* இது எப்போதும் தெரியும் */
+    opacity: 1; 
+    z-index: 9999;
   }
 
-  /* எழுத்துக்களுக்கான பொதுவான ஸ்டைல் */
+  /* --- 2. உள்ளே இருக்கும் எழுத்து (Text Item) --- */
   .news-item {
     position: absolute;
-    width: 90%;
+    width: 95%;
     text-align: center;
-    padding: 0 10px;
+    color: #ffffff;
     
-    /* வரிகள் அதிகம் இருந்தால் கட் செய்ய */
+    font-family: 'Roboto', 'Tamil039', sans-serif;
+    font-size: 28px;   /* எழுத்து அளவு */
+    line-height: 1.4;  /* வரி இடைவெளி */
+    font-weight: bold;
+    
+    /* அதிகபட்சம் 2 வரிகள் மட்டும் தெரிய */
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    /* அனிமேஷனுக்கான ஆரம்ப நிலை */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  }
+
+  /* நிலை: மேலே மறைந்திருக்கிறது (New) */
+  .news-item.enter-top {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  /* நிலை: திரையில் தெரிகிறது (Active) */
+  .news-item.active {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+
+  /* நிலை: கீழே போய்விட்டது (Exit) */
+  .news-item.exit-bottom {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="ticker-container">
+    <div id="slot-1" class="news-item active">Loading News...</div>
+    <div id="slot-2" class="news-item enter-top"></div>
+  </div>
+
+<script>
+  // --- அமைப்புகள் ---
+  var blogDomain = "https://feed.rtbs.in"; 
+  var filterLabel = "jflash"; 
+  var displayTime = 5000; // செய்தி நிற்கும் நேரம் (5 வினாடி)
+  
+  var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
+  var newsItems = [];
+  var currentIndex = 0;
+  
+  // ஸ்லாட் மாறிகள்
+  var activeSlot = document.getElementById("slot-1");
+  var nextSlot = document.getElementById("slot-2");
+
+  function fetchNews(json) {
+    if (json.feed && json.feed.entry) {
+      var entry = json.feed.entry;
+      for (var i = 0; i < entry.length; i++) {
+        newsItems.push(entry[i].title.$t);
+      }
+      
+      // பழைய செய்தி முதலில் வர
+      newsItems.reverse(); 
+
+      // முதல் செய்தியை உடனே காட்டு
+      if(newsItems.length > 0) {
+         activeSlot.innerHTML = newsItems[0];
+         currentIndex = 1; // அடுத்த செய்திக்குத் தயார்
+         setInterval(cycleNews, displayTime);
+      }
+      
+    } else {
+      activeSlot.innerHTML = "செய்திகள் இல்லை!";
+    }
+  }
+
+  function cycleNews() {
+    if (newsItems.length === 0) return;
+
+    // 1. அடுத்த செய்தியை 'nextSlot'-ல் நிரப்பு (அது மேலே காத்திருக்கிறது)
+    var nextText = newsItems[currentIndex];
+    nextSlot.innerHTML = nextText;
+
+    // 2. அனிமேஷன் (Swipe Down)
+    // தற்போது உள்ளதை கீழே தள்ளு
+    activeSlot.classList.remove("active");
+    activeSlot.classList.add("exit-bottom");
+
+    // மேலே உள்ளதை உள்ளே இழு
+    nextSlot.classList.remove("enter-top");
+    nextSlot.classList.add("active");
+
+    // 3. அடுத்த சுழற்சிக்காக Reset செய்தல்
+    setTimeout(function() {
+      // கீழே போனதை மீண்டும் மேலே கொண்டு போய் வை (சத்தம் இல்லாமல்)
+      activeSlot.classList.remove("exit-bottom");
+      activeSlot.classList.add
