@@ -239,8 +239,6 @@ body {
     position: absolute;
     vertical-align: middle;
     z-index: -19;
-    -webkit-transform: scale(0.92);
-    -webkit-transform-origin: 0 0;
 }
 
 .rtcs-lt {
