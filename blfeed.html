@@ -3,123 +3,117 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* Ticker Container Style */
-  .news-container {
-    background-color: #000000; /* கருப்பு பின்னணி */
-    width: 100%;
-    height: 50px; /* உயரத்தை தேவைக்கேற்ப மாற்றலாம் */
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    border-top: 2px solid #cc0000; /* மேலே சிவப்பு கோடு - அழகுக்காக */
-    font-family: 'Arial', sans-serif;
-  }
-
-  /* Breaking News Label (Optional) */
-  .label {
-    background-color: #cc0000;
-    color: white;
-    padding: 0 15px;
+  body, html {
+    margin: 0;
+    padding: 0;
     height: 100%;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 18px;
-    z-index: 2;
-    text-transform: uppercase;
-  }
-
-  /* The Ticker Text Area */
-  #ticker-display {
-    flex-grow: 1;
-    color: #ffffff; /* வெள்ளை எழுத்து */
-    font-size: 20px;
-    font-weight: 500;
-    padding-left: 20px;
-    opacity: 0; /* ஆரம்பத்தில் மறைந்திருக்கும் */
-    transition: opacity 1s ease-in-out; /* Fade Effect Magic */
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    background-color: transparent; 
   }
 
-  /* Fade Classes */
-  .fade-in {
-    opacity: 1 !important;
+  /* --- மாற்றம் செய்யப்பட்ட பகுதி --- */
+  .news-wrapper {
+    position: absolute;
+    top: 50%;  /* திரையின் மேலிருந்து 50% தூரத்தில் */
+    left: 0;
+    width: 100%;
+    
+    /* இதுதான் மேஜிக்: பாக்ஸை செங்குத்தாக (Vertically) சரியாக மையப்படுத்தும் */
+    transform: translateY(-50%); 
+    
+    display: flex;
+    /* justify-content: center;  <-- இதைச் சேர்த்தால் செய்தி திரையின் நடுவில் (Center) வரும் */
+    justify-content: flex-start; /* இடது ஓரத்தில் வேண்டும் என்றால் இது இருக்கட்டும் */
+    
+    padding-left: 0;
+    z-index: 9999;
+    pointer-events: none;
   }
-  
-  .fade-out {
-    opacity: 0 !important;
+
+  .news-box {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 15px 25px;
+    
+    /* பாக்ஸின் அமைப்பை Flex ஆக மாற்றினால் உள்ளே இருக்கும் எழுத்துக்கள் எப்போதும் மையத்தில் இருக்கும் */
+    display: flex;
+    align-items: center; 
+    
+    max-width: 90%;
+    
+    /* இடது பார்டர் */
+    border-left: 8px solid #cc0000;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    
+    opacity: 0;
+    /* அனிமேஷன் */
+    transform: scale(0.9); /* ஆரம்பத்தில் சிறிது சிறிதாக இருக்கும் */
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* Active Class - இது சேரும்போதுதான் பெட்டி தெரியும் */
+  .news-box.active {
+    opacity: 1;
+    transform: scale(1); /* இயல்பு நிலைக்கு வரும் */
   }
 </style>
 </head>
 <body>
 
-<div class="news-container">
-  <div class="label">BREAKING NEWS</div>
-  <div id="ticker-display">செய்திகளை ஏற்றுகிறது...</div>
+<div class="news-wrapper">
+  <div id="news-content" class="news-box">Updates Loading...</div>
 </div>
 
 <script>
-  // 1. இங்கு உங்கள் பிளாக் முகவரியை மாற்றவும் (கடைசியில் /feeds/posts/default சேர்க்கவும்)
-  // உதாரணம்: var blogFeedUrl = "https://YOUR_BLOG_NAME.blogspot.com/feeds/posts/default?alt=json-in-script&callback=processPost";
-  
-  // டெஸ்டிங்கிற்காக நான் கூகுள் பிளாக் வைத்திருக்கிறேன். இதை உங்கள் URL-ஆல் மாற்றவும்.
-  var blogDomain = "https://googleblog.blogspot.com"; 
-  var feedUrl = blogDomain + "/feeds/posts/default?alt=json-in-script&max-results=10&callback=fetchNews";
+  // --- முக்கிய அமைப்புகள் ---
+  var blogDomain = "https://feed.rtbs.in"; 
+  var filterLabel = "jscrolling"; 
+  var displayTime = 6000; 
+  var fadeSpeed = 500;    
 
+  // -----------------------------
+  var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
   var newsItems = [];
   var currentIndex = 0;
-  var displayTime = 4000; // செய்தி நிற்கும் நேரம் (4 நொடிகள்)
-  var fadeTime = 1000;    // மறைய எடுத்துக்கொள்ளும் நேரம் (1 நொடி)
 
-  // Blogger Feed-ஐ வாங்கும் Function
   function fetchNews(json) {
-    var entry = json.feed.entry;
-    if (entry) {
+    if (json.feed && json.feed.entry) {
+      var entry = json.feed.entry;
       for (var i = 0; i < entry.length; i++) {
-        var postTitle = entry[i].title.$t;
-        newsItems.push(postTitle);
+        newsItems.push(entry[i].title.$t);
       }
-      // செய்திகள் வந்தவுடன் சுழற்சியைத் தொடங்கு
       startTicker();
+    } else {
+      var box = document.getElementById("news-content");
+      box.innerHTML = "No news found with label: " + filterLabel;
+      box.classList.add("active");
     }
   }
 
   function startTicker() {
     if (newsItems.length === 0) return;
-    
-    var ticker = document.getElementById("ticker-display");
-    
-    // முதல் செய்தியை காட்டு
-    updateText(ticker);
+    var box = document.getElementById("news-content");
+    showNextNews(box);
 
-    // சுழற்சி (Loop)
     setInterval(function() {
-      // 1. மறை (Fade Out)
-      ticker.classList.remove("fade-in");
-      ticker.classList.add("fade-out");
-
-      // 2. மறைந்த பிறகு செய்தியை மாற்றி மீண்டும் காட்டு
+      box.classList.remove("active");
       setTimeout(function() {
-        updateText(ticker);
-      }, fadeTime); // CSS transition நேரத்திற்கு ஏற்ப காத்திருத்தல்
-
-    }, displayTime + fadeTime);
+        showNextNews(box);
+      }, fadeSpeed);
+    }, displayTime + fadeSpeed);
   }
 
-  function updateText(element) {
-    // அடுத்த செய்திக்கு மாறுதல்
-    currentIndex = (currentIndex + 1) % newsItems.length;
+  function showNextNews(element) {
     element.innerHTML = newsItems[currentIndex];
-    
-    // காட்டு (Fade In)
-    element.classList.remove("fade-out");
-    element.classList.add("fade-in");
+    currentIndex = (currentIndex + 1) % newsItems.length;
+    element.classList.add("active");
   }
 
-  // ஸ்கிரிப்டை இணைத்து Feed-ஐ வரவழைத்தல்
   var script = document.createElement('script');
   script.src = feedUrl;
   document.body.appendChild(script);
