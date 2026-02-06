@@ -23,73 +23,70 @@
     background-color: transparent; 
   }
 
-  /* --- 1. டிக்கர் பெட்டியின் அமைப்பு (Red Box) --- */
+  /* --- 1. டிக்கர் பெட்டி (Red Box) --- */
   .ticker-container {
     position: absolute;
-    bottom: 30px; /* திரையின் கீழே இருக்க */
+    bottom: 40px; /* வீடியோவில் உள்ளது போல கீழே */
     left: 50%;
-    transform: translateX(-50%); /* மையப்படுத்த */
+    transform: translateX(-50%);
     
-    width: 80%;       /* அகலம் */
+    width: 85%;
     max-width: 900px;
-    height: 110px;    /* 2 வரிகள் தெரியச் சரியான உயரம் */
+    height: 120px; /* 2 வரிகளுக்கு ஏற்ற உயரம் */
     
     background-color: #c60203; /* சிவப்பு நிறம் */
-    border: 5px solid #e60000;
-    border-radius: 12px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.6);
+    border: 4px solid #ff0000;
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.7);
     
-    /* பெட்டியை விட்டு எழுத்து வெளியே போனால் மறைக்க */
     overflow: hidden; 
-    
-    /* எழுத்துக்களை மையப்படுத்த */
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* இது எப்போதும் தெரியும் */
     opacity: 1; 
-    z-index: 9999;
   }
 
-  /* --- 2. உள்ளே இருக்கும் எழுத்து (Text Item) --- */
+  /* --- 2. செய்தி வரிகள் (News Item) --- */
   .news-item {
     position: absolute;
-    width: 95%;
+    width: 90%;
     text-align: center;
     color: #ffffff;
     
     font-family: 'Roboto', 'Tamil039', sans-serif;
-    font-size: 28px;   /* எழுத்து அளவு */
-    line-height: 1.4;  /* வரி இடைவெளி */
+    font-size: 28px;
+    line-height: 1.5;
     font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     
-    /* அதிகபட்சம் 2 வரிகள் மட்டும் தெரிய */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 
-    /* அனிமேஷனுக்கான ஆரம்ப நிலை */
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    /* அனிமேஷன் வேகம் */
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
   }
 
-  /* நிலை: மேலே மறைந்திருக்கிறது (New) */
+  /* அனிமேஷன் நிலைகள் */
   .news-item.enter-top {
-    transform: translateY(-120%);
+    transform: translateY(-150%);
     opacity: 0;
   }
 
-  /* நிலை: திரையில் தெரிகிறது (Active) */
   .news-item.active {
     transform: translateY(0%);
     opacity: 1;
   }
 
-  /* நிலை: கீழே போய்விட்டது (Exit) */
   .news-item.exit-bottom {
-    transform: translateY(120%);
+    transform: translateY(150%);
     opacity: 0;
+  }
+
+  /* ரீசெட் செய்யும்போது அனிமேஷனை நிறுத்த */
+  .no-transition {
+    transition: none !important;
   }
 
 </style>
@@ -103,58 +100,97 @@
 
 <script>
   // --- அமைப்புகள் ---
-  var blogDomain = "https://feed.rtbs.in"; 
+  // குறிப்பு: feed.rtbs.in வேலை செய்யவில்லை என்றால் www.rtbs.in என மாற்றவும்
+  var blogDomain = "https://www.rtbs.in"; 
   var filterLabel = "jflash"; 
-  var displayTime = 5000; // செய்தி நிற்கும் நேரம் (5 வினாடி)
-  
+  var displayTime = 5000; 
+
+  // மாதிரிச் செய்திகள் (Feed வேலை செய்யாத பட்சத்தில் இது வரும்)
+  var fallbackNews = [
+    "இது ஒரு மாதிரி செய்தி: இணைய இணைப்பு அல்லது Feed-ல் பிழை உள்ளது.",
+    "உங்கள் வலைப்பூவில் (Blogger) 'jflash' என்ற Label உள்ளதா என சரிபார்க்கவும்.",
+    "Tamil039 Font மற்றும் டிசைன் சரியாக வேலை செய்கிறதா என சோதிக்கவும்."
+  ];
+
   var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
   var newsItems = [];
   var currentIndex = 0;
-  
-  // ஸ்லாட் மாறிகள்
   var activeSlot = document.getElementById("slot-1");
   var nextSlot = document.getElementById("slot-2");
+  var hasLoaded = false;
 
+  // 1. Feed-ல் இருந்து செய்திகளைப் பெறுதல்
   function fetchNews(json) {
+    hasLoaded = true;
     if (json.feed && json.feed.entry) {
       var entry = json.feed.entry;
       for (var i = 0; i < entry.length; i++) {
         newsItems.push(entry[i].title.$t);
       }
-      
-      // பழைய செய்தி முதலில் வர
-      newsItems.reverse(); 
-
-      // முதல் செய்தியை உடனே காட்டு
-      if(newsItems.length > 0) {
-         activeSlot.innerHTML = newsItems[0];
-         currentIndex = 1; // அடுத்த செய்திக்குத் தயார்
-         setInterval(cycleNews, displayTime);
-      }
-      
+      newsItems.reverse(); // பழையது முதலில்
+      startTicker();
     } else {
-      activeSlot.innerHTML = "செய்திகள் இல்லை!";
+      activeSlot.innerHTML = "குறிப்பிட்ட Label-ல் செய்திகள் இல்லை!";
     }
   }
 
-  function cycleNews() {
+  // 2. Feed வேலை செய்யவில்லை என்றால் (3 நொடியில் Backup)
+  setTimeout(function() {
+    if (!hasLoaded) {
+      console.log("Feed Error: Using demo data");
+      newsItems = fallbackNews;
+      startTicker();
+    }
+  }, 3000);
+
+  // 3. டிக்கர் ஆரம்பம்
+  function startTicker() {
     if (newsItems.length === 0) return;
+    activeSlot.innerHTML = newsItems[0];
+    currentIndex = 1;
+    setInterval(cycleNews, displayTime);
+  }
 
-    // 1. அடுத்த செய்தியை 'nextSlot'-ல் நிரப்பு (அது மேலே காத்திருக்கிறது)
+  // 4. சுழற்சி முறை (Cycle Logic)
+  function cycleNews() {
     var nextText = newsItems[currentIndex];
+    
+    // அடுத்த செய்தியை தயார் செய் (Transition இல்லாமல் மேலே கொண்டு செல்)
+    nextSlot.classList.add("no-transition");
+    nextSlot.classList.remove("exit-bottom", "active");
+    nextSlot.classList.add("enter-top");
+    
+    // பிரவுசரை ரெப்ரெஷ் செய்யச் சொல் (Force Reflow)
+    void nextSlot.offsetWidth;
+
+    // Transition-ஐ மீண்டும் ஆன் செய்
+    nextSlot.classList.remove("no-transition");
+    
+    // இப்போது செய்தியை மாற்றி உள்ளே கொண்டு வா
     nextSlot.innerHTML = nextText;
-
-    // 2. அனிமேஷன் (Swipe Down)
-    // தற்போது உள்ளதை கீழே தள்ளு
+    
+    // அனிமேஷன் தொடக்கம் (Swap Classes)
     activeSlot.classList.remove("active");
-    activeSlot.classList.add("exit-bottom");
+    activeSlot.classList.add("exit-bottom"); // பழையது கீழே போகும்
 
-    // மேலே உள்ளதை உள்ளே இழு
     nextSlot.classList.remove("enter-top");
-    nextSlot.classList.add("active");
+    nextSlot.classList.add("active"); // புதியது மேலே இருந்து வரும்
 
-    // 3. அடுத்த சுழற்சிக்காக Reset செய்தல்
-    setTimeout(function() {
-      // கீழே போனதை மீண்டும் மேலே கொண்டு போய் வை (சத்தம் இல்லாமல்)
-      activeSlot.classList.remove("exit-bottom");
-      activeSlot.classList.add
+    // Slot-களை மாற்றிக்கொள்
+    var temp = activeSlot;
+    activeSlot = nextSlot;
+    nextSlot = temp;
+
+    currentIndex = (currentIndex + 1) % newsItems.length;
+  }
+
+  // Script இணைத்தல்
+  var script = document.createElement('script');
+  script.src = feedUrl;
+  script.onerror = function() { hasLoaded = false; }; // Error வந்தால் Backup ஓடும்
+  document.body.appendChild(script);
+
+</script>
+
+</body>
+</html>
