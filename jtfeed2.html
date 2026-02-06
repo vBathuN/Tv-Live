@@ -22,17 +22,21 @@
     background-color: transparent; 
   }
 
+  /* மையப்படுத்தும் கன்டெய்னர் */
   .news-wrapper {
     position: absolute;
-    top: 50%;
+    top: 50%; /* திரையின் நடுப்பகுதி */
     left: 0;
     width: 100%;
-    transform: translateY(-50%); 
     display: flex;
     justify-content: center; 
     z-index: 9999;
+    pointer-events: none;
+    /* transform மூலம் சற்றே சரிசெய்தல் */
+    transform: translateY(-50%);
   }
 
+  /* செய்திப் பெட்டி (பின்னணி + எழுத்து) */
   .news-box {
     background-color: #c60203;
     color: #ffffff;
@@ -42,29 +46,32 @@
     line-height: 1.8; 
     padding: 20px 30px;
     text-align: center;
+    
     width: auto;
-    min-width: 400px;
+    min-width: 300px;
     max-width: 85%;
+    
     border: 6px solid #cc0000; 
     border-radius: 15px;      
     box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
-    overflow: hidden; /* செய்திகள் பெட்டிக்கு வெளியே தெரியாமல் இருக்க */
+    
+    /* --- அனிமேஷன் ஆரம்ப நிலை --- */
+    opacity: 0; 
+    transform: translateY(-100px); /* மேலே மறைந்திருக்கும் */
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* துள்ளல் விளைவு (Bounce Effect) */
   }
 
-  /* Swipe Down அனிமேஷன் */
-  @keyframes swipeDown {
-    0% { transform: translateY(-50px); opacity: 0; }
-    15% { transform: translateY(0); opacity: 1; }
-    85% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(50px); opacity: 0; }
+  /* நிலை 1: திரையில் தோன்றுதல் (Slide In) */
+  .news-box.visible {
+    opacity: 0.95;
+    transform: translateY(0px); /* சரியான இடத்திற்கு வரும் */
   }
 
-  .news-text-inner {
-    display: block;
-    width: 100%;
-    /* ஒரு செய்தி திரையில் தோன்றும் மொத்த நேரம் */
-    animation: swipeDown 6s ease-in-out infinite;
-    opacity: 0; /* அனிமேஷன் தொடங்கும் வரை மறைந்திருக்க */
+  /* நிலை 2: கீழே இறங்கி மறைதல் (Slide Out) */
+  .news-box.exit {
+    opacity: 0;
+    transform: translateY(100px); /* கீழே இறங்கி மறையும் */
+    transition: all 0.5s ease-in; /* போகும்போது வேகம் */
   }
 
 </style>
@@ -72,15 +79,16 @@
 <body>
 
 <div class="news-wrapper">
-  <div id="news-container" class="news-box">
-    <div id="news-content" class="news-text-inner">தகவல்கள் லோடு ஆகிறது...</div>
+  <div id="news-box" class="news-box">
+    Waiting for updates...
   </div>
 </div>
 
 <script>
   var blogDomain = "https://feed.rtbs.in"; 
   var filterLabel = "jflash"; 
-  var displayTime = 6000; // அனிமேஷன் கால அளவுடன் ஒத்துப்போக வேண்டும்
+  var displayTime = 5000; // செய்தி நிற்கும் நேரம்
+  var animationDelay = 800; // அனிமேஷன் இடைவெளி
 
   var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
   var newsItems = [];
@@ -93,25 +101,51 @@
         newsItems.push(entry[i].title.$t);
       }
       newsItems.reverse(); // பழையது முதலில்
-      startTicker();
+      runAnimationLoop();
     } else {
-      document.getElementById("news-content").innerHTML = "செய்திகள் ஏதும் இல்லை!";
+      var box = document.getElementById("news-box");
+      box.innerHTML = "செய்திகள் இல்லை";
+      box.classList.add("visible");
     }
   }
 
-  function startTicker() {
+  function runAnimationLoop() {
     if (newsItems.length === 0) return;
     
-    var content = document.getElementById("news-content");
+    var box = document.getElementById("news-box");
     
-    // முதல் செய்தியை வை
-    content.innerHTML = newsItems[currentIndex];
+    // 1. உள்ளடக்கத்தை மாற்று (மறைந்திருக்கும் நிலையில்)
+    box.innerHTML = newsItems[currentIndex];
     
-    // ஒவ்வொரு அனிமேஷன் முடியும்போதும் செய்தியை மாற்ற
-    content.addEventListener('animationiteration', function() {
-      currentIndex = (currentIndex + 1) % newsItems.length;
-      content.innerHTML = newsItems[currentIndex];
+    // 2. பெட்டியை உள்ளே கொண்டுவா (Enter from Top)
+    // சிறிது தாமதம் கொடுப்பதால் transition சரியாக வேலை செய்யும்
+    requestAnimationFrame(() => {
+        box.classList.remove("exit");
+        box.classList.add("visible");
     });
+
+    // 3. குறிப்பிட்ட நேரத்திற்குப் பிறகு வெளியேற்று
+    setTimeout(function() {
+      // பெட்டியை கீழே இறக்கு (Exit to Bottom)
+      box.classList.remove("visible");
+      box.classList.add("exit");
+      
+      // 4. அனிமேஷன் முடிந்ததும் அடுத்த செய்திக்குத் தயார் செய்
+      setTimeout(function() {
+        // கிளாஸ்களை அகற்றி, பெட்டியை மீண்டும் மேலே (ஆரம்ப இடத்திற்கு) கொண்டு செல்
+        box.classList.remove("exit"); 
+        
+        // இது மிக முக்கியம்: Transition இல்லாமல் மேலே கொண்டு செல்ல வேண்டும்
+        // இல்லையெனில் மேலே போகும்போதும் அனிமேஷன் தெரியும்.
+        // ஆனால் நாம் CSS-ல் transition வைத்துள்ளோம்.
+        // எனவே அடுத்த Loop தொடங்கும் போது அது தானாக சரியாகும்.
+        
+        currentIndex = (currentIndex + 1) % newsItems.length;
+        runAnimationLoop(); // அடுத்த சுழற்சி
+        
+      }, 600); // இது CSS transition நேரத்தை விட (0.5s) சற்றே அதிகம் இருக்க வேண்டும்
+
+    }, displayTime);
   }
 
   var script = document.createElement('script');
