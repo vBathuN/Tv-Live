@@ -3,117 +3,106 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* மொத்த கன்டெய்னர் - இது நிலையாக கீழே இருக்கும் */
+  /* அதே ஸ்டைல் - மாற்றம் இல்லை */
   body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
-    /* பின்னணி நிறம் தேவையில்லை என்றால் நீக்கிவிடலாம் (Transparent) */
     background-color: transparent; 
   }
 
-  /* செய்திக்கான பெட்டி (Wrapper) */
   .news-wrapper {
     position: absolute;
-    bottom: 20px; /* திரையின் கீழிருந்து 20px மேலே */
+    bottom: 20px;
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* இடது ஓரத்தில் */
-    padding-left: 0; /* ஓரத்தில் இடைவெளி வேண்டாம் */
+    justify-content: flex-start;
+    padding-left: 0;
   }
 
-  /* உண்மையான செய்தி பெட்டி */
   .news-box {
-    background-color: rgba(0, 0, 0, 0.9); /* அடர் கருப்பு */
+    background-color: rgba(0, 0, 0, 0.9);
     color: #ffffff;
     font-family: 'Arial', sans-serif;
     font-size: 24px;
     font-weight: bold;
     line-height: 1.5;
-    
-    padding: 15px 25px; /* உரைக்கு சுற்றிலும் இடைவெளி */
-    
-    /* மேஜிக்: செய்திக்கு ஏற்ப அகலமும் உயரமும் மாறும் */
+    padding: 15px 25px;
     display: inline-block; 
-    max-width: 90%; /* திரையில் 90% வரை நீளலாம் */
-    
-    border-left: 8px solid #cc0000; /* சிவப்பு பட்டை */
-    border-radius: 0 10px 10px 0;   /* வலது பக்கம் வளைவு */
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.5); /* நிழல் */
-
-    opacity: 0; /* ஆரம்பத்தில் மறைவு */
-    transform: translateY(20px); /* கீழே இருந்து மேலே வரும் எஃபெக்ட் */
-    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth Slide Up */
+    max-width: 90%;
+    border-left: 8px solid #cc0000;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
-  /* Active Class - இது சேரும்போதுதான் பெட்டி தெரியும் */
   .news-box.active {
     opacity: 1;
     transform: translateY(0);
   }
-
 </style>
 </head>
 <body>
 
 <div class="news-wrapper">
-  <div id="news-content" class="news-box">Loading...</div>
+  <div id="news-content" class="news-box">Updates Loading...</div>
 </div>
 
 <script>
-  // --- அமைப்புகள் (Settings) ---
+  // --- முக்கிய அமைப்புகள் (Settings) ---
   
-  // உங்கள் பிளாக் முகவரி
+  // 1. உங்கள் பிளாக் முகவரி
   var blogDomain = "https://feed.rtbs.in"; 
-  // var blogDomain = "https://googleblog.blogspot.com"; // Testing
+
+  // 2. எந்த லேபிள் உள்ள செய்திகள் மட்டும் வர வேண்டும்? 
+  // (இங்கு 'Ticker' என்று இருந்தால், உங்கள் பிளாக்கில் 'Ticker' என லேபிள் இட்ட பதிவுகள் மட்டும் வரும்)
+  var filterLabel = "jscrolling"; 
   
-  var displayTime = 6000; // செய்தி நிற்கும் நேரம் (6 நொடிகள்)
+  var displayTime = 6000; // செய்தி நிற்கும் நேரம்
   var fadeSpeed = 800;    // அனிமேஷன் வேகம்
 
   // -----------------------------
 
-  var feedUrl = blogDomain + "/feeds/posts/default?alt=json-in-script&max-results=15&callback=fetchNews";
+  // URL-ல் லேபிளை இணைத்தல் (முக்கியமான மாற்றம் இங்கே தான் உள்ளது)
+  // வடிவம்: /feeds/posts/default/-/[LabelName]
+  var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
+  
   var newsItems = [];
   var currentIndex = 0;
 
   function fetchNews(json) {
-    var entry = json.feed.entry;
-    if (entry) {
+    if (json.feed && json.feed.entry) {
+      var entry = json.feed.entry;
       for (var i = 0; i < entry.length; i++) {
         newsItems.push(entry[i].title.$t);
       }
       startTicker();
+    } else {
+      document.getElementById("news-content").innerHTML = "No news found with label: " + filterLabel;
+      document.getElementById("news-content").classList.add("active");
     }
   }
 
   function startTicker() {
     if (newsItems.length === 0) return;
-    
     var box = document.getElementById("news-content");
-    
-    // முதல் செய்தியை காட்டு
     showNextNews(box);
 
     setInterval(function() {
-      // 1. மறை (Slide Down & Fade Out)
       box.classList.remove("active");
-
-      // 2. மறைந்த பிறகு செய்தியை மாற்றி மீண்டும் மேலே கொண்டு வா
       setTimeout(function() {
         showNextNews(box);
-      }, fadeSpeed); // அனிமேஷன் முடியும் வரை காத்திரு
-
+      }, fadeSpeed);
     }, displayTime + fadeSpeed);
   }
 
   function showNextNews(element) {
-    // செய்தியை மாற்று
     element.innerHTML = newsItems[currentIndex];
     currentIndex = (currentIndex + 1) % newsItems.length;
-    
-    // காட்டு (Slide Up & Fade In)
     element.classList.add("active");
   }
 
