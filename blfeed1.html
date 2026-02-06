@@ -11,15 +11,15 @@
     background-color: transparent; 
   }
 
-  /* கன்டெய்னர்: திரையின் மையத்தில் பெட்டியை வைக்கும் */
+  /* கன்டெய்னர் */
   .news-wrapper {
     position: absolute;
     top: 50%;
     left: 0;
     width: 100%;
-    transform: translateY(-50%); /* செங்குத்தாக மையப்படுத்துதல் */
+    transform: translateY(-50%); 
     display: flex;
-    justify-content: center; /* பெட்டியையும் திரையின் நடுவில் வைக்கும் */
+    justify-content: center; 
     padding: 0;
     z-index: 9999;
     pointer-events: none;
@@ -35,18 +35,17 @@
     line-height: 1.5;
     padding: 20px 30px;
     
-    /* --- மாற்றம் செய்யப்பட்ட பகுதி --- */
-    text-align: center; /* எழுத்துக்களை மையப்படுத்துதல் */
+    text-align: center;
     display: flex;
     align-items: center; 
-    justify-content: center; /* Flex-box உள்ளேயும் மையப்படுத்துதல் */
-    /* ------------------------------ */
+    justify-content: center; 
 
-    max-width: 80%; /* அதிகபட்ச அகலம் */
+    max-width: 80%;
     
-    border-left: 8px solid #cc0000;  /* இடது பக்கம் சிவப்பு கோடு */
-    border-right: 8px solid #cc0000; /* வலது பக்கமும் சிவப்பு கோடு (அழகுக்காக) */
-    border-radius: 15px; /* நான்கு பக்கமும் வளைவு */
+    /* --- மாற்றம் செய்யப்பட்ட பகுதி (4 பக்க பார்டர்) --- */
+    border: 6px solid #cc0000; /* நான்கு பக்கமும் 6px தடிமன் உள்ள சிவப்பு கோடு */
+    border-radius: 15px;       /* நான்கு பக்கமும் வளைவு */
+    /* ---------------------------------------------- */
     
     box-shadow: 0px 5px 15px rgba(0,0,0,0.6);
     
@@ -64,7 +63,7 @@
 <body>
 
 <div class="news-wrapper">
-  <div id="news-content" class="news-box">Loading...</div>
+  <div id="news-content" class="news-box">Updates Loading...</div>
 </div>
 
 <script>
