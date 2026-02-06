@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+
+  @font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+         url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent; 
+  }
+
+  /* மையப்படுத்தும் கன்டெய்னர் */
+  .news-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* சிவப்பு பெட்டி (நிலையானது) */
+  .news-box {
+    background-color: #c60203;
+    color: #ffffff;
+    font-family: 'Roboto', 'Tamil039', sans-serif; 
+    font-size: 26px; 
+    font-weight: bold;
+    line-height: 1.5; 
+    
+    /* பெட்டியின் அளவு */
+    width: auto;
+    min-width: 400px;
+    max-width: 85%;
+    height: 120px; /* உயரத்தை நிலையாக வைத்துள்ளேன், அப்போதுதான் Swipe தெளிவாகத் தெரியும் */
+    
+    border: 6px solid #cc0000; 
+    border-radius: 15px;      
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
+    
+    /* மிக முக்கியம்: பெட்டியை விட்டு வெளியே செல்லும் எழுத்துக்களை மறைக்க */
+    overflow: hidden; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* எழுத்துக்களுக்கான பொதுவான ஸ்டைல் */
+  .news-item {
+    position: absolute;
+    width: 90%;
+    text-align: center;
+    padding: 0 10px;
+    
+    /* வரிகள் அதிகம் இருந்தால் கட் செய்ய */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box
