@@ -3,48 +3,63 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* 1. செய்திக்கான பெட்டி (Container) */
-  .news-container {
-    background-color: rgba(0, 0, 0, 0.85); /* அடர் கருப்பு பின்னணி */
+  /* மொத்த கன்டெய்னர் - இது நிலையாக கீழே இருக்கும் */
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    /* பின்னணி நிறம் தேவையில்லை என்றால் நீக்கிவிடலாம் (Transparent) */
+    background-color: transparent; 
+  }
+
+  /* செய்திக்கான பெட்டி (Wrapper) */
+  .news-wrapper {
+    position: absolute;
+    bottom: 20px; /* திரையின் கீழிருந்து 20px மேலே */
+    left: 0;
     width: 100%;
-    min-height: 130px; /* 4 வரிகள் தாராளமாக அமரும் உயரம் */
-    display: flex;     /* உள்ளே இருக்கும் செய்தியை மையப்படுத்த */
-    align-items: center; 
-    padding: 15px 20px; /* ஓரங்களில் இடைவெளி */
-    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start; /* இடது ஓரத்தில் */
+    padding-left: 0; /* ஓரத்தில் இடைவெளி வேண்டாம் */
+  }
+
+  /* உண்மையான செய்தி பெட்டி */
+  .news-box {
+    background-color: rgba(0, 0, 0, 0.9); /* அடர் கருப்பு */
+    color: #ffffff;
     font-family: 'Arial', sans-serif;
-    border-left: 8px solid #cc0000; /* இடது பக்கம் தடிமனான சிவப்பு கோடு */
-    border-radius: 0 10px 10px 0; /* வலது பக்கம் லேசான வளைவு */
-    overflow: hidden;
-  }
-
-  /* 2. செய்தி உரை (Text Styling) */
-  #news-content {
-    color: #ffffff;      /* வெள்ளை எழுத்து */
-    font-size: 24px;     /* எழுத்து அளவு (தேவைக்கேற்ப மாற்றலாம்) */
+    font-size: 24px;
     font-weight: bold;
-    line-height: 1.4;    /* வரிகளுக்கு இடையே இடைவெளி */
+    line-height: 1.5;
     
-    /* மேஜிக்: 4 வரிகளுக்கு மேல் போனால் வெட்டிவிடும் */
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* அதிகபட்சம் 4 வரிகள் */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    padding: 15px 25px; /* உரைக்கு சுற்றிலும் இடைவெளி */
     
-    opacity: 0; /* ஆரம்பத்தில் மறைந்திருக்கும் */
-    transition: opacity 1s ease-in-out; /* Fade Effect */
+    /* மேஜிக்: செய்திக்கு ஏற்ப அகலமும் உயரமும் மாறும் */
+    display: inline-block; 
+    max-width: 90%; /* திரையில் 90% வரை நீளலாம் */
+    
+    border-left: 8px solid #cc0000; /* சிவப்பு பட்டை */
+    border-radius: 0 10px 10px 0;   /* வலது பக்கம் வளைவு */
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5); /* நிழல் */
+
+    opacity: 0; /* ஆரம்பத்தில் மறைவு */
+    transform: translateY(20px); /* கீழே இருந்து மேலே வரும் எஃபெக்ட் */
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth Slide Up */
   }
 
-  /* Fade Classes */
-  .fade-in { opacity: 1 !important; }
-  .fade-out { opacity: 0 !important; }
+  /* Active Class - இது சேரும்போதுதான் பெட்டி தெரியும் */
+  .news-box.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
 </style>
 </head>
 <body>
 
-<div class="news-container">
-  <div id="news-content">Loading Updates...</div>
+<div class="news-wrapper">
+  <div id="news-content" class="news-box">Loading...</div>
 </div>
 
 <script>
@@ -52,10 +67,10 @@
   
   // உங்கள் பிளாக் முகவரி
   var blogDomain = "https://feed.rtbs.in"; 
-  // var blogDomain = "https://googleblog.blogspot.com"; // டெஸ்டிங்
+  // var blogDomain = "https://googleblog.blogspot.com"; // Testing
   
-  var displayTime = 6000; // பெரிய செய்தி என்பதால் படிக்க 6 நொடிகள்
-  var fadeSpeed = 1000;   // மறையும் வேகம்
+  var displayTime = 6000; // செய்தி நிற்கும் நேரம் (6 நொடிகள்)
+  var fadeSpeed = 800;    // அனிமேஷன் வேகம்
 
   // -----------------------------
 
@@ -67,12 +82,7 @@
     var entry = json.feed.entry;
     if (entry) {
       for (var i = 0; i < entry.length; i++) {
-        // செய்தியின் தலைப்பை எடுக்கிறோம்
         newsItems.push(entry[i].title.$t);
-        
-        // விருப்பம்: செய்தியின் சுருக்கத்தையும் (Snippet) சேர்க்க விரும்பினால் கீழே உள்ளதை uncomment செய்யவும்
-        // var snippet = entry[i].summary.$t.substring(0, 150); 
-        // newsItems.push(entry[i].title.$t + ": " + snippet);
       }
       startTicker();
     }
@@ -81,32 +91,30 @@
   function startTicker() {
     if (newsItems.length === 0) return;
     
-    var textElement = document.getElementById("news-content");
+    var box = document.getElementById("news-content");
     
     // முதல் செய்தியை காட்டு
-    updateDisplay(textElement);
+    showNextNews(box);
 
     setInterval(function() {
-      // 1. மறை (Fade Out)
-      textElement.classList.remove("fade-in");
-      textElement.classList.add("fade-out");
+      // 1. மறை (Slide Down & Fade Out)
+      box.classList.remove("active");
 
-      // 2. மறைந்த பிறகு செய்தியை மாற்று
+      // 2. மறைந்த பிறகு செய்தியை மாற்றி மீண்டும் மேலே கொண்டு வா
       setTimeout(function() {
-        updateDisplay(textElement);
-      }, fadeSpeed);
+        showNextNews(box);
+      }, fadeSpeed); // அனிமேஷன் முடியும் வரை காத்திரு
 
     }, displayTime + fadeSpeed);
   }
 
-  function updateDisplay(element) {
-    // அடுத்த செய்தி
+  function showNextNews(element) {
+    // செய்தியை மாற்று
     element.innerHTML = newsItems[currentIndex];
     currentIndex = (currentIndex + 1) % newsItems.length;
     
-    // காட்டு (Fade In)
-    element.classList.remove("fade-out");
-    element.classList.add("fade-in");
+    // காட்டு (Slide Up & Fade In)
+    element.classList.add("active");
   }
 
   var script = document.createElement('script');
