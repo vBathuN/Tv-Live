@@ -195,7 +195,7 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    background: #c60203;
+    background: #19f radial-gradient(transparent, #02c);
     width: 540px;
     height: 605px;
     margin-right: 0px;
