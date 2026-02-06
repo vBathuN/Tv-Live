@@ -195,7 +195,7 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    background: transparent;
+    background: #c60203;
     width: 1080px;
     height: 605px;
     margin-right: -2px;
