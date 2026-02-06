@@ -196,9 +196,9 @@ body {
 .rtcs-stream {
     display: inline-block;
     background: #c60203;
-    width: 1080px;
+    width: 540px;
     height: 605px;
-    margin-right: -2px;
+    margin-right: 0px;
     margin-bottom: -30px;
     position: absolute;
     vertical-align: middle;
@@ -232,10 +232,10 @@ body {
 }
 
 .rtcs-rstream {
-    width: 860px;
+    width: 750px;
     height: 610px;
     margin-bottom: -10px;
-    margin-right: 428px;
+    margin-right: 538px;
     position: absolute;
     vertical-align: middle;
     z-index: -19;
