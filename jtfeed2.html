@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* 1. எழுத்துருக்கள் */
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
 
   @font-face {
@@ -45,56 +44,50 @@
     line-height: 1.8; 
     padding: 20px 30px;
     text-align: center;
-    width: auto;
+    min-width: 300px;
     max-width: 80%;
     border: 6px solid #cc0000; 
     border-radius: 15px;      
     box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
     box-sizing: border-box; 
-    
-    /* Swipe அனிமேஷனுக்காக மாற்றப்பட்டது */
     overflow: hidden; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  /* Swipe Down அனிமேஷன் */
+  /* அனிமேஷன் நிலைகள் */
   .news-text-inner {
     display: block;
     width: 100%;
     opacity: 0;
-    transform: translateY(-30px); /* மேலிருந்து தொடங்க */
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-30px); /* மேலிருந்து வரும் நிலை */
+    transition: transform 0.6s ease, opacity 0.6s ease;
   }
 
-  /* செய்தி உள்ளே வரும்போது */
-  .news-text-inner.active {
+  /* செய்தி திரையில் இருக்கும்போது */
+  .news-text-inner.visible {
     opacity: 1;
-    transform: translateY(0); /* இயல்பு நிலைக்கு வர */
+    transform: translateY(0);
   }
 
-  /* செய்தி வெளியே போகும்போது (கீழ் நோக்கி மறைய) */
+  /* செய்தி கீழே நகர்ந்து மறையும்போது */
   .news-text-inner.exit {
     opacity: 0;
-    transform: translateY(30px); /* கீழ் நோக்கி நகர்ந்து மறைய */
+    transform: translateY(30px);
   }
-
 </style>
 </head>
 <body>
 
 <div class="news-wrapper">
   <div id="news-container" class="news-box">
-    <div id="news-content" class="news-text-inner">காத்திருக்கவும்...</div>
+    <div id="news-content" class="news-text-inner">Loading...</div>
   </div>
 </div>
 
 <script>
   var blogDomain = "https://feed.rtbs.in"; 
   var filterLabel = "jflash"; 
-  var displayTime = 5000; // செய்தி தெரியும் நேரம்
-  var fadeSpeed = 600;    // அனிமேஷன் வேகம்
+  var displayTime = 5000; 
+  var fadeSpeed = 600;    
 
   var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
   var newsItems = [];
@@ -109,8 +102,9 @@
       newsItems.reverse(); // பழையது முதலில்
       startTicker();
     } else {
-      document.getElementById("news-content").innerHTML = "செய்திகள் இல்லை!";
-      document.getElementById("news-content").classList.add("active");
+      var content = document.getElementById("news-content");
+      content.innerHTML = "No News Found!";
+      content.classList.add("visible");
     }
   }
 
@@ -118,41 +112,42 @@
     if (newsItems.length === 0) return;
     var content = document.getElementById("news-content");
     
-    showNextNews(content);
+    // முதல் செய்தியை காட்டு
+    updateContent(content);
 
     setInterval(function() {
-      // 1. தற்போதைய செய்தியை கீழ் நோக்கி தள்ளவும் (Exit)
-      content.classList.remove("active");
+      // 1. தற்போதைய செய்தியை வெளியேற்று (Exit Down)
+      content.classList.remove("visible");
       content.classList.add("exit");
 
-      // 2. சிறிய இடைவெளிக்குப் பின் அடுத்த செய்தியை மேலிருந்து கொண்டு வரவும்
       setTimeout(function() {
+        // 2. செய்தியை மாற்றி, பழைய நிலைக்கு (மேலே) கொண்டு செல்
         content.classList.remove("exit");
-        showNextNews(content);
+        updateContent(content);
       }, fadeSpeed);
 
     }, displayTime + fadeSpeed);
   }
 
-  function showNextNews(content) {
+  function updateContent(content) {
     content.innerHTML = newsItems[currentIndex];
     currentIndex = (currentIndex + 1) % newsItems.length;
     
-    // செய்தியைத் தயார் செய்து (மேலே உயர்த்தி) பின் உள்ளே கொண்டு வரவும்
-    content.style.transition = 'none'; 
-    content.style.transform = 'translateY(-30px)';
-    content.style.opacity = '0';
+    // அனிமேஷன் இல்லாமல் மேலே கொண்டு செல்
+    content.style.transition = "none";
+    content.style.transform = "translateY(-30px)";
+    content.style.opacity = "0";
 
+    // ஒரு சிறிய இடைவெளிக்குப் பின் அனிமேஷனுடன் உள்ளே கொண்டு வா
     setTimeout(function() {
-      content.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-      content.classList.add("active");
+      content.style.transition = "transform 0.6s ease, opacity 0.6s ease";
+      content.classList.add("visible");
     }, 50);
   }
 
   var script = document.createElement('script');
   script.src = feedUrl;
   document.body.appendChild(script);
-
 </script>
 
 </body>
