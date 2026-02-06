@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* 1. தமிழ் ஃபான்ட் இணைப்பு */
+  @font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+         url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent; 
+  }
+
+  /* கன்டெய்னர் */
+  .news-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%); 
+    display: flex;
+    justify-content: center; 
+    padding: 0;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  /* செய்திப் பெட்டி */
+  .news-box {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    
+    /* 2. தமிழ் ஃபான்ட் பயன்படுத்தப்பட்டுள்ளது */
+    font-family: 'Tamil039', 'Arial', sans-serif; 
+    
+    font-size: 24px; /* தேவைப்பட்டால் அளவை மாற்றிக்கொள்ளலாம் */
+    font-weight: bold;
+    line-height: 1.4; 
+    padding: 25px 35px;
+    
+    text-align: center;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+
+    width: auto;
+    max-width: 80%;
+    max-height: 80vh; 
+    
+    border: 6px solid #cc0000; 
+    border-radius: 15px;      
+    
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.6);
+    box-sizing: border-box; 
+    
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .news-box.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* 12 வரிகள் லிமிட் */
+  .news-text-inner {
+    display: -webkit-box;
+    -webkit-line-clamp: 12; 
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 100%;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="news-wrapper">
+  <div id="news-container" class="news-box">
+    <div id="news-content" class="news-text-inner">Updates Loading...</div>
+  </div>
+</div>
+
+<script>
+  // --- அமைப்புகள் ---
+  var blogDomain = "https://feed.rtbs.in"; 
+  var filterLabel = "jflash"; 
+  var displayTime = 6000; 
+  var fadeSpeed = 500;    
+
+  var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
+  var newsItems = [];
+  var currentIndex = 0;
+
+  function fetchNews(json) {
+    if (json.feed && json.feed.entry) {
+      var entry = json.feed.entry;
+      for (var i = 0; i < entry.length; i++) {
+        newsItems.push(entry[i].title.$t);
+      }
+      startTicker();
+    } else {
+      var box = document.getElementById("news-content");
+      var container = document.getElementById("news-container");
+      box.innerHTML = "No news found with label: " + filterLabel;
+      container.classList.add("active");
+    }
+  }
+
+  function startTicker() {
+    if (newsItems.length === 0) return;
+    var container = document.getElementById("news-container");
+    var content = document.getElementById("news-content");
+    
+    updateText(container, content);
+
+    setInterval(function() {
+      container.classList.remove("active");
+      setTimeout(function() {
+        updateText(container, content);
+      }, fadeSpeed);
+    }, displayTime + fadeSpeed);
+  }
+
+  function updateText(container, content) {
+    content.innerHTML = newsItems[currentIndex];
+    currentIndex = (currentIndex + 1) % newsItems.length;
+    container.classList.add("active");
+  }
+
+  var script = document.createElement('script');
+  script.src = feedUrl;
+  document.body.appendChild(script);
+
+</script>
+
+</body>
+</html>
