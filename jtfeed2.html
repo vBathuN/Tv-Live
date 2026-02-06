@@ -31,12 +31,10 @@
     display: flex;
     justify-content: center; 
     z-index: 9999;
-    pointer-events: none;
   }
 
   .news-box {
     background-color: #c60203;
-    opacity: 0.95;
     color: #ffffff;
     font-family: 'Roboto', 'Tamil039', sans-serif; 
     font-size: 26px; 
@@ -44,50 +42,45 @@
     line-height: 1.8; 
     padding: 20px 30px;
     text-align: center;
-    min-width: 300px;
-    max-width: 80%;
+    width: auto;
+    min-width: 400px;
+    max-width: 85%;
     border: 6px solid #cc0000; 
     border-radius: 15px;      
     box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
-    box-sizing: border-box; 
-    overflow: hidden; 
+    overflow: hidden; /* செய்திகள் பெட்டிக்கு வெளியே தெரியாமல் இருக்க */
   }
 
-  /* அனிமேஷன் நிலைகள் */
+  /* Swipe Down அனிமேஷன் */
+  @keyframes swipeDown {
+    0% { transform: translateY(-50px); opacity: 0; }
+    15% { transform: translateY(0); opacity: 1; }
+    85% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(50px); opacity: 0; }
+  }
+
   .news-text-inner {
     display: block;
     width: 100%;
-    opacity: 0;
-    transform: translateY(-30px); /* மேலிருந்து வரும் நிலை */
-    transition: transform 0.6s ease, opacity 0.6s ease;
+    /* ஒரு செய்தி திரையில் தோன்றும் மொத்த நேரம் */
+    animation: swipeDown 6s ease-in-out infinite;
+    opacity: 0; /* அனிமேஷன் தொடங்கும் வரை மறைந்திருக்க */
   }
 
-  /* செய்தி திரையில் இருக்கும்போது */
-  .news-text-inner.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* செய்தி கீழே நகர்ந்து மறையும்போது */
-  .news-text-inner.exit {
-    opacity: 0;
-    transform: translateY(30px);
-  }
 </style>
 </head>
 <body>
 
 <div class="news-wrapper">
   <div id="news-container" class="news-box">
-    <div id="news-content" class="news-text-inner">Loading...</div>
+    <div id="news-content" class="news-text-inner">தகவல்கள் லோடு ஆகிறது...</div>
   </div>
 </div>
 
 <script>
   var blogDomain = "https://feed.rtbs.in"; 
   var filterLabel = "jflash"; 
-  var displayTime = 5000; 
-  var fadeSpeed = 600;    
+  var displayTime = 6000; // அனிமேஷன் கால அளவுடன் ஒத்துப்போக வேண்டும்
 
   var feedUrl = blogDomain + "/feeds/posts/default/-/" + filterLabel + "?alt=json-in-script&max-results=10&callback=fetchNews";
   var newsItems = [];
@@ -102,52 +95,29 @@
       newsItems.reverse(); // பழையது முதலில்
       startTicker();
     } else {
-      var content = document.getElementById("news-content");
-      content.innerHTML = "No News Found!";
-      content.classList.add("visible");
+      document.getElementById("news-content").innerHTML = "செய்திகள் ஏதும் இல்லை!";
     }
   }
 
   function startTicker() {
     if (newsItems.length === 0) return;
+    
     var content = document.getElementById("news-content");
     
-    // முதல் செய்தியை காட்டு
-    updateContent(content);
-
-    setInterval(function() {
-      // 1. தற்போதைய செய்தியை வெளியேற்று (Exit Down)
-      content.classList.remove("visible");
-      content.classList.add("exit");
-
-      setTimeout(function() {
-        // 2. செய்தியை மாற்றி, பழைய நிலைக்கு (மேலே) கொண்டு செல்
-        content.classList.remove("exit");
-        updateContent(content);
-      }, fadeSpeed);
-
-    }, displayTime + fadeSpeed);
-  }
-
-  function updateContent(content) {
+    // முதல் செய்தியை வை
     content.innerHTML = newsItems[currentIndex];
-    currentIndex = (currentIndex + 1) % newsItems.length;
     
-    // அனிமேஷன் இல்லாமல் மேலே கொண்டு செல்
-    content.style.transition = "none";
-    content.style.transform = "translateY(-30px)";
-    content.style.opacity = "0";
-
-    // ஒரு சிறிய இடைவெளிக்குப் பின் அனிமேஷனுடன் உள்ளே கொண்டு வா
-    setTimeout(function() {
-      content.style.transition = "transform 0.6s ease, opacity 0.6s ease";
-      content.classList.add("visible");
-    }, 50);
+    // ஒவ்வொரு அனிமேஷன் முடியும்போதும் செய்தியை மாற்ற
+    content.addEventListener('animationiteration', function() {
+      currentIndex = (currentIndex + 1) % newsItems.length;
+      content.innerHTML = newsItems[currentIndex];
+    });
   }
 
   var script = document.createElement('script');
   script.src = feedUrl;
   document.body.appendChild(script);
+
 </script>
 
 </body>
