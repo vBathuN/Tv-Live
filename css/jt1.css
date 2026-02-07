@@ -168,8 +168,8 @@ body {
     background: #19f radial-gradient(transparent, #02c);
     vertical-align: top;
     width: 1280px;
-    height: 75px;
-    margin-bottom: 645px;
+    height: 720px;
+    margin-bottom: 0px;
     position: absolute;
     z-index: -11;
     opacity: 0.9;
@@ -195,7 +195,6 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    background: #19f radial-gradient(transparent, #02c);
     width: 1280px;
     height: 605px;
     margin-right: 0px;
