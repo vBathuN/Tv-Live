@@ -204,6 +204,21 @@ body {
     z-index: -8;
 }
 
+.caption {
+    @font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    z-index: 1;
+    margin: 0px 720px;
+}
+
 .rtcs-ad {
     width: 235px;
     height: 670px;
@@ -238,21 +253,6 @@ body {
     position: absolute;
     vertical-align: middle;
     z-index: 9;
-}
-
-.caption {
-    @font-face {
-    font-family: 'Tamil039';
-    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
-        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    z-index: 1;
-    margin: 0px 720px;
 }
 
 .rtcs-lt {
