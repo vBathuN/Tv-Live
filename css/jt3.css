@@ -201,14 +201,13 @@ body {
     margin-bottom: 109px;
     position: absolute;
     vertical-align: middle;
-    border-radius: 15px;
-    border: 1px solid #fff000;
-    z-index: -8;
+    z-index: 0;
 }
 
 .jslider {
     border-radius: 15px;
-    z-index: -10;
+    border: 2px solid #fff000;
+    z-index: -8;
 }
 
 .rtcs-ad {
