@@ -210,27 +210,11 @@ body {
     z-index: -8;
 }
 
-.caption {
+.jslider {
     width: 540px;
     height: 460px;
     margin-left: 766px;
     margin-top: -600px;
-
-.rtcs-ad {
-    width: 235px;
-    height: 670px;
-    margin-top: -6px;
-    margin-left: -210px;
-    position: absolute;
-    vertical-align: middle;
-    z-index: 2;
-        -moz-transform: scale(0.9);
-        -moz-transform-origin: 0 0;
-        -o-transform: scale(0.9);
-        -o-transform-origin: 0 0;
-        -webkit-transform: scale(0.9);
-        -webkit-transform-origin: 0 0;
-}
 
 .rtcs-anchor {
     width: 220px;
