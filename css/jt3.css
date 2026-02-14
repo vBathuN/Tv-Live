@@ -201,6 +201,8 @@ body {
     margin-bottom: 105px;
     position: absolute;
     vertical-align: middle;
+    border-radius: 15px;
+    border: 4px solid #fff000;
     z-index: -8;
 }
 
