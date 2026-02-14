@@ -195,10 +195,10 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    width: 1280px;
-    height: 605px;
-    margin-right: 0px;
-    margin-bottom: -30px;
+    width: 826px;
+    height: 465px;
+    margin-right: 440px;
+    margin-bottom: 105px;
     position: absolute;
     vertical-align: middle;
     z-index: -8;
