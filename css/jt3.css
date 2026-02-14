@@ -195,14 +195,14 @@ body {
 
 .rtcs-stream {
     display: inline-block;
-    width: 806px;
-    height: 465px;
-    margin-right: 465px;
+    width: 800px;
+    height: 460px;
+    margin-right: 460px;
     margin-bottom: 105px;
     position: absolute;
     vertical-align: middle;
     border-radius: 15px;
-    border: 4px solid #fff000;
+    border: 1px solid #fff000;
     z-index: -8;
 }
 
