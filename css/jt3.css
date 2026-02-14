@@ -206,6 +206,11 @@ body {
     z-index: -8;
 }
 
+.jslider {
+    border-radius: 15px;
+    z-index: -7;
+}
+
 .rtcs-ad {
     width: 235px;
     height: 670px;
