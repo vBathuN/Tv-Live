@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RTBS TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0"><link rel="stylesheet" href="css/jt3.css">
+</head>
+<body>
+<div class="page-loader">
+	<div class="txt"><img src="https://host.rtbs.in/media/isat-glob.gif"><br>Connection Establishing...</div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+$(window).on('load',function(){
+	setTimeout(function(){ // allowing 3 secs to fade out loader
+	$('.page-loader').fadeOut('slow');
+	},3500);
+});
+</script>
+
+<div class='rtcs-bg'>
+</div>
+
+<div class='rtcs'>
+<!-- partial:index.partial.html -->
+<div class='main'>
+<div class='top-wrap'>
+  <style>
+/* 1. Font Definition */
+@font-face {
+  font-family: 'Tamil039';
+  src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+       url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap; 
+}
+
+/* 2. Main Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  font-family: 'Tamil039', 'Arial Unicode MS', sans-serif;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+  float: right; 
+  margin-right: 0px;
+}
+
+/* 3. Red Text Box */
+.text-box {
+  background: #c60203;
+  padding: 0px 3px 0px 7px; 
+  border-radius: 10px 0 0 10px;
+  border-top: 1px solid #ff4d4d;
+  display: flex;
+  align-items: center;
+  height: 55px;
+  
+  /* பின்னணி ஒளிக்காக */
+  position: relative;
+  overflow: hidden; 
+}
+
+/* --- புதுமை: பின்னணி ஒளி (Background Shine) --- */
+.text-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 100%; /* வலது பக்கம் தொடக்கம் */
+  width: 50%;
+  height: 100%;
+  
+  /* பின்னணி ஒளிக்கீற்று (லேசான வெள்ளை) */
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  
+  transform: skewX(-25deg);
+  z-index: 1; /* எழுத்துக்குப் பின்னால் */
+  
+  /* பின்னணி ஒளி அனிமேஷன் (வலமிருந்து இடம்) */
+  animation: bgSweep 3.5s infinite linear; 
+}
+
+/* --- எழுத்து ஸ்டைல் (Text Shine + Outline) --- */
+.text-box span {
+  display: inline-block;
+  font-size: 38px;
+  font-weight: 900;
+  padding-top: 25px; 
+  letter-spacing: 5px; 
+  
+  /* --- எழுத்து ஒளி (Text Shine) --- */
+  background: linear-gradient(110deg, #ffffff 35%, #bfbfbf 45%, #ffffff 50%, #bfbfbf 55%, #ffffff 65%);
+  background-size: 200% auto;
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  /* கருப்பு அவுட்லைன் (Black Outline) */
+  -webkit-text-stroke: 0.8px #fff; 
+  
+  /* எழுத்து ஒளி அனிமேஷன் (வலமிருந்து இடம்) */
+  animation: shineMove 3.5s linear infinite; 
+  
+  /* 3D Shadow */
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.6));
+  
+  line-height: 60px; 
+  margin-top: -2px;
+  
+  /* பின்னணி ஒளிக்கு மேலே தெரிய வேண்டும் */
+  z-index: 2;
+  position: relative;
+}
+
+/* 4. Blue Icon Box */
+.icon-box {
+  background: linear-gradient(180deg, #0055ff 0%, #002db3 100%);
+  width: 50px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 10px 10px 0;
+  border-top: 1px solid #6699ff;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  z-index: 5;
+}
+
+.icon-box span {
+  font-size: 38px;
+  padding-top: 10px;
+  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5));
+  animation: flipScale 6s infinite;
+}
+
+/* --- Animations --- */
+
+/* 1. எழுத்து ஒளி நகரும் அனிமேஷன் */
+@keyframes shineMove {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* 2. பின்னணி ஒளி நகரும் அனிமேஷன் */
+@keyframes bgSweep {
+  0% { left: 100%; }
+  100% { left: -100%; }
+}
+
+@keyframes flipScale {
+  0%, 85% { transform: rotateY(0deg); }
+  90% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+</style>
+
+<div class="logo-container">
+  
+  <div class="text-box">
+    <span>சட்டவியல்</span>
+  </div>
+
+  <div class="icon-box">
+    <span>⚖️</span>
+  </div>
+
+</div>
+</div>
+</div>
+
+<div class='ticker-top'>
+<div class='textrss'>
+<style type="text/css">
+        @font-face {
+            font-family: 'Tamil039';
+            src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+                url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        #breakingnews {
+            text-align: center;
+            background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203;
+            border-radius: 15px;
+            border: 2px solid #fff000;
+            width: 956px;
+            height: 50px ;
+            overflow: hidden;
+
+        }
+
+        #adbreakingnews li a {
+            font-family: 'Tamil039';
+            font-weight: bold;
+            font-style: normal;
+            font-size: 26px;
+            word-spacing: -8px;
+            text-align: justify;
+            justify-content: center;
+            color: #fff;
+            padding: 0 0px;
+            font-weight: 900;
+            transition: all 1.5s ease-in-out;
+            text-decoration: none;
+            text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+        }
+
+        #adbreakingnews {
+            float: none;
+            margin-right: 0px;
+            margin-top: 0px;
+        }
+
+        #adbreakingnews ul,
+        #adbreakingnews li {
+            list-style: none;
+            margin: 0;
+            padding: 0px;
+        }
+
+
+        .af_news {
+            height: 0px;
+            overflow: hidden;
+            transition: height 0.5s ease-in-out;
+        }
+
+        .af_news.active {
+            height: 400px;
+        }
+    </style>
+
+<div id="breakingnews">
+        <div id='adbreakingnews'></div>
+    </div>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var feedUrl = "https://feed.rtbs.in";
+            var maxResults = 5;
+
+            var script = document.createElement("script");
+            script.src = feedUrl + "/feeds/posts/default/-/jslidingtop?alt=json-in-script&max-results=" + maxResults + "&callback=processFeed";
+            document.body.appendChild(script);
+        });
+
+
+        function processFeed(response) {
+            var newsContainer = document.getElementById("adbreakingnews");
+            var newsList = "";
+            var entries = response.feed.entry;
+            var len = entries.length;
+
+            if (entries !== undefined) {
+                newsList = "<ul>";
+
+                entries.forEach(function(entry) {
+                    var postTitle = entry.title.$t;
+                    var postLink = "";
+                    entry.link.forEach(function(link) {
+                        if (link.rel === "alternate") {
+                            postLink = link.href;
+                        }
+                    });
+
+                    newsList += '<li class="af_news"><a href="' + postLink + '" target="_blank">' + postTitle + "</a></li>";
+                });
+                newsList += "</ul>";
+
+                newsContainer.innerHTML = newsList;
+
+                let af_now = 0;
+                const af_boxes = document.querySelectorAll(".af_news");
+
+                if (af_boxes.length > 0) {
+                    af_boxes[af_now].classList.add("active");
+
+                    setInterval(() => {
+                        af_boxes[af_now].classList.remove("active");
+
+                        af_now = (af_now + 1) % af_boxes.length;
+
+                        setTimeout(() => {
+                            af_boxes[af_now].classList.add("active");
+                        }, 500);
+                    }, 4000);
+                } else {
+                    console.warn("No elements found with class 'af_news'");
+                }
+
+            } else {
+                newsContainer.innerHTML = "<span>No result!</span>";
+            }
+        }
+    </script>
+
+</div></div></div></div>
+
+<div class="rtcs-stream">
+<iframe class="rtcs-stream" width="100vh" height="100vh" src="https://com.rtbs.in/?scene&room=RTCSliveDemo&scenetype=2&order=N&916&cover&exclude=Anchor&controls=0&cc&cv&transparency&rounded=10&animate&margin=2&sl&fontsize=140&css=https://host.rtbs.in/rtcs/label-mt-debate.css" allow="autoplay" scrolling="no" frameborder="0" encrypted-media;></iframe>
+<iframe class="jslider" width="804px" height="456px" src="https://www.rtbs.in/image-slider/jt" scrolling="no" frameborder="0" autoplay; encrypted-media;></iframe>
+</div>		
+
+<div class="rtcs-lt">
+<iframe class="rtcs-lt" width="100vh" height="100vh" src="https://lt.rtbs.in/" frameborder="0" encrypted-media;></iframe>
+</div>
+	
+<div class="watermark"><marquee width="100%" direction="right"><h1>lawtamil.in | @JurisprudenceTamil</h1></marquee></div>
+
+<div class='cur-event'>
+  </div>
+	
+<div class="textslider">
+<style>
+@font-face {
+    font-family: 'Tamil039';
+    src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+        url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+#slider,#sliderContent,#slider img{
+width:1260px;  
+height:110px; /* Chiều cao slideshow */
+position:absolute;
+}
+#sliderContent {
+bottom:120px;
+left:10px;
+margin:0 0;
+padding:0 0;
+overflow: hidden;
+}
+#slider img {
+border:none;
+padding:10 0;
+margin:0 0;
+height:auto;
+outline:none;
+display:none;
+}
+.sliderImage {
+list-style:none;
+margin:0 0;
+padding:0 0;
+display:none;
+}
+.sliderImage span {
+background-color:#c60203;
+border-radius: 20px;
+opacity:.9;
+filter:alpha(opacity=90);
+left:0;
+right:0;
+bottom:0;
+text-align: center;
+color:white;
+padding:12px 10px 2px;
+display:none;
+overflow: hidden;
+}
+.sliderImage span a {
+font-size:26px;
+color:white;
+text-decoration:none;
+important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;
+text-align: center;
+line-height: 1.8;
+text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+overflow: hidden;
+}
+
+</style>
+<script>
+slideOpenNewTab = false,
+idMode          = true,
+slidebyLabels   = true,
+slideLabelName  = "jtxtslide",
+thumbWidth      = 420,
+pBlank          = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1DBQz7KbG9ycllCVxo8gAW5jB2qzUFZp-bIXc8t55QxC70eugjthx2OjzDxyEYLp0ObVlWGITcypy7oIUyO7y1AMCAu5RlUei6a6V7HWoW5Vl-PzPUYBNRrq7cXMbafC4bsWCz0JO6fRCzejdKC1EynC5MsaCQLTewDJ3r1cMVAp95eeD2L8f3kKzZu4/s500/20241120_144504.png",//Ảnh đại diện khi bài ko có ảnh
+numposts_g      = 10,//Số bài cần trình chiếu
+home_page       = "https://feed.rtbs.in";//URL Blog
+
+$(window).bind('load', function() {
+$('#slider').s3Slider({
+timeOut:5000
+});
+});
+
+
+(function($) {
+    $.fn.s3Slider = function(vars) {
+        var element = this;
+        var timeOut = (vars.timeOut != undefined) ? vars.timeOut : 10000;
+        var current = null;
+        var timeOutFn = null;
+        var faderStat = true;
+        var mOver = false;
+        var items = $("#" + element[0].id + "Content ." + element[0].id + "Image")
+        var itemsSpan = $("#" + element[0].id + "Content ." + element[0].id + "Image span");
+        items.each(function(i) {
+            $(items[i]).mouseover(function() {
+                mOver = true;
+            });
+            $(items[i]).mouseout(function() {
+                mOver = false;
+
+                fadeElement(true);
+            });
+        });
+        var fadeElement = function(isMouseOut) {
+            var thisTimeOut = (isMouseOut) ? (timeOut / 2) : timeOut;
+            thisTimeOut = (faderStat) ? 10 : thisTimeOut;
+            if (items.length > 0) {
+                timeOutFn = setTimeout(makeSlider, thisTimeOut);
+            } else {
+                console.log("Poof..");
+            }
+        }
+        var makeSlider = function() {
+            current = (current != null) ? current : items[(items.length - 1)];
+            var currNo = jQuery.inArray(current, items) + 1
+
+            currNo = (currNo == items.length) ? 0 : (currNo - 1);
+            var newMargin = $(element).width() * currNo;
+            if (faderStat == true) {
+                if (!mOver) {
+                    $(items[currNo]).fadeIn((timeOut / 6), function() {
+                        if ($(itemsSpan[currNo]).css('bottom') == 0) {
+                            $(itemsSpan[currNo]).slideUp((timeOut / 6), function() {
+                                faderStat = false;
+                                current = items[currNo];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        } else {
+                            $(itemsSpan[currNo]).slideDown((timeOut / 6), function() {
+                                faderStat = false;
+                                current = items[currNo];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        }
+                    });
+                }
+            } else {
+                if (!mOver) {
+                    if ($(itemsSpan[currNo]).css('bottom') == 0) {
+                        $(itemsSpan[currNo]).slideDown((timeOut / 6), function() {
+                            $(items[currNo]).fadeOut((timeOut / 6), function() {
+                                faderStat = true;
+                                current = items[(currNo + 1)];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        });
+                    } else {
+                        $(itemsSpan[currNo]).slideUp((timeOut / 6), function() {
+                            $(items[currNo]).fadeOut((timeOut / 6), function() {
+                                faderStat = true;
+                                current = items[(currNo + 1)];
+                                if (!mOver) {
+                                    fadeElement(false);
+                                }
+                            });
+                        });
+                    }
+                }
+            }
+        }
+        makeSlider();
+    };
+})(jQuery);
+
+function s3SliderGallery(json) {
+document.write('<div id="slider"><ul id="sliderContent">');
+for (var i = 0; i < numposts_g; i++) {
+var entry = json.feed.entry[i],
+title = entry.title.$t,
+date = entry.published.$t,
+link, months, cm, img;
+if (i == entry.length) break;
+for (var j = 0, jen = entry.link.length; j < jen; j++) {
+if (entry.link[j].rel == 'alternate') {
+link = entry.link[j].href;
+break;
+}
+}
+for (var k = 0, ken = entry.link.length; k < ken; k++) {
+if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+cm = entry.link[k].title.split(' ')[0];
+break;
+}
+}
+document.write('<li class="sliderImage"><a href="' + link + '"' + (slideOpenNewTab ? ' target="_blank"' : '') + '><img src="' + img + '" alt="' + title + '" class="recent-thumb"></a><span><a href="' + link + '"' + (slideOpenNewTab ? ' target="_blank"' : '') + ' class="recent-link">' + title + '</a></span></li>');
+}
+document.write('</ul></div>');
+}
+document.write("<scr" + "ipt type='text/javascript' src='" + home_page.replace(/\/$/,"") + "/feeds/posts/default/" + (slidebyLabels ? '-/' + slideLabelName : '') + "?max-results=" + numposts_g + "&orderby=published&alt=json-in-script&callback=s3SliderGallery'><\/scr" + "ipt>");
+</script>
+</div>
+	
+<div class='ticker'>
+  <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
+<style>
+.breaking-scroll,.breaking-scroll a:link {text-decoration: none; height: 47px; color:#FFF; !important ;font-family: 'Tamil039'; font-weight: bold; font-style: normal;font-size:26px; text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; word-spacing: -5px; margin-top: 2px; }
+</style>
+<script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+var nMaxPosts =10;
+        var nWidth = 100;
+        var nScrollDelay = 0;
+        var sDirection = "left";
+        var sOpenLinkLocation = "N";
+        var sBulletChar = "&#x2727;"
+</script>
+<script type="text/javascript">
+function RecentPostsScrollerv2(json) {
+var sHeadLines;
+var sPostURL;
+var objPost;
+var sMoqueeHTMLStart;
+var sMoqueeHTMLEnd;
+var sPoweredBy;
+var sHeadlineTerminator;
+var sPostLinkLocation;
+  try {
+   sMoqueeHTMLStart = "\<MARQUEE behavior=\"scroll\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\" ";
+   if (nWidth) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"" + nWidth + "%\"";
+  } else {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " width = \"100%\"";
+  }
+  if (nScrollDelay) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " scrolldelay = \"" + nScrollDelay + "\"";
+  }
+  if (sDirection) {
+   sMoqueeHTMLStart = sMoqueeHTMLStart + " direction = \"" + sDirection + "\"\>";
+    if (sDirection == "left" || sDirection == "right") {
+    sHeadlineTerminator = "&nbsp;&nbsp;";
+   } else {
+    sHeadlineTerminator = "\<br/\>";
+   }
+  }
+  if (sOpenLinkLocation == "N") {
+   sPostLinkLocation = " target= \"_blank\" ";
+  } else {
+   sPostLinkLocation = " ";
+  }
+  sMoqueeHTMLEnd = "\</MARQUEE\>"
+   sHeadLines = "";
+   for (var nFeedCounter = 0; nFeedCounter < nMaxPosts; nFeedCounter++) {
+   var objPost = json.feed.entry[nFeedCounter];
+    if (nFeedCounter == json.feed.entry.length) break;
+    for (var nCounter = 0; nCounter < objPost.link.length; nCounter++) {
+    if (objPost.link[nCounter].rel == 'alternate') {
+     sPostURL = objPost.link[nCounter].href;
+     break;
+    }
+   }
+   sHeadLines = sHeadLines + "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" +
+sHeadlineTerminator;
+  }
+   if (sDirection == "right") {
+   sHeadLines = sHeadLines + "&nbsp;&nbsp;" + sPoweredBy;
+  } else if (sDirection == "right") {
+   sHeadLines = sPoweredBy + "&nbsp;&nbsp;" + sHeadLines;
+  } else if (sDirection == "up") {
+   sHeadLines = sHeadLines + "\<br/\>" + sHeadLines;
+  }
+  document.write(sMoqueeHTMLStart + sHeadLines + sMoqueeHTMLEnd)
+} catch (exception) {
+  alert(exception);
+}
+}</script>
+<script src="https://feed.rtbs.in/feeds/posts/default/-/jscrolling?alt=json-in-script&amp;callback=RecentPostsScrollerv2&amp;max-results=50"
+type="text/javascript"></script>
+      
+    <script src="https://host.rtbs.in/rtcs/horizontal-panel-marquee.js"></script>
+     <script type="text/javascript">
+    $(window).load( function() {
+      $('#panel').hpanel({
+        duration: 80000
+      });
+    });
+    </script>
+<div class='stock-info'>
+<div class="breaking_news">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+</style>
+  <div class="label ripple">Breaking News</div>
+</div></div>
+
+</body>
+</html>
