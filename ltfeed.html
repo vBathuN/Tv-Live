@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogger Full Post - Premium Animated News Box (Fixed 8 Lines)</title>
+    
+    <style>
+        /* 1. ஆங்கிலத்திற்கான Roboto Font இணைப்பு */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+
+        /* 2. தமிழுக்கான Tamil039 Font இணைப்பு */
+        @font-face {
+            font-family: 'Tamil039';
+            src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+                 url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* 3. அடிப்படை வடிவமைப்பு (Transparent Background) */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: transparent; 
+        }
+
+        /* 4. கன்டெய்னர் (திரையின் மையத்தில் மிதக்க) */
+        .news-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%); 
+            display: flex;
+            justify-content: center; 
+            padding: 0;
+            z-index: 9999;
+            pointer-events: none; /* அனிமேஷன் நடக்கும்போது கிளிக் செய்வதைத் தவிர்க்க */
+        }
+
+        /* 5. செய்திப் பெட்டி (Premium Box) */
+        .news-box {
+            background-color: #c60203;
+            opacity: 0.9;
+            filter: alpha(opacity=90);
+            color: #ffffff;
+            
+            padding: 20px 30px;
+            width: auto;
+            max-width: 80%;
+            
+            /* பெட்டியைத் தாண்டி எழுத்துக்கள் கீழே செல்லாமல் இருக்க பாதுகாப்பான overflow */
+            overflow: hidden; 
+            
+            border: 2px solid #fff; 
+            border-radius: 15px;      
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.8);
+            box-sizing: border-box; 
+            
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        /* 6. எழுத்துக்களுக்கான வடிவமைப்பு (Fonts, Size, Line-height & Clamp) */
+        .ml10 {
+            position: relative;
+            font-family: 'Roboto', 'Tamil039', sans-serif; 
+            font-weight: bold;
+            font-size: 26px; 
+            line-height: 1.8; 
+            color: #ffffff; 
+            text-align: center;
+            margin: 0;
+            width: 100%;
+            
+            /* 8 வரிகள் மட்டுமே தெரியும்படி செய்யும் முக்கியக் குறியீடுகள் */
+            display: -webkit-box;
+            -webkit-line-clamp: 8; 
+            -webkit-box-orient: vertical;
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            
+            /* அனிமேஷன் span-களைக் கட்டுப்படுத்த உறுதியான Max-height (1.8 * 8 வரிகள்) */
+            max-height: calc(1.8em * 8); 
+        }
+        
+        .ml10 .text-wrapper {
+            position: relative;
+            display: inline-block;
+            padding-top: 0.2em;
+            padding-right: 0.05em;
+            padding-bottom: 0.1em;
+            width: 100%;
+        }
+        
+        .ml10 .word {
+            display: inline-block;
+            transform-origin: 0 0;
+            margin-right: 0.25em; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="news-wrapper">
+        <div class="news-box">
+            <h1 class="ml10">
+                <span class="text-wrapper">
+                    <span class="letters" id="blogger-post-content">பதிவு லோட் ஆகிறது...</span>
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <script>
+        var textChunks = []; 
+        var currentChunkIndex = 0;
+        var textContainer = document.getElementById('blogger-post-content');
+        
+        var animationSpeed = 70; 
+
+        function handleBloggerFeed(json) {
+            if (json.feed && json.feed.entry && json.feed.entry.length > 0) {
+                var entry = json.feed.entry[0]; 
+                var title = entry.title.$t;
+                
+                var contentHtml = entry.content ? entry.content.$t : "";
+                
+                contentHtml = contentHtml.replace(/<\/(p|div|li|h[1-6])>/gi, " </$1> ")
+                                         .replace(/<br\s*[\/]?>/gi, " ");
+
+                var tempDiv = document.createElement("div");
+                tempDiv.innerHTML = contentHtml;
+                var plainText = tempDiv.textContent || tempDiv.innerText || "";
+                
+                plainText = plainText.replace(/\s+/g, ' ').trim();
+
+                textChunks.push(title);
+
+                var safeText = plainText
+                    .replace(/\.(com|in|org|net|gov|edu|co|info)\b/gi, "@DOMAINDOT@$1") 
+                    .replace(/\bwww\./gi, "www@DOMAINDOT@")
+                    .replace(/(\d)\.(\d)/g, "$1@DECIMAL@$2") 
+                    .replace(/\b(\d+)\./g, "$1@DOT@") 
+                    .replace(/\b(vs|v|sec|art|no|dr|mr|mrs)\./gi, "$1@DOT@"); 
+
+                safeText = safeText.replace(/([.!?]+)(\s*)/g, "$1|SPLIT|");
+
+                var rawSentences = safeText.split("|SPLIT|");
+
+                for (var i = 0; i < rawSentences.length; i++) {
+                    var s = rawSentences[i].trim();
+                    if (s.length === 0) continue;
+
+                    s = s.replace(/@DOMAINDOT@/g, ".")
+                         .replace(/@DECIMAL@/g, ".")
+                         .replace(/@DOT@/g, ".");
+
+                    textChunks.push(s);
+                }
+
+                if (textChunks.length > 0) {
+                    animateNextChunk();
+                } else {
+                    textContainer.innerHTML = "பதிவில் விவரங்கள் இல்லை";
+                }
+            } else {
+                textContainer.innerHTML = "பதிவுகள் எதுவும் இல்லை";
+            }
+        }
+
+        function animateNextChunk() {
+            var currentText = textChunks[currentChunkIndex];
+            var words = currentText.split(" ");
+            var formattedText = "";
+            
+            for (var i = 0; i < words.length; i++) {
+                formattedText += "<span class='word'>" + words[i] + "</span> ";
+            }
+
+            textContainer.innerHTML = formattedText;
+
+            var dynamicReadingTime = Math.max(3000, words.length * 350);
+
+            anime.timeline({loop: false})
+            .add({
+                targets: '.ml10 .word',
+                rotateY: [-90, 0],
+                duration: 1300,
+                delay: function(el, i) { return animationSpeed * i; } 
+            }).add({
+                targets: '.ml10',
+                opacity: 0,
+                duration: 1000,
+                easing: "easeOutExpo",
+                delay: dynamicReadingTime,
+                complete: function() {
+                    currentChunkIndex++;
+                    
+                    if(currentChunkIndex >= textChunks.length) {
+                        currentChunkIndex = 0; 
+                    }
+                    
+                    document.querySelector('.ml10').style.opacity = 1; 
+                    animateNextChunk(); 
+                }
+            });
+        }
+    </script>
+
+    <script src="https://www.lawtamil.in/feeds/posts/default?alt=json-in-script&max-results=1&callback=handleBloggerFeed"></script>
+
+</body>
+</html>
