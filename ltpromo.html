@@ -1,0 +1,214 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<div id="base">
+    <a href="https://www.lawtamil.in" target="_blank" style="text-decoration: none;">
+        <div>
+            <div class="bg-navy"></div>
+            
+            <div class="left-block-container">
+                <div class="scale-icon">⚖️</div>
+                <div class="text-group">
+                    <div class="title">சட்டவியல்</div>
+                    <div class="tagline">இது நீதியின் தேடல்</div>
+                </div>
+            </div>
+            
+            <i class="fa-brands fa-youtube soc yt"></i>
+            <i class="fa-brands fa-facebook soc fb"></i>
+            <i class="fa-brands fa-instagram soc ig"></i>
+            <i class="fa-brands fa-x-twitter soc tw-x"></i>
+            
+            <div class="slid1"></div>
+            
+            <div class="h2-ribbon">
+                <div class="ribbon-text-container">
+                    <div class="h1-main">lawtamil.in</div>
+                    <div class="h1-sub">@JurisprudenceTamil</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<style>
+/* 1. உங்களின் Custom Tamil Font Definition */
+@font-face {
+  font-family: 'Tamil039';
+  src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+       url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap; 
+}
+
+/* ஆங்கிலத்திற்கான Premium Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
+
+/* Leaderboard Banner Styles */
+#base {
+  position: relative;
+  margin: 20px auto;
+  width: 728px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #00478F;
+}
+
+.bg-navy {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #001f4d 0%, #00478F 100%);
+}
+
+/* --- Left Block (Scale + Title + Tagline) --- */
+.left-block-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: -350px; 
+  z-index: 1;
+  animation: leftBlockAnim 10s ease-in-out infinite;
+}
+
+/* தராசு Flip அனிமேஷன் */
+.scale-icon {
+  font-size: 60px;
+  margin-left: -15px;
+  margin-bottom: 10px;
+  filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.4));
+  display: inline-block;
+  animation: flipAction 4s ease-in-out infinite;
+}
+
+.text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 18px;
+  margin-left: 8px; 
+}
+
+/* நீங்கள் கொடுத்த Tamil039 Font பயன்படுத்தப்பட்டுள்ளது */
+.title {
+  font-family: 'Tamil039', sans-serif;
+  font-size: 38px; /* உங்களின் கஸ்டம் ஃபான்ட்டிற்கு ஏற்றவாறு அளவு சற்று கூட்டப்பட்டுள்ளது */
+  font-weight: bold;
+  color: #ffc16f;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  font-family: 'Tamil039', sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  margin-top: -2px;
+}
+
+/* --- Social Icons --- */
+.soc {
+  position: absolute;
+  top: 26px;
+  font-size: 38px;
+  z-index: 3;
+  filter: drop-shadow(0px 3px 5px rgba(0,0,0,0.5));
+}
+.yt { color: #ff0000; animation: soc1 10s ease-in-out infinite; }
+.fb { color: #1877F2; background: white; border-radius: 50%; font-size: 38px; animation: soc2 10s ease-in-out infinite; }
+.ig { color: #E1306C; animation: soc3 10s ease-in-out infinite; }
+.tw-x { color: #ffffff; animation: soc4 10s ease-in-out infinite; } 
+
+
+/* --- Right Ribbon --- */
+.h2-ribbon {
+  position: absolute;
+  height: 300px;
+  width: 190px;
+  top: -100px;
+  background: linear-gradient(45deg, #e6a955, #ffc16f, #e6a955);
+  transform: rotate(15deg);
+  z-index: 6;
+  animation: ribbon 10s ease-in-out infinite;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.6);
+}
+
+.ribbon-text-container {
+  position: absolute;
+  text-align: center;
+  top: 130px;
+  width: 170px;
+  margin-left: -5px;
+  transform: rotate(-15deg); 
+  z-index: 6;
+}
+
+.h1-main {
+  font-family: 'Montserrat', sans-serif;
+  color: #00478F;
+  font-size: 20px; 
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+.h1-sub {
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* --- Animations (Keyframes) --- */
+
+@keyframes flipAction {
+  0% { transform: perspective(400px) rotateY(0deg); }
+  40% { transform: perspective(400px) rotateY(180deg); } 
+  80% { transform: perspective(400px) rotateY(360deg); } 
+  100% { transform: perspective(400px) rotateY(360deg); } 
+}
+
+@keyframes leftBlockAnim {
+  0% { left: -350px; }
+  12% { left: 20px; }
+  85% { left: 20px; }
+  95% { left: -350px; }
+  100% { left: -350px; }
+}
+
+@keyframes soc1 { 0% { left: 800px; } 16% { left: 320px; } 85% { left: 320px; } 96% { left: 800px; } 100% { left: 800px; } }
+@keyframes soc2 { 0% { left: 800px; } 18% { left: 380px; } 85% { left: 380px; } 97% { left: 800px; } 100% { left: 800px; } }
+@keyframes soc3 { 0% { left: 800px; } 20% { left: 440px; } 85% { left: 440px; } 98% { left: 800px; } 100% { left: 800px; } }
+@keyframes soc4 { 0% { left: 800px; } 22% { left: 500px; } 85% { left: 500px; } 99% { left: 800px; } 100% { left: 800px; } }
+
+@keyframes ribbon {
+  0% { left: 800px; }
+  15% { left: 565px; } 
+  85% { left: 565px; }
+  100% { left: 800px; }
+}
+
+.slid1 {
+  position: absolute; background-color: rgba(255, 255, 255, 0.15);
+  height: 300px; width: 50px; top: -100px; transform: rotate(20deg); z-index: 2;
+  animation: flash 10s ease infinite;
+}
+@keyframes flash { 0% { left: -100px; } 10% { left: 800px; } 100% { left: 800px; } }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  #base { width: 100%; height: auto; padding: 15px 0; overflow: visible; display: flex; flex-direction: column; align-items: center; background: #00478F; }
+  .bg-navy, .h2-ribbon, .slid1 { display: none; }
+  .left-block-container { position: static; animation: none; margin-bottom: 15px; }
+  .soc { position: static; animation: none; display: inline-block; margin: 0 10px; font-size: 32px; } 
+}
+</style>
