@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogger Full Post - Premium Animated News Box (Fixed 8 Lines)</title>
+    <title>Blogger Full Post - Premium Animated News Box (9 Lines Fixed)</title>
     
     <style>
         /* 1. ஆங்கிலத்திற்கான Roboto Font இணைப்பு */
@@ -39,7 +39,7 @@
             justify-content: center; 
             padding: 0;
             z-index: 9999;
-            pointer-events: none; /* அனிமேஷன் நடக்கும்போது கிளிக் செய்வதைத் தவிர்க்க */
+            pointer-events: none;
         }
 
         /* 5. செய்திப் பெட்டி (Premium Box) */
@@ -52,8 +52,6 @@
             padding: 20px 30px;
             width: auto;
             max-width: 80%;
-            
-            /* பெட்டியைத் தாண்டி எழுத்துக்கள் கீழே செல்லாமல் இருக்க பாதுகாப்பான overflow */
             overflow: hidden; 
             
             border: 2px solid #fff; 
@@ -66,7 +64,7 @@
             justify-content: center; 
         }
 
-        /* 6. எழுத்துக்களுக்கான வடிவமைப்பு (Fonts, Size, Line-height & Clamp) */
+        /* 6. எழுத்துக்களுக்கான வடிவமைப்பு (9 Lines Fixed) */
         .ml10 {
             position: relative;
             font-family: 'Roboto', 'Tamil039', sans-serif; 
@@ -78,15 +76,16 @@
             margin: 0;
             width: 100%;
             
-            /* 8 வரிகள் மட்டுமே தெரியும்படி செய்யும் முக்கியக் குறியீடுகள் */
+            /* 9 வரிகள் மட்டுமே தெரியும்படி செய்யும் முக்கியக் குறியீடுகள் */
             display: -webkit-box;
             -webkit-line-clamp: 9; 
             -webkit-box-orient: vertical;
             overflow: hidden; 
             text-overflow: ellipsis; 
             
-            /* அனிமேஷன் span-களைக் கட்டுப்படுத்த உறுதியான Max-height (1.8 * 8 வரிகள்) */
-            max-height: calc(1.8em * 8); 
+            /* 1.8 em (line-height) * 9 (lines) = 16.2em */
+            /* இது எழுத்துக்கள் பெட்டியைத் தாண்டிச் செல்லாமல் தடுக்கும் */
+            max-height: 16.2em; 
         }
         
         .ml10 .text-wrapper {
