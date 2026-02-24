@@ -198,13 +198,14 @@ body {
     width: 807px;
     height: 460px;
     margin-right: 460px;
-    margin-bottom: 109px;
+    margin-bottom: 106px;
     position: absolute;
     vertical-align: middle;
     z-index: 0;
 }
 
 .jslider {
+    margin-top: 3px;
     border-radius: 15px;
     border: 2px solid #fff000;
     z-index: -8;
