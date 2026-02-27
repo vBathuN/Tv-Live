@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LawTamil Infinite Open Book - Auto Outro</title>
+  <title>LawTamil Infinite Open Book - Pro Edition V2</title>
   <link href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
@@ -12,7 +12,7 @@
       margin: 0;
       display: flex;
       min-height: 100dvh;
-      perspective: 1000px;
+      perspective: 1200px; 
       font: 1.2em/1.6 "Mukta Malar", sans-serif;
       overflow: hidden;
       color: hsl(180 68% 5%);
@@ -31,7 +31,6 @@
     }
 
     .page {
-      --thickness: 4;
       flex: none;
       display: flex;
       width: 100%;
@@ -40,13 +39,10 @@
       user-select: none;
       transform-style: preserve-3d;
       transform-origin: left center;
-      transition:
-        transform 1s,
-        rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+      transition: rotate 1.2s ease-in-out;
       translate: calc(var(--i) * -100%) 0px 0px;
-      transform: translateZ( calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * .23vmin)));
+      transform: translateZ(calc((var(--c) - var(--i)) * 0.5px));
       rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
-      box-shadow: 0em .5em 1em -.2em #00000020;
     }
 
     .front,
@@ -62,7 +58,8 @@
       flex-flow: column wrap;
       justify-content: flex-start; 
       padding: 2.5em 2em;
-      border: 1px solid #0002;
+      border: 1px solid #dcdcdc; 
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.03); 
     }
 
     .back {
@@ -71,11 +68,11 @@
     }
 
     .front {
-      background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+      background: linear-gradient(to left, #fbfbfb 80%, #eaeaea 100%);
       border-radius: .1em .5em .5em .1em;
     }
     .back {
-      background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+      background-image: linear-gradient(to right, #fbfbfb 80%, #eaeaea 100%);
       border-radius: .5em .1em .1em .5em;
     }
 
@@ -94,14 +91,29 @@
       margin-top: 20%;
     }
 
+    /* Footer Text Design - கருப்பு நிறம் */
+    .footer-text {
+      position: absolute;
+      bottom: 1.4em;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      font-size: 0.75em;
+      color: #333; 
+      font-weight: bold;
+      opacity: 0.8;
+    }
+
+    /* Page Numbers Design */
     .page-number {
       position: absolute;
-      bottom: 1em;
-      font-size: 0.8em;
+      bottom: 1.3em;
+      font-size: 0.85em;
       color: #777;
+      font-weight: bold;
     }
-    .front .page-number { right: 1.5em; }
-    .back .page-number { left: 1.5em; }
+    .front .page-number { right: 1.8em; } /* வலது பக்கத்தின் ஓரம் */
+    .back .page-number { left: 1.8em; }   /* இடது பக்கத்தின் ஓரம் */
   </style>
 </head>
 <body>
@@ -111,7 +123,7 @@
   </div>
 
   <script>
-    const charsPerPage = 400; 
+    const charsPerPage = 550; 
 
     function handleBloggerFeed(data) {
       if(data.feed && data.feed.entry) {
@@ -161,13 +173,11 @@
       const bookContainer = document.getElementById('lawTamilBook');
       let htmlContent = '';
       
-      // அனைத்து தரவுகளையும் வரிசைப்படுத்துதல்
       let items = [{ text: title, isTitle: true }];
       chunks.forEach((chunk, index) => {
           items.push({ text: chunk, pageNum: index + 1 });
       });
       
-      // காலியாக உள்ள கடைசிப் பக்கத்தை நிரப்பும் லாஜிக் (பக்கங்கள் ஒற்றைப்படையாக இருந்தால்)
       if (items.length % 2 !== 0) {
           items.push({ 
               text: `
@@ -186,7 +196,6 @@
       
       let totalSpreads = Math.ceil(items.length / 2);
 
-      // Page 0 - திறந்த புத்தகத்தின் இடதுபுறம் (தலைப்பு)
       htmlContent += `
         <div class="page">
           <div class="front" style="background: transparent; border: none; box-shadow: none;"></div>
@@ -197,17 +206,19 @@
         </div>
       `;
 
-      // உள்ளடக்கப் பக்கங்கள் & Outro
       for(let i = 1; i <= totalSpreads; i++) {
-        let frontItem = items[i * 2 - 1]; // வலது பக்கம்
-        let backItem = items[i * 2];      // இடது பக்கம்
+        let frontItem = items[i * 2 - 1]; // Right Page (வலது பக்கம்)
+        let backItem = items[i * 2];      // Left Page (இடது பக்கம்)
 
-        // Outro ஆக இருந்தால் அப்படியே HTML-ஐப் பயன்படுத்துகிறோம், இல்லையெனில் சாதாரண உரை
         let frontText = frontItem ? (frontItem.isOutro ? frontItem.text : `<p class="content-text">${frontItem.text}</p>`) : "";
         let backText = backItem ? (backItem.isOutro ? backItem.text : `<p class="content-text">${backItem.text}</p>`) : "";
         
-        let frontNumHtml = (frontItem && frontItem.pageNum && !frontItem.isOutro) ? `<div class="page-number">${frontItem.pageNum}</div>` : '';
-        let backNumHtml = (backItem && backItem.pageNum && !backItem.isOutro) ? `<div class="page-number">${backItem.pageNum}</div>` : '';
+        // இடது மற்றும் வலது பக்கங்களுக்கான தனித்தனி Footer உரை
+        let frontFooterHtml = `<div class="footer-text">lawtamil.in</div>`;
+        let backFooterHtml = `<div class="footer-text">சட்டவியல் @JurisprudenceTamil</div>`;
+        
+        let frontNumHtml = (frontItem && frontItem.pageNum && !frontItem.isOutro) ? `<div class="page-number">${frontItem.pageNum}</div> ${frontFooterHtml}` : '';
+        let backNumHtml = (backItem && backItem.pageNum && !backItem.isOutro) ? `<div class="page-number">${backItem.pageNum}</div> ${backFooterHtml}` : '';
 
         htmlContent += `
           <div class="page">
@@ -247,7 +258,7 @@
           void elBook.offsetWidth; 
           
           setTimeout(() => {
-              pages.forEach(p => p.style.transition = '');
+              pages.forEach(p => p.style.transition = 'rotate 1.2s ease-in-out');
           }, 50); 
           
         } else {
