@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LawTamil AI - Iframe View</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        /* Iframe ஸ்டைல் */
+        .ai-iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+
+        /* சிவப்பு பெட்டிக்கும் எழுத்துக்களுக்கும் இடையேயான 
+           மேல் padding-ஐக் குறைக்க உங்கள் அசல் குறியீட்டில் 
+           கீழே உள்ள மாற்றத்தைச் செய்யவும்:
+        */
+        .news-box {
+            /* பழைய padding: 30px 45px; */
+            padding: 5px 45px 30px 45px !important; /* மேல் padding 5px ஆகக் குறைக்கப்பட்டுள்ளது */
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .ml10 {
+            /* எழுத்துக்களை இன்னும் கொஞ்சம் மேலே நகர்த்த margin-top பயன்படுத்தலாம் */
+            margin-top: -10px !important;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe 
+        class="ai-iframe"
+        src="https://script.google.com/macros/s/AKfycbwRrqLhyEXPnvAa46YOrnZe20Jb2FuP4t6ayJL0h8TX9jNi4sdDATW8giiHcEo7OhFmlw/exec" 
+        allow="autoplay">
+    </iframe>
+
+</body>
+</html>
