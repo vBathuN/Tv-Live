@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LawTamil AI - 
-    Live</title>
+    <title>LawTamil AI - Live</title>
     <style>
         body, html {
             margin: 0;
@@ -22,35 +21,39 @@
             border: none;
         }
 
-        /* சிவப்பு பெட்டிக்கும் எழுத்துக்களுக்கும் இடையேயான 
-           மேல் padding-ஐக் குறைக்க உங்கள் அசல் குறியீட்டில் 
-           கீழே உள்ள மாற்றத்தைச் செய்யவும்:
-        */
+        /* பெட்டி மற்றும் எழுத்துக்களுக்கான திருத்தப்பட்ட ஸ்டைல் */
+        /* குறிப்பு: இந்த ஸ்டைல்கள் உங்கள் கூகுள் ஸ்கிரிப்ட் (Index.html) கோப்பிலும் இருக்க வேண்டும் */
         .news-box {
-            /* பழைய padding: 30px 45px; */
-            width: 80%;
-            padding: 5px 45px 30px 45px !important; /* மேல் padding 5px ஆகக் குறைக்கப்பட்டுள்ளது */
+            width: 100%;
+            height: 100vh;
+            /* இடது மற்றும் வலது பக்கம் 60px padding சேர்க்கப்பட்டுள்ளது */
+            padding: 5px 60px 30px 60px !important; 
             display: flex;
             align-items: center; 
             justify-content: center;
+            box-sizing: border-box;
         }
 
         .ml10 {
-            /* எழுத்துக்களை இன்னும் கொஞ்சம் மேலே நகர்த்த margin-top பயன்படுத்தலாம் */
+            /* எழுத்துக்கள் பெட்டிக்குள் நிறைந்து தெரிய (Full Justify) */
+            text-align: justify;
+            text-justify: inter-word;
             margin-top: -10px !important;
+            width: 100%;
+            line-height: 1.8;
         }
     </style>
 </head>
 <body>
 
     <iframe 
-    src="https://script.google.com/macros/s/AKfycby6poz6mRra6mP4O-Zb3KG_8uBT5a1NtO9aImk_myUkZvDpoUbPBKYKL9DB5vFGd1viqA/exec" 
-    width="100%" 
-    height="100%" 
-    frameborder="0" 
-    allow="autoplay; clipboard-read; clipboard-write" 
-    sandbox="allow-forms allow-scripts allow-same-origin allow-popups">
-</iframe>
+        src="https://script.google.com/macros/s/AKfycby6poz6mRra6mP4O-Zb3KG_8uBT5a1NtO9aImk_myUkZvDpoUbPBKYKL9DB5vFGd1viqA/exec" 
+        width="100%" 
+        height="100%" 
+        frameborder="0" 
+        allow="autoplay; clipboard-read; clipboard-write" 
+        sandbox="allow-forms allow-scripts allow-same-origin allow-popups">
+    </iframe>
 
 </body>
 </html>
