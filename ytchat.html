@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sattaviyal AI Live Chat Overlay</title>
+    <style>
+        /* முழுத் திரையையும் ஆக்கிரமிக்க மற்றும் ஸ்க்ரோல் பாரைத் தவிர்க்க */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: transparent !important; /* பின்னணி ஊடுருவும் வகையில் */
+        }
+
+        /* iframe அமைப்புகள் */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe 
+        src="https://script.google.com/macros/s/AKfycbynSbaY-wFiNOC-DYoNntgoWAqUsevgtfejKLxNfaiO2BUYXr57SvV3byuMh4Z3t9jb/exec" 
+        allowtransparency="true"
+        scrolling="no">
+    </iframe>
+
+</body>
+</html>
