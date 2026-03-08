@@ -3,44 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LawTamil AI - Live</title>
+    <title>LawTamil Controller - Full View</title>
     <style>
+        /* ஸ்க்ரோல் பார் மற்றும் தேவையற்ற இடைவெளிகளை நீக்க */
         body, html {
             margin: 0;
             padding: 0;
-            height: 100vh;
+            height: 100%;
             width: 100%;
             overflow: hidden;
-            background-color: transparent;
+            background-color: #f0f0f0;
         }
 
-        /* Iframe ஸ்டைல் */
-        .ai-iframe {
+        /* Iframe-ஐ முழுத் திரையில் காட்ட */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             border: none;
-        }
-
-        /* பெட்டி மற்றும் எழுத்துக்களுக்கான திருத்தப்பட்ட ஸ்டைல் */
-        /* குறிப்பு: இந்த ஸ்டைல்கள் உங்கள் கூகுள் ஸ்கிரிப்ட் (Index.html) கோப்பிலும் இருக்க வேண்டும் */
-        .news-box {
-            width: 100%;
-            height: 100vh;
-            /* இடது மற்றும் வலது பக்கம் 60px padding சேர்க்கப்பட்டுள்ளது */
-            padding: 5px 60px 30px 60px !important; 
-            display: flex;
-            align-items: center; 
-            justify-content: center;
-            box-sizing: border-box;
-        }
-
-        .ml10 {
-            /* எழுத்துக்கள் பெட்டிக்குள் நிறைந்து தெரிய (Full Justify) */
-            text-align: center;
-            text-justify: inter-word;
-            margin-top: -10px !important;
-            width: 100%;
-            line-height: 2.1;
         }
     </style>
 </head>
@@ -48,11 +30,8 @@
 
     <iframe 
         src="https://script.google.com/macros/s/AKfycbws6Uusq3Frma1H5qFBnj75GT5vA5PZm4-Aj75_vYim9T8TPIvlbfICSa_3MrrHWimt/exec" 
-        width="100%" 
-        height="100%" 
-        frameborder="0" 
-        allow="autoplay; clipboard-read; clipboard-write" 
-        sandbox="allow-forms allow-scripts allow-same-origin allow-popups">
+        allow="clipboard-read; clipboard-write"
+        title="LawTamil Controller">
     </iframe>
 
 </body>
