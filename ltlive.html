@@ -16,7 +16,14 @@
       font-weight: bold; font-style: normal; font-display: swap; 
     }
 
-    body, html { margin: 0; padding: 0; overflow: hidden; background: transparent; }
+    html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* இடது - வலது மையம் */
+    align-items: center;     /* மேல் - கீழ் மையம் */
+    background-color: #0047ab; /* நீல நிறப் பின்னணி */
+}
 
     /* Layout Container */
     .main-container {
@@ -102,6 +109,49 @@
     @keyframes flipScale { 0%, 85% { transform: rotateY(0deg); } 90% { transform: rotateY(180deg); } 100% { transform: rotateY(360deg); } }
     @keyframes ripple { 0% { transform: scale(0, 0); opacity: 1; } 20% { transform: scale(25, 25); opacity: 1; } 100% { opacity: 0; transform: scale(40, 40); } }
 .lower-ticker { margin-top: 470px; }
+
+    /* --- Social Logo Styles Added --- */
+    .round-image {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      z-index: 1;
+      position: relative;
+    }
+    .pulse-container {
+      position: relative;
+    }
+    .pulse1,
+    .pulse2,
+    .pulse3 {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      z-index: 0;
+      background: #fff;
+      animation: pulse 3s infinite;
+    }
+    .pulse2 {
+      animation-delay: 1s;
+    }
+    .pulse3 {
+      animation-delay: 2s;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+    .social-logo {
+      margin-left: 10px;
+    }
+    /* -------------------------------- */
     </style>
 </head>
 <body>
@@ -114,6 +164,16 @@
             <div class="text-box"><span>சட்டவியல்</span></div>
             <div class="icon-box"><span>⚖️</span></div>
         </div>
+        
+        <div class="social-logo">
+            <div class="pulse-container">
+              <div class="pulse1"></div>
+              <div class="pulse2"></div>
+              <div class="pulse3"></div>
+              <img class="round-image" src="https://host.rtbs.in/media/social.gif" alt="" />
+            </div>
+        </div>
+
     </div>
 
     <div class="ai-fixed-frame">
