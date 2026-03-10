@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LawTamil Live AI - OBS Edition</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+    /* 1. Base Font Definitions */
+    @font-face {
+      font-family: 'Tamil039';
+      src: url('https://www.rtbs.in/font/Tamil039.woff2') format('woff2'),
+           url('https://www.rtbs.in/font/Tamil039.woff') format('woff');
+      font-weight: bold; font-style: normal; font-display: swap; 
+    }
+
+    html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* இடது - வலது மையம் */
+    align-items: center;     /* மேல் - கீழ் மையம் */
+    background-color: #0047ab; /* நீல நிறப் பின்னணி */
+}
+
+    /* Layout Container */
+    .main-container {
+      background: #19f radial-gradient(transparent, #02c); 
+      width: 1280px; height: 720px; 
+      position: relative; overflow: hidden; 
+      padding: 10px; /* பக்கவாட்டு இடைவெளிக்காக 10px */
+      box-sizing: border-box;
+    }
+
+    /* Logo Styles */
+    .logo-container {
+      display: flex; align-items: center; font-family: 'Tamil039', 'Arial Unicode MS', sans-serif;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+    }
+    .text-box {
+      background: #c60203; padding: 0px 3px 0px 7px; border-radius: 10px 0 0 10px;
+      border-top: 1px solid #ff4d4d; display: flex; align-items: center; height: 55px;
+      position: relative; overflow: hidden; 
+    }
+    .text-box::after {
+      content: ''; position: absolute; top: 0; left: 100%; width: 50%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-25deg); z-index: 1; animation: bgSweep 3.5s infinite linear; 
+    }
+    .text-box span {
+      display: inline-block; font-size: 38px; font-weight: 900; padding-top: 25px; 
+      letter-spacing: 5px; background: linear-gradient(110deg, #ffffff 35%, #bfbfbf 45%, #ffffff 50%, #bfbfbf 55%, #ffffff 65%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent; -webkit-text-stroke: 0.8px #fff; 
+      animation: shineMove 3.5s linear infinite; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.6));
+      line-height: 60px; margin-top: -2px; z-index: 2; position: relative;
+    }
+    .icon-box {
+      background: linear-gradient(180deg, #0055ff 0%, #002db3 100%); width: 50px; height: 55px;
+      display: flex; justify-content: center; align-items: center; border-radius: 0 10px 10px 0;
+      border-top: 1px solid #6699ff; box-shadow: inset 0 0 10px rgba(0,0,0,0.3); z-index: 5;
+    }
+    .icon-box span { font-size: 38px; padding-top: 10px; filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5)); animation: flipScale 6s infinite; }
+
+    /* Top Ticker Styles */
+    #breakingnews {
+      text-align: center; background: #c60203;
+      border-radius: 15px; border: 2px solid #fff000; width: 940px; height: 50px; overflow: hidden; display: inline-block;
+    }
+    #adbreakingnews li a {
+      font-family: 'Tamil039'; font-weight: bold; font-size: 26px; word-spacing: -8px; color: #fff;
+      transition: all 1.5s ease-in-out; text-decoration: none; text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+    }
+    #adbreakingnews ul, #adbreakingnews li { list-style: none; margin: 0; padding: 0px; }
+    .af_news { height: 0px; overflow: hidden; transition: height 0.5s ease-in-out; }
+    .af_news.active { height: 400px; }
+
+    /* AI Fixed Frame - IFRAME CONTAINER */
+    .ai-fixed-frame {
+      position: absolute;
+      top: 72px; /* Ticker-க்கு கீழ் 15px இடைவெளிக்காக */
+      left: 10px;
+      width: 800px; height: 450px;
+      border: 2px solid #fff; border-radius: 15px;
+      overflow: hidden; z-index: 100;
+      background: #c60203; 
+    }
+    .ai-fixed-frame iframe {
+      width: 100%;
+      height: calc(100% + 50px);
+      margin-top: -30px;
+      border: none;
+    }
+
+    /* Bottom Ticker Styles */
+    .ticker { background: linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%) #c60203; background-image: url('https://host.rtbs.in/media/tv-bg.gif'); background-size:100% 100%; width: 100%; height: 50px; overflow: hidden; position: absolute; bottom: 0; left: 0; white-space: nowrap; }
+    .breaking-scroll,.breaking-scroll a:link { text-decoration: none; height: 47px; color:#FFF; font-family: 'Tamil039'; font-weight: bold; font-size:26px; text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; word-spacing: -5px; margin-top: 2px; }
+    .ticker .stock-info { position: absolute; top: 0; right: 0; width: 260px; height: 50px; }
+    .breaking_news { float:right; width:100%; font-family: "Agdasima", sans-serif; font-size: 40px; margin-top: 0px; text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000; letter-spacing: 2px; }
+    .label { float:right; padding:1.4px 7px 7px 10px; background:#c60203; color:#FFF; font-weight: bold; text-transform: uppercase; }
+    .ripple { position: relative; overflow: hidden; }
+    .ripple:after { content: ''; position: absolute; top: 50%; left: 50%; width: 9px; height: 5px; background: rgba(255, 255, 255, .5); opacity: 0; border-radius: 100%; transform: scale(1, 1) translate(-50%); transform-origin: 50% 50%; animation: ripple 1.5s ease-out infinite; }
+
+    /* Common Animations */
+    @keyframes shineMove { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
+    @keyframes bgSweep { 0% { left: 100%; } 100% { left: -100%; } }
+    @keyframes flipScale { 0%, 85% { transform: rotateY(0deg); } 90% { transform: rotateY(180deg); } 100% { transform: rotateY(360deg); } }
+    @keyframes ripple { 0% { transform: scale(0, 0); opacity: 1; } 20% { transform: scale(25, 25); opacity: 1; } 100% { opacity: 0; transform: scale(40, 40); } }
+.lower-ticker { margin-top: 470px; }
+
+    /* --- Social Logo Styles Added --- */
+    .round-image {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      z-index: 1;
+      position: relative;
+    }
+    .pulse-container {
+      position: relative;
+    }
+    .pulse1,
+    .pulse2,
+    .pulse3 {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      z-index: 0;
+      background: #fff;
+      animation: pulse 3s infinite;
+    }
+    .pulse2 {
+      animation-delay: 1s;
+    }
+    .pulse3 {
+      animation-delay: 2s;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+    .social-logo {
+      margin-left: 10px;
+    }
+    /* -------------------------------- */
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <div class="ticker-top" style="display: flex; justify-content: space-between; align-items: center; padding: -5px 0 0 0; gap: 10px; margin-top: -2px;">
+        <div id="breakingnews" style="flex-grow: 1;"><div id='adbreakingnews'></div></div>
+        <div class="logo-container">
+            <div class="text-box"><span>சட்டவியல்</span></div>
+            <div class="icon-box"><span>⚖️</span></div>
+        </div>
+        
+        <div class="social-logo">
+            <div class="pulse-container">
+              <div class="pulse1"></div>
+              <div class="pulse2"></div>
+              <div class="pulse3"></div>
+              <img class="round-image" src="https://host.rtbs.in/media/social.gif" alt="" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ai-fixed-frame">
+        <iframe src="https://script.google.com/macros/s/AKfycbwrpg5TcBiciAytiy6OHJnnEX8pqa_vGc3F8iKWegj1Irucp_j-6vuRd4upBWicF1fd/exec" allow="autoplay"></iframe>
+    </div>
+
+<div class='lower-ticker'>
+<style type="text/css">
+#rtcslive-widget {
+    font-family: 'Tamil039', sans-serif;
+    font-weight: bold;
+    overflow: hidden;
+    height: 120px;
+    background: #c60203;
+    border-radius: 15px 30px;
+    border: 3px solid #fff000;
+    text-align: center;
+    position: relative;
+    /* பெட்டியின் மையத்தில் எழுத்துக்களைக் கொண்டுவர */
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+#ticker-container {
+    width: 96%;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticker-item {
+    position: absolute;
+    width: 100%;
+    /* மேல் கீழ் சமமான இடைவெளி */
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticker-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 28px;
+    /* நீங்கள் கேட்ட 1.8 இடைவெளி */
+    line-height: 1.8; 
+    /* வார்த்தை இடைவெளி நெருக்கம் */
+    word-spacing: -10px; 
+    text-shadow: 2px 2px 5px #000;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    animation: tv-flash 1.5s linear infinite alternate;
+    /* எழுத்துக்கள் மேல் ஒட்டாமல் இருக்க சிறு திருத்தம் */
+    padding-top: 10px; 
+}
+
+@keyframes tv-flash {
+    0%, 80% { color: #ffffff; }
+    90% { color: #ff0000; }
+    100% { color: #ffffff; }
+}
+</style>
+
+<div id="rtcslive-widget">
+    <div id="ticker-container">
+        <div class="ticker-item" style="display: flex;">
+            <a class="ticker-link">செய்திகள் ஏற்றப்படுகிறது...</a>
+        </div>
+    </div>
+</div>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script type='text/javascript'>
+//<![CDATA[
+$(document).ready(function() {
+    var home_page = "https://feed.rtbs.in/";
+    
+    $.ajax({
+        url: home_page + "feeds/posts/default/-/livetxtslide?alt=json-in-script&max-results=15",
+        dataType: "jsonp",
+        success: function(data) {
+            var html = "";
+            var entries = data.feed.entry;
+            if (entries && entries.length > 0) {
+                for (var i = 0; i < entries.length; i++) {
+                    var title = entries[i].title.$t;
+                    var link = "";
+                    for (var j = 0; j < entries[i].link.length; j++) {
+                        if (entries[i].link[j].rel == 'alternate') { link = entries[i].link[j].href; break; }
+                    }
+                    html += '<div class="ticker-item"><a href="' + link + '" class="ticker-link">' + title + '</a></div>';
+                }
+                $('#ticker-container').empty().append(html);
+                
+                var items = $('#ticker-container .ticker-item');
+                var count = 0;
+                
+                items.hide().eq(0).css('display', 'flex');
+                
+                setInterval(function() {
+                    items.eq(count).fadeOut(600, function() {
+                        count = (count + 1) % items.length;
+                        items.eq(count).css('display', 'flex').hide().fadeIn(600);
+                    });
+                }, 7000);
+            }
+        }
+    });
+});
+//]]>
+</script>
+</div>
+
+    <div class='ticker'>
+    <nav class="breaking-scroll" id="breaking-scroll" role="breaking-scroll">
+        <script type="text/javascript">
+        var nMaxPosts = 10, nWidth = 100, nScrollDelay = 0, sDirection = "left", sOpenLinkLocation = "N", sBulletChar = "&#x2727;";
+        function RecentPostsScrollerv2(json) {
+            var sHeadLines = "", sPostURL, sMoqueeHTMLStart, sMoqueeHTMLEnd, sHeadlineTerminator, sPostLinkLocation;
+            try {
+                sMoqueeHTMLStart = "\<MARQUEE behavior=\"scroll\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\" width=\"100%\" direction=\"left\"\>";
+                sHeadlineTerminator = "&nbsp;&nbsp;"; 
+                sPostLinkLocation = " target= \"_blank\" "; 
+                sMoqueeHTMLEnd = "\</MARQUEE\>";
+                
+                for (var i = 0; i < nMaxPosts; i++) {
+                    var objPost = json.feed.entry[i]; 
+                    if (!objPost) break;
+                    for (var j = 0; j < objPost.link.length; j++) { 
+                        if (objPost.link[j].rel == 'alternate') { 
+                            sPostURL = objPost.link[j].href; 
+                            break; 
+                        } 
+                    }
+                    sHeadLines += "\<b\>" + sBulletChar + "\</b\> \<a " + sPostLinkLocation + " href=\"" + sPostURL + "\">" + objPost.title.$t + "\</a\>" + sHeadlineTerminator;
+                }
+                
+                // செய்திகளை 4 முறை லூப் செய்வதன் மூலம் இடைவெளி முற்றிலும் மறைந்துவிடும்
+                document.write(sMoqueeHTMLStart + sHeadLines + sHeadLines + sHeadLines + sHeadLines + sMoqueeHTMLEnd);
+            } catch (e) {}
+        }
+        </script>
+        <script src="https://www.lawtamil.in/feeds/posts/default?alt=json-in-script&callback=RecentPostsScrollerv2&max-results=50"></script>
+    </nav>
+    <div class='stock-info'>
+        <div class="breaking_news">
+            <style>@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');</style>
+            <div class="label ripple">Recent Videos</div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+function processFeed(response) {
+    var newsContainer = document.getElementById("adbreakingnews");
+    var entries = response.feed.entry;
+    if (entries) {
+        var newsList = "<ul>";
+        entries.forEach(function(entry) {
+            var postLink = entry.link.find(l => l.rel === "alternate").href;
+            newsList += '<li class="af_news"><a href="' + postLink + '" target="_blank">' + entry.title.$t + "</a></li>";
+        });
+        newsList += "</ul>";
+        newsContainer.innerHTML = newsList;
+        let af_now = 0; const af_boxes = document.querySelectorAll(".af_news");
+        if (af_boxes.length > 0) {
+            af_boxes[af_now].classList.add("active");
+            setInterval(() => {
+                af_boxes[af_now].classList.remove("active");
+                af_now = (af_now + 1) % af_boxes.length;
+                setTimeout(() => af_boxes[af_now].classList.add("active"), 500);
+            }, 4000);
+        }
+    }
+}
+</script>
+<script src="https://feed.rtbs.in/feeds/posts/default/-/livetop?alt=json-in-script&max-results=5&callback=processFeed"></script>
+</body>
+</html>
