@@ -1,0 +1,5 @@
+// எண்களை மட்டும் மாற்றிவிட்டு File -> Save (Ctrl+S) செய்யவும்.
+
+var DMK = "126";
+var ADMK = "68";
+var OTHERS = "12";
